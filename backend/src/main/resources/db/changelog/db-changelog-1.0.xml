@@ -1,0 +1,201 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="create_screenplay" author="anhquynhpham" >
+        <createTable tableName="screen_play" >
+            <column name="id" type="int" autoIncrement="true" >
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name="name" type="varchar(100)" >
+                <constraints nullable="false" unique="true" />
+            </column>
+            <column name="display_time" type="int" >
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+
+        <sql dbms="postgresql"
+             splitStatements="true"
+             stripComments="true">
+            insert into screen_play(name, display_time) values ('default', 10);
+            insert into screen_play(name, display_time) values ('danang', 7);
+            insert into screen_play(name, display_time) values ('hamburg', 5);
+        </sql>
+    </changeSet>
+
+    <changeSet id="create_screen" author="anhquynhpham" >
+        <createTable tableName="screen" >
+            <column name="id" type="int" autoIncrement="true" >
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name="type" type="varchar(100)" >
+                <constraints nullable="false" />
+            </column>
+            <column name="animation_type" type="varchar(100)" >
+                <constraints nullable="false" />
+            </column>
+            <column name="rows" type="int" >
+                <constraints nullable="false" />
+            </column>
+            <column name="cols" type="int" >
+                <constraints nullable="false" />
+            </column>
+            <column name="screenplay_id" type="int" >
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint baseColumnNames="screenplay_id"
+                                 baseTableName="screen"
+                                 constraintName="screenplay_pkey"
+                                 onDelete="CASCADE"
+                                 onUpdate="CASCADE"
+                                 referencedColumnNames="id"
+                                 referencedTableName="screen_play" />
+
+        <sql dbms="postgresql"
+             splitStatements="true"
+             stripComments="true">
+            insert into screen(type, animation_type, rows, cols, screenplay_id) values ('Grid-layout', 'fade', 1, 1, 1);
+            insert into screen(type, animation_type, rows, cols, screenplay_id) values ('Grid-layout', 'slide-right', 1, 1, 1);
+            insert into screen(type, animation_type, rows, cols, screenplay_id) values ('Grid-layout', 'fade', 2, 2, 1);
+            insert into screen(type, animation_type, rows, cols, screenplay_id) values ('Grid-layout', 'fade', 2, 2, 1);
+            insert into screen(type, animation_type, rows, cols, screenplay_id) values ('Grid-layout', 'slide-right', 1, 1, 1);
+            insert into screen(type, animation_type, rows, cols, screenplay_id) values ('Grid-layout', 'fade', 1, 1, 1);
+            insert into screen(type, animation_type, rows, cols, screenplay_id) values ('Grid-layout', 'slide-left', 1, 1, 1);
+            insert into screen(type, animation_type, rows, cols, screenplay_id) values ('Grid-layout', 'slide-left', 1, 1, 1);
+            insert into screen(type, animation_type, rows, cols, screenplay_id) values ('Grid-layout', 'fade', 2, 1, 2);
+            insert into screen(type, animation_type, rows, cols, screenplay_id) values ('Grid-layout', 'fade', 1, 1, 2);
+            insert into screen(type, animation_type, rows, cols, screenplay_id) values ('Grid-layout', 'fade', 2, 1, 3);
+            insert into screen(type, animation_type, rows, cols, screenplay_id) values ('Grid-layout', 'fade', 1, 1, 3);
+        </sql>
+    </changeSet>
+
+    <changeSet id="create_app" author="anhquynhpham" >
+        <createTable tableName="app" >
+            <column name="id" type="int" autoIncrement="true" >
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name="type" type="varchar(100)" >
+                <constraints nullable="false" />
+            </column>
+            <column name="screen_id" type="int" >
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseColumnNames="screen_id"
+                                 baseTableName="app"
+                                 constraintName="screen_pkey"
+                                 onDelete="CASCADE"
+                                 onUpdate="CASCADE"
+                                 referencedColumnNames="id"
+                                 referencedTableName="screen" />
+        <sql dbms="postgresql"
+             splitStatements="true"
+             stripComments="true">
+            insert into app(type, screen_id) values ('Clock', 1);
+            insert into app(type, screen_id) values ('Weather', 2);
+            insert into app(type, screen_id) values ('Clock', 3);
+            insert into app(type, screen_id) values ('Clock', 3);
+            insert into app(type, screen_id) values ('Clock', 3);
+            insert into app(type, screen_id) values ('Clock', 3);
+            insert into app(type, screen_id) values ('Weather', 4);
+            insert into app(type, screen_id) values ('Weather', 4);
+            insert into app(type, screen_id) values ('Weather', 4);
+            insert into app(type, screen_id) values ('Weather', 4);
+            insert into app(type, screen_id) values ('Website', 5);
+            insert into app(type, screen_id) values ('Facebook', 6);
+            insert into app(type, screen_id) values ('Holiday', 7);
+            insert into app(type, screen_id) values ('Calender', 8);
+            insert into app(type, screen_id) values ('Clock', 9);
+            insert into app(type, screen_id) values ('Weather', 9);
+            insert into app(type, screen_id) values ('Facebook', 10);
+            insert into app(type, screen_id) values ('Clock', 11);
+            insert into app(type, screen_id) values ('Weather', 11);
+            insert into app(type, screen_id) values ('Website', 12);
+        </sql>
+    </changeSet>
+
+    <changeSet id="create_parameter" author="anhquynhpham" >
+        <createTable tableName="parameter" >
+            <column name="id" type="int" autoIncrement="true" >
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name="key" type="varchar(100)" >
+                <constraints nullable="false" />
+            </column>
+            <column name="value" type="varchar(300)" >
+                <constraints nullable="false" />
+            </column>
+            <column name="app_id" type="int" >
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseColumnNames="app_id"
+                                 baseTableName="parameter"
+                                 constraintName="app_pkey"
+                                 onDelete="CASCADE"
+                                 onUpdate="CASCADE"
+                                 referencedColumnNames="id"
+                                 referencedTableName="app" />
+        <sql dbms="postgresql"
+             splitStatements="true"
+             stripComments="true">
+            insert into public.parameter(key, value, app_id) values ('utc-diff', '7', 1);
+            insert into public.parameter(key, value, app_id) values ('city', 'Da Nang, Viet Nam', 1);
+            insert into public.parameter(key, value, app_id) values ('city', 'Da Nang', 2);
+            insert into public.parameter(key, value, app_id) values ('degrees', 'C', 2);
+            insert into public.parameter(key, value, app_id) values ('utc-diff', '7', 3);
+            insert into public.parameter(key, value, app_id) values ('city', 'Da Nang, Viet Nam', 3);
+            insert into public.parameter(key, value, app_id) values ('utc-diff', '2', 4);
+            insert into public.parameter(key, value, app_id) values ('city', 'Munich, Germany', 4);
+            insert into public.parameter(key, value, app_id) values ('utc-diff', '-4', 5);
+            insert into public.parameter(key, value, app_id) values ('city', 'Washington DC, USA', 5);
+            insert into public.parameter(key, value, app_id) values ('utc-diff', '2', 6);
+            insert into public.parameter(key, value, app_id) values ('city', 'Hamburg, Germany', 6);
+            insert into public.parameter(key, value, app_id) values ('city', 'Da Nang', 7);
+            insert into public.parameter(key, value, app_id) values ('degrees', 'C', 7);
+            insert into public.parameter(key, value, app_id) values ('city', 'Munich', 8);
+            insert into public.parameter(key, value, app_id) values ('degrees', 'C', 8);
+            insert into public.parameter(key, value, app_id) values ('city', 'Washington DC', 9);
+            insert into public.parameter(key, value, app_id) values ('degrees', 'C', 9);
+            insert into public.parameter(key, value, app_id) values ('city', 'Hamburg', 10);
+            insert into public.parameter(key, value, app_id) values ('degrees', 'C', 10);
+            insert into public.parameter(key, value, app_id) values ('url', 'https://www.mgmtp.com', 11);
+            insert into public.parameter(key, value, app_id) values ('url', 'mgmTechnologyPartnersVietnam', 12);
+            insert into public.parameter(key, value, app_id) values ('start-day', '2017-07-01', 12);
+            insert into public.parameter(key, value, app_id) values ('end-day', '2017-07-15', 12);
+            insert into public.parameter(key, value, app_id) values ('name', 'My Calendar', 14);
+            insert into public.parameter(key, value, app_id) values ('number-of-calendars', '5', 14);
+            insert into public.parameter(key, value, app_id) values ('time-min', '6', 14);
+            insert into public.parameter(key, value, app_id) values ('time-max', '18', 14);
+            insert into public.parameter(key, value, app_id) values ('calendar-id-1', 'wildboar.work@gmail.com', 14);
+            insert into public.parameter(key, value, app_id) values ('color-1', '#9E7BFF', 14);
+            insert into public.parameter(key, value, app_id) values ('calendar-id-2', '1te503579dac6q4tcs87i0ej78@group.calendar.google.com', 14);
+            insert into public.parameter(key, value, app_id) values ('color-2', '#ff8847', 14);
+            insert into public.parameter(key, value, app_id) values ('calendar-id-3', 'fseue5o57ml3hmbk0nbpipufmc@group.calendar.google.com', 14);
+            insert into public.parameter(key, value, app_id) values ('color-3', '#2ecc71', 14);
+            insert into public.parameter(key, value, app_id) values ('calendar-id-4', '36u9i6nkfvs896f5dagrr53s40@group.calendar.google.com', 14);
+            insert into public.parameter(key, value, app_id) values ('color-4', '#50EBEC', 14);
+            insert into public.parameter(key, value, app_id) values ('calendar-id-5', 'hgff4kd43u8t0u0dr3ppucki60@group.calendar.google.com', 14);
+            insert into public.parameter(key, value, app_id) values ('color-5', '#f01111', 14);
+            insert into public.parameter(key, value, app_id) values ('utc-diff', '7', 15);
+            insert into public.parameter(key, value, app_id) values ('city', 'Da Nang, Viet Nam', 15);
+            insert into public.parameter(key, value, app_id) values ('city', 'Da Nang', 16);
+            insert into public.parameter(key, value, app_id) values ('degrees', 'C', 16);
+            insert into public.parameter(key, value, app_id) values ('url', 'mgmTechnologyPartnersVietnam', 17);
+            insert into public.parameter(key, value, app_id) values ('utc-diff', '2', 18);
+            insert into public.parameter(key, value, app_id) values ('city', 'Hamburg, Germany', 18);
+            insert into public.parameter(key, value, app_id) values ('city', 'Hamburg', 19);
+            insert into public.parameter(key, value, app_id) values ('degrees', 'C', 19);
+            insert into public.parameter(key, value, app_id) values ('url', 'https://www.mgmtp.com', 20);
+        </sql>
+    </changeSet>
+
+    <changeSet id="tag-1.0" author="anhquynhpham" >
+        <tagDatabase tag="1.0" />
+    </changeSet>
+
+</databaseChangeLog>

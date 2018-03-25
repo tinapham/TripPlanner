@@ -1,0 +1,117 @@
+{
+  "display-time": 10,
+  "animation-type" : "slide-left",
+  "screen-apps": [
+    {
+      "type": "Facebook",
+      "params": {
+        "url": "mgmTechnologyPartnersVietnam/"
+      }
+    },
+    {
+      "type": "Website",
+      "params": {
+        "url": "https://www.mgmtp.com/"
+      }
+    },
+    {"type" : "Hello"},
+    {
+      "type": "Clock",
+      "params": 
+      {
+        "utc-diff": 7 ,
+        "city" : "Da Nang, Viet Nam"
+      }
+    },
+    {
+      "type": "Clock",
+      "params": 
+      {
+        "utc-diff": 2 ,
+        "city": "Munich, Germany"
+      } 
+    },
+    {
+      "type": "Clock",
+      "params": 
+      {
+        "utc-diff": 2,
+        "city": "Hamburg, Germany"
+      } 
+    },
+    {
+      "type": "Clock",
+      "params": 
+      {
+        "utc-diff": -4,
+        "city": "Washington DC, USA"
+      } 
+    },
+    {
+      "type": "Clock",
+      "params": 
+      {
+        "utc-diff": 2,
+        "city": "Prague, Czech Republic"
+      } 
+    },
+    {
+      "type": "Clock",
+      "params": 
+      {
+        "utc-diff": 2,
+        "city": "Grenoble, France"
+      } 
+    },
+    {
+      "type": "Clock",
+      "params": 
+      {
+        "utc-diff": 2,
+        "city": "Nuremberg, Germany"
+      } 
+    },
+    {
+      "type": "Clock",
+      "params": 
+      {
+        "utc-diff": 2,
+        "city": "Cologne, Germany"
+      } 
+    },
+    {
+      "type": "Clock",
+      "params": 
+      {
+        "utc-diff": 2,
+        "city": "Berlin, Germany"
+      } 
+    },
+    {
+      "type": "Clock",
+      "params": 
+      {
+        "utc-diff": 2,
+        "city": "Zug, Switzerland"
+      } 
+    },
+    {
+      "type": "Clock",
+      "params": 
+      {
+        "utc-diff": 2,
+        "city": "Leipzig, Germany"
+      } 
+    },
+    {
+      "type": "Clock",
+      "params": 
+      {
+        "utc-diff": 2,
+        "city": "Dresden, Germany"
+      } 
+    },
+    {"type" : "Hello"},
+    {"type" : "Holiday"}      
+  ]
+}

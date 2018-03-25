@@ -1,0 +1,28 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="delete_website_screen" author="anhquynhpham" >
+        <sql dbms="postgresql"
+             splitStatements="true"
+             stripComments="true">
+            delete from parameter where value = 'https://www.mgmtp.com';
+            delete from screen
+                where id in (select screen.id from screen, app where screen.id = app.screen_id and app.type = 'Website');
+
+        </sql>
+    </changeSet>
+
+    <changeSet id="fix_calendar_param" author="anhquynhpham" >
+        <update tableName="app">
+            <column name="type" value="Calendar"/>
+            <where>type='Calender'</where>
+        </update>
+    </changeSet>
+
+    <changeSet id="tag-2.0" author="anhquynhpham" >
+        <tagDatabase tag="2.0" />
+    </changeSet>
+
+</databaseChangeLog>

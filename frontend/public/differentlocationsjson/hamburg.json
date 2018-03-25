@@ -1,0 +1,175 @@
+{
+  "name": "Hamburg",
+  "display-time": 10,
+  "screens": [
+    {
+      "type": "Grid-layout",
+      "animation-type": "fade",
+      "rows": 1,
+      "cols": 1,
+      "apps": [
+        {
+          "type": "Clock",
+          "params": {
+            "utc-diff": 2,
+            "city": "Hamburg, Germany"
+          }
+        }
+      ]
+    },
+    {
+      "type": "Grid-layout",
+      "animation-type": "slide-right",
+      "rows": 1,
+      "cols": 1,
+      "apps": [
+        {
+          "type": "Weather",
+          "params": {
+            "city": "Hamburg",
+            "degrees": "C"
+          }
+        }
+      ]
+    },
+    {
+      "type": "Grid-layout",
+      "animation-type": "fade",
+      "rows": 2,
+      "cols": 2,
+      "apps": [
+        {
+          "type": "Clock",
+          "params": {
+            "utc-diff": 2,
+            "city": "Hamburg, Germany"
+          }
+        },
+        {
+          "type": "Clock",
+          "params": {
+            "utc-diff": 7,
+            "city": "Da Nang, Viet Nam"
+          }
+        },
+        {
+          "type": "Clock",
+          "params": {
+            "utc-diff": 2,
+            "city": "Munich, Germany"
+          }
+        },
+        {
+          "type": "Clock",
+          "params": {
+            "utc-diff": -4,
+            "city": "Washington DC, USA"
+          }
+        }
+      ]
+    },
+    {
+      "type": "Grid-layout",
+      "animation-type": "fade",
+      "rows": 2,
+      "cols": 2,
+      "apps": [
+        {
+          "type": "Weather",
+          "params": {
+            "city": "Hamburg",
+            "degrees": "C"
+          }
+        },
+        {
+          "type": "Weather",
+          "params": {
+            "city": "Da Nang",
+            "degrees": "C"
+          }
+        },
+        {
+          "type": "Weather",
+          "params": {
+            "city": "Munich",
+            "degrees": "C"
+          }
+        },
+        {
+          "type": "Weather",
+          "params": {
+            "city": "Washington DC",
+            "degrees": "C"
+          }
+        }
+      ]
+    },
+    {
+      "type": "Grid-layout",
+      "animation-type": "slide-right",
+      "rows": 1,
+      "cols": 1,
+      "apps": [
+        {
+          "type": "Website",
+          "params": {
+            "url": "https://www.mgmtp.com"
+          }
+        }
+      ]
+    },
+    {
+      "type": "Grid-layout",
+      "animation-type": "fade",
+      "rows": 1,
+      "cols": 1,
+      "apps": [
+        {
+          "type": "Facebook",
+          "params": {
+            "url": "mgmTechnologyPartners"
+          }
+        }
+      ]
+    },
+    {
+      "type": "Grid-layout",
+      "animation-type": "slide-right",
+      "rows": 1,
+      "cols": 1,
+      "apps": [
+        {
+          "type": "Holiday",
+          "params": {}
+        }
+      ]
+    },
+    {
+      "type": "Grid-layout",
+      "animation-type": "slide-right",
+      "rows": 1,
+      "cols": 1,
+      "apps": [
+        {
+          "type": "Calendar",
+          "params": {
+            "name": "My Calendar",
+            "number-of-calendars": "5",
+            "time-min": "6",
+            "time-max": "18",
+            "calendar-id-1": "wildboar.work@gmail.com",
+            "color-1": "#9E7BFF",
+            "calendar-id-2": "1te503579dac6q4tcs87i0ej78@group.calendar.google.com",
+            "color-2": "#ff8847",
+            "calendar-id-3": "fseue5o57ml3hmbk0nbpipufmc@group.calendar.google.com",
+            "color-3": "#2ecc71",
+            "calendar-id-4": "36u9i6nkfvs896f5dagrr53s40@group.calendar.google.com",
+            "color-4": "#50EBEC",
+            "calendar-id-5": "hgff4kd43u8t0u0dr3ppucki60@group.calendar.google.com",
+            "color-5": "#f01111"
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="Add is_admin in users" author="anhquynhpham">
+        <addColumn tableName="users">
+            <column name="is_admin" type="boolean" defaultValueNumeric="false">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+        
+        <update tableName="users">
+            <column name="is_admin" value="true"/>
+            <where>email='admin@mgm-tp.com'</where>
+        </update>
+    </changeSet>
+
+    <changeSet id="tag-4.0" author="anhquynhpham" >
+        <tagDatabase tag="4.0" />
+    </changeSet>
+
+</databaseChangeLog>

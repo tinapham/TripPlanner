@@ -1,0 +1,45 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <changeSet id="create_user" author="anhquynhpham" >
+        <createTable tableName="users" >
+            <column name="id" type="int" autoIncrement="true" >
+            <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name="email" type="varchar(100)" >
+            <constraints nullable="false" unique="true" />
+            </column>
+            <column name="password" type="varchar(100)" >
+            <constraints nullable="false" />
+            </column>
+        </createTable>
+
+        <insert tableName="users">
+            <column name="id">1</column>
+            <column name="email">admin@mgm-tp.com</column>
+            <column name="password">2cb27494fa256db7dd687cc2d9c67369e004cfddcd0d51cb97077290c8521a5f</column> <!--mgmScreens-->
+        </insert>
+    </changeSet>
+
+    <changeSet id="Add users_id to screen_play" author="anhquynhpham">
+        <addColumn tableName="screen_play">
+            <column name="users_id" type="int" defaultValueNumeric="1">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+
+        <addForeignKeyConstraint baseColumnNames="users_id"
+                                 baseTableName="screen_play"
+                                 constraintName="screenplay_fk"
+                                 onDelete="CASCADE"
+                                 onUpdate="CASCADE"
+                                 referencedColumnNames="id"
+                                 referencedTableName="users" />
+    </changeSet>
+
+    <changeSet id="tag-3.0" author="anhquynhpham" >
+        <tagDatabase tag="3.0" />
+    </changeSet>
+
+</databaseChangeLog>

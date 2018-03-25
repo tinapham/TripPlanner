@@ -1,0 +1,39 @@
+.danang{
+   padding-top: 20px;
+}
+.danang img{
+    height:20%;
+    margin-left:auto;
+    margin-right:auto;
+    width:20%;
+}
+
+@media all and (max-width:1024px) and (min-width:800px){
+    .danang h1{
+        font-size: 2em;
+    }
+}
+
+@media all and (max-width:800px) and (min-width:640px){
+    .danang h1{
+        font-size: 2em;
+    }
+}
+
+@media all and (max-width:640px) and (min-width:480px){
+    .danang h1{
+        font-size: 1.6em;
+    }
+}
+
+@media all and (max-width:480px) and (min-width:320px){
+    .danang h1{
+        font-size: 1.4em;
+    }
+}
+
+@media all and (max-width:320px){
+    .danang h1{
+        font-size: 1.4em;
+    }
+}

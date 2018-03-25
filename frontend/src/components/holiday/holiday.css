@@ -1,0 +1,162 @@
+.holiday-Bg {
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  -webkit-background-size: cover;
+  background-color: #00a3cc;
+  height: 100%;
+}
+
+.wapper-logo-mgm {
+  display: block;
+}
+
+.logo-mgm {
+  display: block;
+  width: 50px;
+  -ms-transform: logo-mgm-spin infinite 5s linear;
+  -webkit-transform: logo-mgm-spin infinite 5s linear;
+  animation: logo-mgm-spin infinite 5s linear;
+}
+
+.holiday-content {
+  height: 100%;
+}
+
+.wrapper {
+  height: 80%;
+}
+
+.panel-info {
+  height: 100%;
+}
+
+@font-face {
+  font-family: 'Bangers';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Bangers Regular'), local('Bangers-Regular'), url("../../static/resources/file/fonts/bangers.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
+}
+
+.holiday-title {
+  -moz-transform: skew(0, 0);
+  -moz-transition-duration: .5s;
+  -moz-transition-property: font-size;
+  -ms-transform: skew(0, 0);
+  -o-transition-duration: .5s;
+  -o-transition-property: font-size;
+  -webkit-transform: skew(0, 0);
+  -webkit-transition-duration: .5s;
+  -webkit-transition-property: font-size;
+  color: #fff;
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: 45px;
+  font-weight: normal;
+  text-align: center;
+  text-transform: uppercase;
+  transform: skew(0, 0);
+  transition-duration: .5s;
+  transition-property: font-size;
+  white-space: nowrap;
+  z-index: 1000;
+}
+
+.holiday-todayItem div:nth-child(odd) {
+  background-color: rgb(185, 229, 241);
+}
+
+.eachItem {
+  background-color: rgb(185, 229, 241);
+  font-size: 13px;
+  margin-bottom: 2px;
+  min-height: 30px;
+}
+
+.panel-heading-color {
+  color: white !important;
+  background-color: rgb(223, 132, 13) !important;
+}
+
+.panel-body {
+  height: 93%;
+}
+
+.wrapper-eachItem {
+  height: 100%;
+  padding-bottom: 3px;
+}
+.text-color {
+  color: #a54f16;
+  font-weight: bold;
+}
+
+.up-event-content {
+  color: rgb(83, 80, 80);
+  font-weight: bold;
+}
+
+@media screen and (max-width: 768px) {
+  .eachItem {
+    font-size: 12px;
+    margin-bottom: 2px;
+    min-height: 30px;
+  }
+  img.logoOffices {
+    height: 20px;
+    width: 20px;
+  }
+  .logo-mgm {
+    width: 50px;
+    margin-left: 30px;
+    margin-top: 2px;
+    margin-bottom: -9px;
+  }
+  .holiday-title {
+    font-size: 20px;
+  }
+  .panel-heading>h3 {
+    font-size: 12px;
+    margin-top: 0px;
+  }
+  .up-event-content {
+    font-size: 9px;
+  }
+  .text-color {
+    font-size: 10px;
+    float: left;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .eachItem {
+    margin-bottom: 0px;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .eachItem {
+    margin-bottom: 0px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .eachItem {
+    margin-bottom: 2px;
+  }
+}
+
+@media screen and (min-width: 1920px) {
+  .eachItem {
+    margin-bottom: 3px;
+  }
+}
+
+@keyframes logo-mgm-spin {
+  from {
+    transform: rotateY(0deg);
+  }
+  to {
+    transform: rotateY(360deg);
+  }
+}
