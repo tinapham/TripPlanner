@@ -21,9 +21,6 @@ public class EventEntity implements Serializable {
 	@Column(name = "end_time")
 	private String endTime;
 
-//	@Column(name = "market_id", nullable = false)
-//	private Integer marketId;
-
 	@ManyToOne
 	@JoinColumn(name = "attraction_id", nullable = false)
 	private AttractionEntity attraction;
@@ -33,6 +30,12 @@ public class EventEntity implements Serializable {
 	private PlanEntity plan;
 
 	public EventEntity() { }
+
+	public EventEntity(String startTime, String endTime, PlanEntity plan) {
+		this.startTime = startTime;
+		this.endTime = endTime;
+		this.plan = plan;
+	}
 
 	public EventEntity(String startTime, String endTime, AttractionEntity attraction, PlanEntity plan) {
 		this.startTime = startTime;

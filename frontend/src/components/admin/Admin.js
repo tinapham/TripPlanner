@@ -11,6 +11,7 @@ import FormPage from './containers/FormPage';
 import Dashboard from './containers/DashboardPage';
 import AttractionPage from './containers/AttractionPage';
 import AttractionFormPage from './containers/AttractionFormPage';
+import PlanFormPage from './containers/PlanFormPage';
 import UserPage from './containers/UserPage';
 import UserProfilePage from './containers/UserProfilePage';
 
@@ -185,6 +186,9 @@ class Admin extends Component {
                 <Route path={`${this.props.match.url}/plans`}
                        render={(props) => <PlanPage data={this.state.dataPlans}
                                                      delete={this.deleteScreenPlay} {...props} />} />
+                <Route path={`${this.props.match.url}/plan-form`}
+                       render={(props) => <PlanFormPage updateData={this.updateAttraction} save={this.saveAttraction}
+                                                        attractions={this.state.dataAttractions} {...props} />} />
                 <Route path={`${this.props.match.url}/form`}
                   render={(props) => <FormPage updateData={this.updateScreenPlay} save={this.saveScreenPlay} {...props} />} />
                 <Route path={`${this.props.match.url}/attractions`}

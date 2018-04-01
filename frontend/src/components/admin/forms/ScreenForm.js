@@ -53,6 +53,7 @@ class ScreenForm extends Component {
   }
 
   onAnimationChange(event, index, value) {
+    console.log(value);
     this.props.onChange("screen", "animation-type", value)
   }
 

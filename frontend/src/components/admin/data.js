@@ -36,6 +36,11 @@ const data = {
     <MenuItem value={"slide-right"} key={2} primaryText="slide-right" />,
     <MenuItem value={"slide-left"} key={3} primaryText="slide-left" />
   ],
+  listAttraction:[
+    <MenuItem value={"29/3 park"} key={1} primaryText="29/3 park" />,
+    <MenuItem value={"Ban Co Peak"} key={2} primaryText="Ban Co Peak" />,
+    <MenuItem value={"Asia Park"} key={3} primaryText="Asia Park" />
+  ],
   parameters:{
     Clock:[
       {key:"city", value: ""},
