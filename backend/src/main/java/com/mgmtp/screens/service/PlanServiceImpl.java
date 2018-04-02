@@ -6,6 +6,7 @@ import com.mgmtp.screens.model.EventDTO;
 import com.mgmtp.screens.model.PlanDTO;
 import com.mgmtp.screens.repository.EventDAO;
 import com.mgmtp.screens.repository.PlanDAO;
+import com.mgmtp.screens.repository.PlanRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -64,13 +65,18 @@ public class PlanServiceImpl implements PlanService {
 	public void addNewPlan(PlanDTO planDTO, UserEntity user) {
 //		PlanEntity planEntity = new PlanEntity(planDTO.getName(),
 //				planDTO.getStartDay(), planDTO.getEndDay(),
-//				planDTO.getEvents());
+//				null);
+//		planEntity.setEvents(covertListEventDTOToEntity(planDTO.getEvents(), planEntity));
 //		planDAO.save(planEntity);
 	}
 
 	@Override
 	public void addNewPlan(PlanDTO planDTO) {
-
+		PlanEntity planEntity = new PlanEntity(planDTO.getName(),
+				planDTO.getStartDay(), planDTO.getEndDay(),
+				null);
+		planEntity.setEvents(covertListEventDTOToEntity(planDTO.getEvents(), planEntity));
+		planDAO.save(planEntity);
 	}
 
 	@Override
@@ -82,7 +88,7 @@ public class PlanServiceImpl implements PlanService {
 		planEntity.setEndDay(planDTO.getEndDay());
 		deleteDiffEvent(planEntity.getEvents(), planDTO.getEvents());
 		planEntity.setEvents(covertListEventDTOToEntity(planDTO.getEvents(), planEntity));
-		planDAO.save(planEntity);
+		planDAO.saveAndFlush(planEntity);
 	}
 
 	private void deleteDiffEvent(List<EventEntity> oldList, List<EventDTO> newList) {
@@ -106,12 +112,17 @@ public class PlanServiceImpl implements PlanService {
 														   PlanEntity planEntity) {
 		List<EventEntity> events = new ArrayList<>();
 		for (EventDTO item : listEventDTO) {
-			EventEntity eventEntity = new EventEntity(item.getStartTime(), item.getEndTime(),
-					planEntity);
+			EventEntity eventEntity;
+			if (item.getId() != null) {
+				eventEntity = new EventEntity(item.getId(), item.getStartTime(), item.getEndTime(), planEntity);
+			} else {
+				eventEntity = new EventEntity(item.getStartTime(), item.getEndTime(), planEntity);
+			}
 			AttractionDTO attractionDTO = item.getAttraction();
-			eventEntity.setAttraction(new AttractionEntity(attractionDTO.getName(), attractionDTO.getAddress(),
-													attractionDTO.getLat(), attractionDTO.getLng(),
-													attractionDTO.getType(), attractionDTO.getDescription()));
+			eventEntity.setAttraction(new AttractionEntity(attractionDTO.getId(), attractionDTO.getName(),
+													attractionDTO.getAddress(), attractionDTO.getLat(),
+													attractionDTO.getLng(), attractionDTO.getType(),
+													attractionDTO.getDescription()));
 			events.add(eventEntity);
 		}
 		return events;

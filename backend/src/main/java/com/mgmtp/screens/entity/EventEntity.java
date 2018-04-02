@@ -37,10 +37,10 @@ public class EventEntity implements Serializable {
 		this.plan = plan;
 	}
 
-	public EventEntity(String startTime, String endTime, AttractionEntity attraction, PlanEntity plan) {
+	public EventEntity(Integer id, String startTime, String endTime, PlanEntity plan) {
+		this.id = id;
 		this.startTime = startTime;
 		this.endTime = endTime;
-		this.attraction = attraction;
 		this.plan = plan;
 	}
 

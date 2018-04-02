@@ -21,8 +21,8 @@ class PlanForm extends Component {
     this.state = {
       id: this.props.location.state ? this.props.location.state.data.id : undefined,
       name: this.props.location.state ? this.props.location.state.data.name : "",
-      startDay: this.props.location.state ? this.props.location.state.data['start-day'] : "",
-      endDay: this.props.location.state ? this.props.location.state.data['end-day'] : "",
+      'start-day': this.props.location.state ? this.props.location.state.data['start-day'] : "",
+      'end-day': this.props.location.state ? this.props.location.state.data['end-day'] : "",
       events: this.props.location.state ? this.props.location.state.data.events : [],
       activatedEventForm: false,
       idEvents: this.getIdEvents(this.props.location.state ? this.props.location.state.data.events : []),
@@ -30,7 +30,7 @@ class PlanForm extends Component {
     }
     this.showEventForm = this.showEventForm.bind(this);
     this.addEvent = this.addEvent.bind(this);
-    this.saveAttraction = this.saveAttraction.bind(this);
+    this.savePlan = this.savePlan.bind(this);
     this.onNameChange = this.onNameChange.bind(this);
     this.onStartDayChange = this.onStartDayChange.bind(this);
     this.onEndDayChange = this.onEndDayChange.bind(this);
@@ -82,7 +82,8 @@ class PlanForm extends Component {
     });
   }
 
-  saveAttraction() {
+  savePlan() {
+    console.log(this.state);
     if (this.state.name === "") {
       this.setState({
         errorMessage: "This field is required"
@@ -110,14 +111,14 @@ class PlanForm extends Component {
 
   onStartDayChange(event, value) {
     this.setState({
-      startDay: value.toISOString().substr(0,10),
+      'start-day': value.toISOString().substr(0,10),
       errorMessage: undefined
     });
   }
 
   onEndDayChange(event, value) {
     this.setState({
-      endDay: value.toISOString().substr(0,10),
+      'end-day': value.toISOString().substr(0,10),
       errorMessage: undefined
     });
   }
@@ -143,7 +144,8 @@ class PlanForm extends Component {
   }
 
   render() {
-    console.log(this.state);
+    let startDay = this.state['start-day']? new Date(this.state['start-day']): undefined;
+    let endDay = this.state['end-day']? new Date(this.state['end-day']): undefined;
     return (
       <div className="row">
         <div className="col-md-6 col-sm-12 col-xs-12">
@@ -168,7 +170,7 @@ class PlanForm extends Component {
                 floatingLabelText="Start day"
                 hintText="Start day"
                 fullWidth={true}
-                value={new Date(this.state.startDay)}
+                value={startDay}
                 onChange={this.onStartDayChange}
                 ref="start-day"
                 errorText={this.state.errorMessage}
@@ -181,7 +183,7 @@ class PlanForm extends Component {
                 floatingLabelText="End day"
                 hintText="End day"
                 fullWidth={true}
-                value={new Date(this.state.endDay)}
+                value={endDay}
                 onChange={this.onEndDayChange}
                 ref="start-day"
                 errorText={this.state.errorMessage}
@@ -218,7 +220,7 @@ class PlanForm extends Component {
                 </Link>
 
                 <RaisedButton label="Save"
-                              onClick={this.saveAttraction}
+                              onClick={this.savePlan}
                               style={styles.saveButton}
                               type="submit"
                               icon={<ContentSave/>}

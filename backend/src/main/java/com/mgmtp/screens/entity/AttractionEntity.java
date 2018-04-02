@@ -47,6 +47,16 @@ public class AttractionEntity implements Serializable {
 		this.description = description;
 	}
 
+	public AttractionEntity(Integer id, String name, String address, double lat, double lng, String type, String description) {
+		this.id = id;
+		this.name = name;
+		this.address = address;
+		this.lat = lat;
+		this.lng = lng;
+		this.type = type;
+		this.description = description;
+	}
+
 	public Integer getId() { return id; }
 
 	public void setId(Integer id) {

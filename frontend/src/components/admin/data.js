@@ -2,6 +2,7 @@ import React from 'react';
 import Assessment from 'material-ui/svg-icons/action/assessment';
 import PermIdentity from 'material-ui/svg-icons/action/perm-identity';
 import Group from 'material-ui/svg-icons/social/group';
+import ActionFlightTakeoff from 'material-ui/svg-icons/action/flight-takeoff';
 import AccountBalance from 'material-ui/svg-icons/action/account-balance';
 import Exit from 'material-ui/svg-icons/action/exit-to-app';
 import Web from 'material-ui/svg-icons/av/web';
@@ -16,9 +17,8 @@ const data = {
     { text: 'Sign out', icon: <Exit/>, link: '/admin/login'}
   ],
   adminMenus: [
-    { text: 'DashBoard', icon: <Assessment/>, link: '/admin/dashboard' },
-    { text: 'Attractions', icon: <Group/>,link: '/admin/attractions' },
-    { text: 'Plans', icon: <Group/>,link: '/admin/plans' },
+    { text: 'Attractions', icon: <Assessment/>,link: '/admin/attractions' },
+    { text: 'Plans', icon: <ActionFlightTakeoff/>,link: '/admin/plans' },
     { text: 'Users', icon: <Group/>,link: '/admin/users' },
     { text: 'About us', icon: <AccountBalance/> , link: '/admin/about_us'},
     { text: 'Sign out', icon: <Exit/>, link: '/admin/login'}

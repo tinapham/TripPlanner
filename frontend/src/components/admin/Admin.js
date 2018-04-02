@@ -42,8 +42,11 @@ class Admin extends Component {
     this.saveScreenPlay = this.saveScreenPlay.bind(this);
     this.updateAttraction = this.updateAttraction.bind(this);
     this.saveAttraction = this.saveAttraction.bind(this);
+    this.updatePlan = this.updatePlan.bind(this);
+    this.savePlan = this.savePlan.bind(this);
     this.deleteUser = this.deleteUser.bind(this);
     this.deleteAttraction = this.deleteAttraction.bind(this);
+    this.deletePlan = this.deletePlan.bind(this);
   }
 
   async componentDidMount() {
@@ -129,7 +132,6 @@ class Admin extends Component {
   }
 
   async saveAttraction(data) {
-    console.log(data);
     let response = await axios({
       method: 'post',
       url: this.url[3],
@@ -140,6 +142,34 @@ class Admin extends Component {
     });
     if (response.data === "SUCCESS") {
       window.location.href = "/admin/attractions";
+    }
+  }
+
+  async updatePlan(id, data) {
+    let response = await axios({
+      method: 'put',
+      url: this.url[4] + id,
+      data: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json; charset=utf8"
+      }
+    });
+    if (response.data === "SUCCESS") {
+      window.location.href = "/admin/plans";
+    }
+  }
+
+  async savePlan(data) {
+    let response = await axios({
+      method: 'post',
+      url: this.url[4],
+      data: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json; charset=utf8"
+      }
+    });
+    if (response.data === "SUCCESS") {
+      window.location.href = "/admin/plans";
     }
   }
 
@@ -171,6 +201,20 @@ class Admin extends Component {
     }
   }
 
+  async deletePlan(id, position) {
+    let response = await axios({
+      method: 'delete',
+      url: this.url[4] + id
+    });
+    if (response.data === "SUCCESS") {
+      let dataPlans = this.state.dataPlans;
+      dataPlans.splice(position, 1);
+      this.setState({
+        dataPlans: dataPlans
+      });
+    }
+  }
+
   render() {
     return (
       <div>
@@ -185,9 +229,9 @@ class Admin extends Component {
                     delete={this.deleteScreenPlay} {...props} />} />
                 <Route path={`${this.props.match.url}/plans`}
                        render={(props) => <PlanPage data={this.state.dataPlans}
-                                                     delete={this.deleteScreenPlay} {...props} />} />
+                                                     delete={this.deletePlan} {...props} />} />
                 <Route path={`${this.props.match.url}/plan-form`}
-                       render={(props) => <PlanFormPage updateData={this.updateAttraction} save={this.saveAttraction}
+                       render={(props) => <PlanFormPage updateData={this.updatePlan} save={this.savePlan}
                                                         attractions={this.state.dataAttractions} {...props} />} />
                 <Route path={`${this.props.match.url}/form`}
                   render={(props) => <FormPage updateData={this.updateScreenPlay} save={this.saveScreenPlay} {...props} />} />
