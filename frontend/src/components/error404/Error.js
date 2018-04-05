@@ -1,7 +1,7 @@
 import React from 'react';
 import './css/style.css';
 import Banner from './images/banner.png';
-import Logo from './images/mgm-logo.png';
+import Logo from './images/logo.png';
 
 const Error = () => {
     return (
