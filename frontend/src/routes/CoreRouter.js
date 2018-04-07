@@ -5,8 +5,8 @@ import LoginPage from "../components/authentication/LoginPage";
 import RegisterPage from "../components/authentication/RegisterPage";
 import axios from "axios/index";
 import {loggedIn} from "../components/authentication/oauth";
-import Admin from "../admin/Admin";
-import App from '../containers/App/App';
+import Admin from "../admin/index";
+import App from '../containers/App/index';
 class CoreRouter extends React.Component{
 
     url_backend = process.env.REACT_APP_BACKEND_URL + "admin/api/";

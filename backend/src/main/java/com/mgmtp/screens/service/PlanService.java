@@ -23,4 +23,6 @@ public interface PlanService {
 
 	void updatePlan(int id, PlanDTO planDTO);
 
+	void addNewPlanWithoutEvent(PlanDTO planDTO);
+
 }

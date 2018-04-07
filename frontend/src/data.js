@@ -1,6 +1,7 @@
 import React from 'react';
 import Assessment from 'material-ui/svg-icons/action/assessment';
 import Group from 'material-ui/svg-icons/social/group';
+import ActionHome from 'material-ui/svg-icons/action/home';
 import ActionFlightTakeoff from 'material-ui/svg-icons/action/flight-takeoff';
 import AccountBalance from 'material-ui/svg-icons/action/account-balance';
 import Exit from 'material-ui/svg-icons/action/exit-to-app';
@@ -8,16 +9,17 @@ import MenuItem from 'material-ui/MenuItem';
 
 const data = {
     menus: [
-        {text: 'Attractions', icon: <Assessment/>, link: '/admin/attractions'},
-        {text: 'Plans', icon: <ActionFlightTakeoff/>, link: '/admin/plans'},
-        {text: 'Users', icon: <Group/>, link: '/admin/users'},
-        {text: 'About us', icon: <AccountBalance/>, link: '/admin/about_us'},
+        {text: 'Home', icon: <ActionHome/>, link: '/'},
+        {text: 'Explore', icon: <Assessment/>, link: '/explore'},
+        {text: 'My plans', icon: <ActionFlightTakeoff/>, link: '/plan'},
+        {text: 'Profile', icon: <Group/>, link: '/profile'},
+        {text: 'About us', icon: <AccountBalance/>, link: '/about_us'},
         {text: 'Sign out', icon: <Exit/>, link: '/login'}
     ],
     adminMenus: [
-        {text: 'Attractions', icon: <Assessment/>, link: '/admin/attractions'},
-        {text: 'Plans', icon: <ActionFlightTakeoff/>, link: '/admin/plans'},
-        {text: 'Users', icon: <Group/>, link: '/admin/users'},
+        {text: 'Attraction Management', icon: <Assessment/>, link: '/admin/attractions'},
+        {text: 'Plan Management', icon: <ActionFlightTakeoff/>, link: '/admin/plans'},
+        {text: 'User Management', icon: <Group/>, link: '/admin/users'},
         {text: 'About us', icon: <AccountBalance/>, link: '/admin/about_us'},
         {text: 'Sign out', icon: <Exit/>, link: '/login'}
     ],

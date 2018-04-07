@@ -5,7 +5,7 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 import './styles.scss';
 import 'font-awesome/css/font-awesome.css';
 import 'flexboxgrid/css/flexboxgrid.css';
-import App from './containers/App';
+import Container from '../containers/Container/index';
 import Error from '../components/error404/Error.js';
 import AttractionPage from './containers/AttractionPage';
 import AttractionFormPage from './containers/AttractionFormPage';
@@ -19,13 +19,12 @@ injectTapEventPlugin();
 class Admin extends Component {
 
     url_backend = process.env.REACT_APP_BACKEND_URL + "admin/api/";
-    url = [this.url_backend + "screenplay/", this.url_backend + "user/", this.url_backend + "user/getEmail",
+    url = [this.url_backend + "user/", this.url_backend + "user/getEmail",
           this.url_backend + "attraction/", this.url_backend + "plan/"];
 
   constructor() {
     super();
     this.state = {
-      data: [],
       dataUsers: [],
       dataAttractions: [],
       dataPlans: [],
@@ -33,9 +32,6 @@ class Admin extends Component {
       accessToken: loggedIn(),
       isAdmin: false
     };
-    this.deleteScreenPlay = this.deleteScreenPlay.bind(this);
-    this.updateScreenPlay = this.updateScreenPlay.bind(this);
-    this.saveScreenPlay = this.saveScreenPlay.bind(this);
     this.updateAttraction = this.updateAttraction.bind(this);
     this.saveAttraction = this.saveAttraction.bind(this);
     this.updatePlan = this.updatePlan.bind(this);
@@ -60,64 +56,21 @@ class Admin extends Component {
         }));
       console.log(data[1].data);
       this.setState({
-        data: data[0].data,
-        isAdmin: !!data[1].data,
-        dataUsers: data[1].data,
-        email: data[2].data,
-        dataAttractions: data[3].data,
-        dataPlans: data[4].data
+        isAdmin: !!data[0].data,
+        dataUsers: data[0].data,
+        email: data[1].data,
+        dataAttractions: data[2].data,
+        dataPlans: data[3].data
       });
     } else {
       axios.defaults.headers.common = undefined;
     }
   }
 
-  async deleteScreenPlay(id, position) {
-    let response = await axios({
-      method: 'delete',
-      url: this.url[0] + id
-    });
-    if (response.data === "SUCCESS") {
-      let data = this.state.data;
-      data.splice(position, 1);
-      this.setState({
-        data: data
-      });
-    }
-  }
-
-  async updateScreenPlay(id, data) {
-    let response = await axios({
-      method: 'put',
-      url: this.url[0] + id,
-      data: JSON.stringify(data),
-      headers: {
-        "Content-Type": "application/json; charset=utf8"
-      }
-    });
-    if (response.data === "SUCCESS") {
-      window.location.href = "/admin";
-    }
-  }
-
-  async saveScreenPlay(data) {
-    let response = await axios({
-      method: 'post',
-      url: this.url[0],
-      data: JSON.stringify(data),
-      headers: {
-        "Content-Type": "application/json; charset=utf8"
-      }
-    });
-    if (response.data === "SUCCESS") {
-      window.location.href = "/admin";
-    }
-  }
-
   async updateAttraction(id, data) {
     let response = await axios({
       method: 'put',
-      url: this.url[3] + id,
+      url: this.url[2] + id,
       data: JSON.stringify(data),
       headers: {
         "Content-Type": "application/json; charset=utf8"
@@ -131,7 +84,7 @@ class Admin extends Component {
   async saveAttraction(data) {
     let response = await axios({
       method: 'post',
-      url: this.url[3],
+      url: this.url[2],
       data: JSON.stringify(data),
       headers: {
         "Content-Type": "application/json; charset=utf8"
@@ -145,7 +98,7 @@ class Admin extends Component {
   async updatePlan(id, data) {
     let response = await axios({
       method: 'put',
-      url: this.url[4] + id,
+      url: this.url[3] + id,
       data: JSON.stringify(data),
       headers: {
         "Content-Type": "application/json; charset=utf8"
@@ -159,7 +112,7 @@ class Admin extends Component {
   async savePlan(data) {
     let response = await axios({
       method: 'post',
-      url: this.url[4],
+      url: this.url[3],
       data: JSON.stringify(data),
       headers: {
         "Content-Type": "application/json; charset=utf8"
@@ -173,7 +126,7 @@ class Admin extends Component {
   async deleteUser(id, position) {
     let response = await axios({
       method: 'delete',
-      url: this.url[1] + id
+      url: this.url[0] + id
     });
     if (response.data === "SUCCESS") {
       let dataUsers = this.state.dataUsers;
@@ -187,7 +140,7 @@ class Admin extends Component {
   async deleteAttraction(id, position) {
     let response = await axios({
       method: 'delete',
-      url: this.url[3] + id
+      url: this.url[2] + id
     });
     if (response.data === "SUCCESS") {
       let dataAttractions = this.state.dataAttractions;
@@ -201,7 +154,7 @@ class Admin extends Component {
   async deletePlan(id, position) {
     let response = await axios({
       method: 'delete',
-      url: this.url[4] + id
+      url: this.url[3] + id
     });
     if (response.data === "SUCCESS") {
       let dataPlans = this.state.dataPlans;
@@ -217,7 +170,7 @@ class Admin extends Component {
       <div>
         {
           this.state.accessToken
-            ? < App isAdmin={this.state.isAdmin} email={this.state.email}>
+            ? < Container isAdmin={this.state.isAdmin} email={this.state.email}>
               <Switch>
                 <Route exact path={this.props.match.url}
                        render={(props) => <AttractionPage data={this.state.dataAttractions}
@@ -239,7 +192,7 @@ class Admin extends Component {
                                                     delete={this.deleteUser}{...props} />}/>
                 <Route path="*" component={Error} />
               </Switch>
-            </App >
+            </Container >
             : <Redirect to={`${this.props.match.url}/login`} />
         }
       </div>

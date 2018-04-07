@@ -2,7 +2,7 @@ import React from 'react';
 import Paper from 'material-ui/Paper';
 import PropTypes from 'prop-types';
 import Divider from 'material-ui/Divider';
-import globalStyles from '../styles';
+import globalStyles from '../../admin/styles';
 
 const PageBase = (props) => {
 

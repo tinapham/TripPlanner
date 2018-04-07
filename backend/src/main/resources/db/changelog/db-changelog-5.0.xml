@@ -46,6 +46,12 @@
             <column name="start_day" type="varchar(10)" />
             <column name="end_day" type="varchar(10)" />
         </createTable>
+
+        <sql dbms="postgresql"
+             splitStatements="true"
+             stripComments="true">
+            insert into plans(name, start_day, end_day) values ('Summer trip', '2018-04-01', '2018-04-03');
+        </sql>
     </changeSet>
 
     <changeSet id="create_event" author="anhquynhpham" >
@@ -78,6 +84,10 @@
                                  onUpdate="CASCADE"
                                  referencedColumnNames="id"
                                  referencedTableName="attractions" />
+
+        <sql>
+            insert into events(start_time, end_time, attraction_id, plan_id) values ('2018-01-04 13:30', '2018-01-04 16:30', 1, 1);
+        </sql>
 
     </changeSet>
 

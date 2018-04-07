@@ -1,14 +1,14 @@
 import React from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import Header from '../components/Header';
-import LeftDrawer from '../components/LeftDrawer';
+import Header from '../../components/header/Header';
+import LeftDrawer from '../../components/left-drawer/LeftDrawer';
 import withWidth, { LARGE, SMALL } from 'material-ui/utils/withWidth';
-import ThemeDefault from '../theme-default';
-import Footer from '../components/Footer';
+import ThemeDefault from '../../theme-default';
+import Footer from '../../components/footer/Footer';
 import PropTypes from 'prop-types';
-import Data from '../data';
+import Data from '../../data';
 
-class App extends React.Component {
+class Container extends React.Component {
 
   constructor(props) {
     super(props);
@@ -53,7 +53,7 @@ class App extends React.Component {
             handleChangeRequestNavDrawer={this.handleChangeRequestNavDrawer.bind(this)} />
 
           <LeftDrawer navDrawerOpen={navDrawerOpen}
-            menus={Data.menus}
+            menus={this.props.isAdmin? Data.adminMenus : Data.menus}
             username={this.props.email}
           />
           <div style={styles.container}>
@@ -66,9 +66,9 @@ class App extends React.Component {
   }
 }
 
-App.propTypes = {
+Container.propTypes = {
   children: PropTypes.element,
   width: PropTypes.number
 };
 
-export default withWidth()(App);
+export default withWidth()(Container);

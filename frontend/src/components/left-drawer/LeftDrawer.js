@@ -31,7 +31,7 @@ const LeftDrawer = (props) => {
     avatar: {
       div: {
         padding: '15px 0 20px 15px',
-        backgroundImage: 'url(' + require('../images/backgroundAva.jpg') + ')' ,
+        backgroundImage: 'url(' + require('../../admin/images/backgroundAva.jpg') + ')' ,
         backgroundSize: 'cover',
         height: 85
       },

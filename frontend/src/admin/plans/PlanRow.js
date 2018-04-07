@@ -54,13 +54,15 @@ class PlanRow extends React.Component {
         <TableRowColumn style={styles.columns.displayTime}>{this.props.data["start-day"]}</TableRowColumn>
         <TableRowColumn style={styles.columns.screens}>{this.props.data["end-day"]}</TableRowColumn>
         <TableRowColumn style={styles.columns.apps}>
-          {this.props.data["events"].map(function (event, index) {
-            return (
-            <div key={index}>
-              <p>{event.attraction.name}</p>
-            </div>
-            )
-          })}
+          {this.props.data["events"] ?
+              this.props.data["events"].map(function (event, index) {
+                return (
+                <div key={index}>
+                  <p>{event.attraction.name}</p>
+                </div>
+                )})
+              : undefined
+          }
         </TableRowColumn>
         <TableRowColumn style={styles.columns.action}>
           <Link className="button" to={location}>

@@ -4,7 +4,7 @@ import { Table, TableBody, TableHeaderColumn, TableRow } from 'material-ui/Table
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import { pink500 } from 'material-ui/styles/colors';
-import PageBase from '../components/PageBase';
+import PageBase from '../../components/page-base/PageBase';
 import styles from './AttractionManagementStyles';
 import { Link } from 'react-router-dom';
 

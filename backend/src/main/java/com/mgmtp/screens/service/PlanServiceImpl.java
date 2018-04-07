@@ -80,6 +80,15 @@ public class PlanServiceImpl implements PlanService {
 	}
 
 	@Override
+	public void addNewPlanWithoutEvent(PlanDTO planDTO){
+		PlanEntity planEntity = new PlanEntity(planDTO.getName(),
+				planDTO.getStartDay(), planDTO.getEndDay(),
+				null);
+		planDAO.save(planEntity);
+//		planEntity = planDAO.getPlanEntityByName(planDTO.getName());
+	}
+
+	@Override
 	@Transactional
 	public void updatePlan(int id, PlanDTO planDTO) {
 		PlanEntity planEntity = planDAO.findOne(id);

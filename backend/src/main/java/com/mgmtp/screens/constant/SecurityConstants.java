@@ -10,7 +10,5 @@ public class SecurityConstants {
     public static final String PUBLIC_SCREENPLAY_URL = "/api/screenplay/**";
     public static final String MARKET_URL = "/api/attraction";
     public static final String MARKET_NAME_URL = "/api/attraction/**";
-    public static final String PLAN_URL = "/api/plan";
-    public static final String PLAN_NAME_URL = "/api/plan/**";
     public static final String REMOTE_API = "/api/remoteAPI/";
 }

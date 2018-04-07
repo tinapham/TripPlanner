@@ -7,9 +7,9 @@ import MenuItem from 'material-ui/MenuItem';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import Menu from 'material-ui/svg-icons/navigation/menu';
 import {white} from 'material-ui/styles/colors';
-import {logOut} from "../../components/authentication/oauth";
+import {logOut} from "../authentication/oauth";
 import PropTypes from 'prop-types';
-import SearchBox from './SearchBox';
+import SearchBox from '../search-box/SearchBox';
 
 class Header extends React.Component {
 

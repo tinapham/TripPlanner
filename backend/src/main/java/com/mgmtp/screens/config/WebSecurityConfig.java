@@ -39,8 +39,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(PUBLIC_SCREENPLAY_URL).permitAll()
                 .antMatchers(MARKET_URL).permitAll()
                 .antMatchers(MARKET_NAME_URL).permitAll()
-                .antMatchers(PLAN_URL).permitAll()
-                .antMatchers(PLAN_NAME_URL).permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .addFilter(new JWTAuthorizationFilter(authenticationManager()))

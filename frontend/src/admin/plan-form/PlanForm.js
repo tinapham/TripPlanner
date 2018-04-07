@@ -6,7 +6,7 @@ import {Link} from 'react-router-dom';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import Divider from 'material-ui/Divider';
-import PageBase from '../components/PageBase';
+import PageBase from '../../components/page-base/PageBase';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import ContentSave from 'material-ui/svg-icons/content/save';
 import AvNotInterested from 'material-ui/svg-icons/av/not-interested';
