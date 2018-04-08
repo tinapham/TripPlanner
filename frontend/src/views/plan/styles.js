@@ -3,8 +3,8 @@ const styles = {
     banner: {
         width: '100%',
         height: '350px',
-        background: 'url(' + require('../../static/resources/image/home-bg.jpg') + ') no-repeat center' ,
-        backgroundSize: 'cover'
+        background: 'url(' + require('../../static/resources/image/home-bg.jpg') + ') no-repeat center',
+        backgroundSize: 'cover',
     },
     plusCircle: {
         color : pink500

@@ -6,7 +6,7 @@ import TextField from 'material-ui/TextField';
 import PageBase from '../../components/page-base/PageBase';
 import ContentSave from 'material-ui/svg-icons/content/save';
 import AvNotInterested from 'material-ui/svg-icons/av/not-interested';
-import styles from './FormsStyle'
+import styles from './styles'
 
 class AttractionForm extends Component {
 

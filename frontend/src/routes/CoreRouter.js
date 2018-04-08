@@ -1,12 +1,12 @@
 import React  from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import Error from '../components/error404/Error';
 import LoginPage from "../components/authentication/LoginPage";
 import RegisterPage from "../components/authentication/RegisterPage";
 import axios from "axios/index";
 import {loggedIn} from "../components/authentication/oauth";
 import Admin from "../admin/index";
-import App from '../containers/App/index';
+import App from '../containers/App';
 class CoreRouter extends React.Component{
 
     url_backend = process.env.REACT_APP_BACKEND_URL + "admin/api/";
@@ -48,11 +48,12 @@ class CoreRouter extends React.Component{
         return (
             <Router>
                 <Switch>
-                    <Route exact path="/" component={App} />
+                    <Redirect exact from='/' to='/home'/>
+                    <Route path="/home" render={(props) => <App {...props}/>}/>
                     {
                         this.state.isAdmin ?
                             <Route path='/admin'
-                                   render={(props) => <Admin userData={this.state.data} {...props}/>}/>
+                                   render={(props) => <Admin isAdmin={this.state.isAdmin} userData={this.state.data} {...props}/>}/>
                             : undefined
                     }
                     <Route path="/login" component={LoginPage} />

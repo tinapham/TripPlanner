@@ -7,7 +7,7 @@ import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import ContentCreate from 'material-ui/svg-icons/content/create';
 import { Link } from 'react-router-dom';
-import styles from './AttractionManagementStyles';
+import styles from './styles';
 
 class AttractionRow extends React.Component {
   constructor(props) {
@@ -34,7 +34,7 @@ class AttractionRow extends React.Component {
     const location = {
       pathname: '/admin/attraction-form',
       state: { data: this.props.data }
-    }
+    };
     const actions = [
       <FlatButton
         label="Cancel"

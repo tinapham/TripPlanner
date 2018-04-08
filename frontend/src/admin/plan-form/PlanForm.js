@@ -12,7 +12,7 @@ import ContentSave from 'material-ui/svg-icons/content/save';
 import AvNotInterested from 'material-ui/svg-icons/av/not-interested';
 import EventForm from './EventForm';
 import DatePicker from 'material-ui/DatePicker';
-import styles from './FormsStyle';
+import styles from './styles';
 
 class PlanForm extends Component {
 

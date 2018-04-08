@@ -57,10 +57,10 @@ const LeftDrawer = (props) => {
       docked={true}
       open={navDrawerOpen}>
       <div style={styles.logo}>
-        <span><img style={styles.logo_mgm} src='../images/mgm-logo.svg' alt="mgm-logo" /> </span>
+        <span><img style={styles.logo_mgm} src={require('../../static/resources/image/mgm-logo.svg')} alt="mgm-logo" /> </span>
       </div>
       <div style={styles.avatar.div}>
-        <Avatar src="../images/defaultAvatar.png"
+        <Avatar src={require('../../static/resources/image/defaultAvatar.png')}
           size={50}
           style={styles.avatar.icon} />
         <span style={styles.avatar.span}>{props.username}</span>

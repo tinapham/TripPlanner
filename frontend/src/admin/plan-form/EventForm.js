@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import PageBase from '../../components/page-base/PageBase';
 import TextField from 'material-ui/TextField';
 import SelectField from 'material-ui/SelectField';
-import styles from './FormsStyle';
+import styles from './styles';
 import RaisedButton from 'material-ui/RaisedButton';
 import AvNotInterested from 'material-ui/svg-icons/av/not-interested';
 import MenuItem from 'material-ui/MenuItem';

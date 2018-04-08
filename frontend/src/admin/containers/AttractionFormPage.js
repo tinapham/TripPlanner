@@ -1,5 +1,5 @@
 import React from 'react';
-import AttractionForm from '../attraction-form/AttractionForm';
+import AttractionForm from '../attraction-form/index';
 
 const AttractionFormPage = (props) => {
   return (

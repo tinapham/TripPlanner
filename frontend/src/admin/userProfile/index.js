@@ -10,7 +10,7 @@ import TextField from 'material-ui/TextField';
 
 import globalStyles from '../styles';
 import styles from '../forms/FormsStyle';
-import './UserProfile.css';
+import './styles.css';
 
 import axios from 'axios';
 import {sha256} from 'js-sha256';

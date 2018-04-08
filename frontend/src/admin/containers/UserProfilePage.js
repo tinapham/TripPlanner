@@ -1,5 +1,5 @@
 import React from 'react';
-import UserProfile from '../userProfile/UserProfile';
+import UserProfile from '../userProfile/index';
 
 const UserInfoPage = (props) => {
     return (

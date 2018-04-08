@@ -6,7 +6,7 @@ import ContentAdd from 'material-ui/svg-icons/content/add';
 import { pink500 } from 'material-ui/styles/colors';
 import PageBase from '../../components/page-base/PageBase';
 import FormAddUser from './FormAddUser';
-import styles from './UserManagementStyles';
+import styles from './styles';
 
 class UserManagement extends React.Component {
   constructor(props) {

@@ -7,7 +7,7 @@ import Delete from 'material-ui/svg-icons/action/delete';
 import { grey200 } from 'material-ui/styles/colors';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
-import styles from './PlanManagementStyles';
+import styles from './styles';
 
 class PlanRow extends React.Component {
   constructor(props) {

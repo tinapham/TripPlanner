@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Redirect, Route, Switch} from 'react-router-dom';
+import {Route, Switch} from 'react-router-dom';
 import axios from 'axios';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import './styles.scss';
@@ -169,7 +169,7 @@ class Admin extends Component {
     return (
       <div>
         {
-          this.state.accessToken
+          this.props.isAdmin
             ? < Container isAdmin={this.state.isAdmin} email={this.state.email}>
               <Switch>
                 <Route exact path={this.props.match.url}
@@ -193,7 +193,7 @@ class Admin extends Component {
                 <Route path="*" component={Error} />
               </Switch>
             </Container >
-            : <Redirect to={`${this.props.match.url}/login`} />
+            : undefined
         }
       </div>
     );

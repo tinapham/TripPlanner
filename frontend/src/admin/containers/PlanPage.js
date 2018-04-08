@@ -1,5 +1,5 @@
 import React from 'react';
-import PlanManagement from '../plans/PlanManagement';
+import PlanManagement from '../plans/index';
 
 const PlanPage = (props) => {
   return (

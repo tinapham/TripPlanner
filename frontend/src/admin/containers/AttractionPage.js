@@ -1,5 +1,5 @@
 import React from 'react';
-import AttractionManagement from "../attractions/AttractionManagement";
+import AttractionManagement from "../attractions/index";
 
 const AttractionPage = (props) => {
   return (
