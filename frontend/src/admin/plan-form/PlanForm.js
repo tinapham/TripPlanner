@@ -6,7 +6,7 @@ import {Link} from 'react-router-dom';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import Divider from 'material-ui/Divider';
-import PageBase from '../../components/page-base/PageBase';
+import PageBase from '../../components/page-base/index';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import ContentSave from 'material-ui/svg-icons/content/save';
 import AvNotInterested from 'material-ui/svg-icons/av/not-interested';
@@ -28,12 +28,8 @@ class PlanForm extends Component {
       idEvents: this.getIdEvents(this.props.location.state ? this.props.location.state.data.events : []),
       errorMessage: undefined
     }
-    this.showEventForm = this.showEventForm.bind(this);
     this.addEvent = this.addEvent.bind(this);
     this.savePlan = this.savePlan.bind(this);
-    this.onNameChange = this.onNameChange.bind(this);
-    this.onStartDayChange = this.onStartDayChange.bind(this);
-    this.onEndDayChange = this.onEndDayChange.bind(this);
     this.deleteEvent = this.deleteEvent.bind(this);
     this.updateEvent = this.updateEvent.bind(this);
     this.onEventChange = this.onEventChange.bind(this);
@@ -61,7 +57,7 @@ class PlanForm extends Component {
     )
   }
 
-  showEventForm(value, event) {
+  showEventForm = (value, event) => {
     this.setState({
       activatedEventForm: value,
       event: event
@@ -83,7 +79,6 @@ class PlanForm extends Component {
   }
 
   savePlan() {
-    console.log(this.state);
     if (this.state.name === "") {
       this.setState({
         errorMessage: "This field is required"
@@ -102,21 +97,21 @@ class PlanForm extends Component {
 
   }
 
-  onNameChange(event) {
+  onNameChange = (event) => {
     this.setState({
       name: event.target.value,
       errorMessage: undefined
     });
   }
 
-  onStartDayChange(event, value) {
+  onStartDayChange = (event, value) => {
     this.setState({
       'start-day': value.toISOString().substr(0,10),
       errorMessage: undefined
     });
   }
 
-  onEndDayChange(event, value) {
+  onEndDayChange = (event, value) => {
     this.setState({
       'end-day': value.toISOString().substr(0,10),
       errorMessage: undefined

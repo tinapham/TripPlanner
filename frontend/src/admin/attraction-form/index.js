@@ -3,7 +3,7 @@ import '../Admin.css';
 import {Link} from 'react-router-dom';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
-import PageBase from '../../components/page-base/PageBase';
+import PageBase from '../../components/page-base/index';
 import ContentSave from 'material-ui/svg-icons/content/save';
 import AvNotInterested from 'material-ui/svg-icons/av/not-interested';
 import styles from './styles'

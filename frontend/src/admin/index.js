@@ -6,7 +6,7 @@ import './styles.scss';
 import 'font-awesome/css/font-awesome.css';
 import 'flexboxgrid/css/flexboxgrid.css';
 import Container from '../containers/Container/index';
-import Error from '../components/error404/Error.js';
+import Error from '../components/error404/index.js';
 import AttractionPage from './containers/AttractionPage';
 import AttractionFormPage from './containers/AttractionFormPage';
 import PlanFormPage from './containers/PlanFormPage';

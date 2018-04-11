@@ -1,10 +1,7 @@
 import { pink500, grey400, red500, orange500} from 'material-ui/styles/colors';
 const styles = {
-    banner: {
-        width: '100%',
-        height: '350px',
-        background: 'url(' + require('../../static/resources/image/home-bg.jpg') + ') no-repeat center',
-        backgroundSize: 'cover',
+    map: {
+        height: '550px',
     },
     plusCircle: {
         color : pink500

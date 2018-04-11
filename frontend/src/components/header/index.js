@@ -9,7 +9,7 @@ import Menu from 'material-ui/svg-icons/navigation/menu';
 import {white} from 'material-ui/styles/colors';
 import {logOut} from "../authentication/oauth";
 import PropTypes from 'prop-types';
-import SearchBox from '../search-box/SearchBox';
+import SearchBox from '../search-box/index';
 
 class Header extends React.Component {
 

@@ -1,8 +1,9 @@
 import React  from 'react';
-import './App.css';
+import './styles.css';
 import Container from '../Container/index';
-import Error from '../../components/error404/Error.js';
+import Error from '../../components/error404/index.js';
 import HomePage from '../HomePage';
+import ExplorePage from '../ExplorePage';
 import {Redirect, Route, Switch} from 'react-router-dom';
 import {loggedIn} from "../../components/authentication/oauth";
 import axios from "axios/index";
@@ -22,6 +23,28 @@ class App extends React.Component {
         this.savePlan = this.savePlan.bind(this);
     }
 
+    async componentDidMount() {
+        if (this.state.accessToken) {
+            axios.defaults.headers.common['Authorization'] = `Bearer ${this.state.accessToken}`;
+            let data = [];
+            let promises = [];
+            this.url.forEach(url => {
+                let promise = axios.get(url);
+                promises.push(promise);
+            });
+            await axios.all(promises)
+                .then(axios.spread((...promises) => {
+                    data = [...promises];
+                }));
+            this.setState({
+                dataAttractions: data[0].data,
+                dataPlans: data[1].data
+            });
+        } else {
+            axios.defaults.headers.common = undefined;
+        }
+    }
+
     async savePlan(data) {
         let response = await axios({
             method: 'post',
@@ -32,12 +55,11 @@ class App extends React.Component {
             }
         });
         if (response.data === "SUCCESS") {
-            window.location.href = 'home/plan/'+data.name;
+            window.location.href = 'plan/'+data.name;
         }
     }
 
     render(){
-        console.log(this.props.match);
         return (
             <div>
                 {
@@ -45,9 +67,13 @@ class App extends React.Component {
                         ? < Container isAdmin={this.state.isAdmin} email={this.state.email}>
                             <Switch>
                                 <Route exact path={this.props.match.url}
-                                       render={(props) => <HomePage save={this.savePlan}{...props} />}  />
+                                       render={(props) => <HomePage save={this.savePlan} {...props} />}  />
                                 <Route path={`${this.props.match.url}/dashboard`}
-                                       render={(props) => <HomePage {...props} />} />
+                                       render={(props) => <HomePage save={this.savePlan} {...props} />} />
+                                <Route path={`${this.props.match.url}/explore`}
+                                       render={(props) => <ExplorePage {...props} data = {this.state.dataAttractions}/>} />
+                                <Route path={`${this.props.match.url}/plan`}
+                                       render={(props) => <MyPlanPage {...props} />} />
                                 <Route path={`${this.props.match.url}/plan/:name`}
                                        render={(props) => <MyPlanPage {...props} />} />
                                 <Route path="*" component={Error} />

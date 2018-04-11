@@ -1,10 +1,10 @@
 import React from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import Header from '../../components/header/Header';
-import LeftDrawer from '../../components/left-drawer/LeftDrawer';
+import Header from '../../components/header/index';
+import LeftDrawer from '../../components/left-drawer/index';
 import withWidth, { LARGE, SMALL } from 'material-ui/utils/withWidth';
 import ThemeDefault from '../../theme-default';
-import Footer from '../../components/footer/Footer';
+import Footer from '../../components/footer/index';
 import PropTypes from 'prop-types';
 import Data from '../../data';
 

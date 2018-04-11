@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
-import PageBase from '../../components/page-base/PageBase';
+import PageBase from '../../components/page-base/index';
 import ContentSave from 'material-ui/svg-icons/content/save';
 import styles from './styles';
 
@@ -12,11 +12,9 @@ class Home extends Component {
         this.state = {
             name: "",
         };
-        this.savePlan = this.savePlan.bind(this);
-        this.onNameChange = this.onNameChange.bind(this);
     }
 
-    savePlan() {
+    savePlan = () => {
         if (this.state.name === "") {
             this.setState({
                 nameErrorMessage: "This field is required"
@@ -27,7 +25,7 @@ class Home extends Component {
 
     }
 
-    onNameChange(event) {
+    onNameChange = (event) => {
         this.setState({
             name: event.target.value,
             nameErrorMessage: undefined

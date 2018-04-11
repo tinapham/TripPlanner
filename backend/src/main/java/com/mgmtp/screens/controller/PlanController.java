@@ -26,31 +26,31 @@ public class PlanController {
     public PlanController(PlanService planService) {
         this.planService = planService;
     }
-//
-//    @RequestMapping()
-//    @PreAuthorize("hasAuthority('read:plans')")
-//    public ResponseEntity<List<PlanDTO>> getAll() {
-//        List<PlanDTO> planDTOS = planService.findAll(true);
-//        if (planDTOS == null) {
-//            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-//        }
-//        return ResponseEntity.ok(planDTOS);
-//    }
 
-//    @RequestMapping(value = "/{name}")
-//    @PreAuthorize("hasAuthority('read:plan')")
-//    public ResponseEntity<PlanDTO> getPlan(@PathVariable String name) {
-//        PlanDTO planDTO = planService.findByName(name);
-//        if (planDTO == null) {
-//            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-//        }
-//        return ResponseEntity.ok(planDTO);
-//    }
+    @RequestMapping()
+    @PreAuthorize("hasAuthority('read:plans')")
+    public ResponseEntity<List<PlanDTO>> getAll() {
+        List<PlanDTO> planDTOS = planService.findAll(true);
+        if (planDTOS == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        return ResponseEntity.ok(planDTOS);
+    }
+
+    @RequestMapping(value = "/{name}")
+    @PreAuthorize("hasAuthority('read:plan')")
+    public ResponseEntity<PlanDTO> getPlan(@PathVariable String name) {
+        PlanDTO planDTO = planService.findByName(name);
+        if (planDTO == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        return ResponseEntity.ok(planDTO);
+    }
 
     @PreAuthorize("hasAuthority('create:plan')")
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<String> addNewPlan(@RequestBody PlanDTO request) {
-        planService.addNewPlanWithoutEvent(request);
+        planService.addNewPlanWithName(request.getName());
         return ResponseEntity.ok(SUCCESS);
     }
 

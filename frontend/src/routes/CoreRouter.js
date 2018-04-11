@@ -1,6 +1,6 @@
 import React  from 'react';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
-import Error from '../components/error404/Error';
+import Error from '../components/error404/index';
 import LoginPage from "../components/authentication/LoginPage";
 import RegisterPage from "../components/authentication/RegisterPage";
 import axios from "axios/index";

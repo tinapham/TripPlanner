@@ -1,9 +1,9 @@
 import React from 'react';
-import Plan from '../../views/plan';
+import MyPlanForm from '../../views/my-plan-form';
 
 const MyPlanPage = (props) => {
     return (
-        <Plan location={props.location} save={props.save}/>
+        <MyPlanForm location={props.location} save={props.save}/>
     );
 };
 

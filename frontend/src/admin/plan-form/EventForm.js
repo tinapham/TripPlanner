@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import PageBase from '../../components/page-base/PageBase';
+import PageBase from '../../components/page-base/index';
 import TextField from 'material-ui/TextField';
 import SelectField from 'material-ui/SelectField';
 import styles from './styles';

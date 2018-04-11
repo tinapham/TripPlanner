@@ -4,7 +4,7 @@ import { Table, TableBody, TableHeaderColumn, TableRow } from 'material-ui/Table
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import { pink500 } from 'material-ui/styles/colors';
-import PageBase from '../../components/page-base/PageBase';
+import PageBase from '../../components/page-base/index';
 import FormAddUser from './FormAddUser';
 import styles from './styles';
 
