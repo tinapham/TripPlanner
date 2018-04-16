@@ -55,7 +55,9 @@ class AttractionList extends React.Component {
                                     actionIcon={<IconButton><StarBorder color="white"/></IconButton>}
 
                                 >
-                                    <img src={require(`../../static/resources/image/attraction/${event.id}.jpg`)} name={event.name}/>
+                                    <img src={require(`../../static/resources/image/attraction/${event.id}.jpg`)}
+                                         name={event.name}
+                                         alt={event.name}/>
                                 </GridTile>
                             )})
                         : undefined

@@ -40,6 +40,8 @@ class ExploreMap extends React.Component {
     };
 
     onMapClicked = () => {
+        this.props.setCurrent(undefined);
+
         if (this.state.showingInfoWindow)
             this.setState({
                 activeMarker: null,
@@ -85,7 +87,7 @@ class ExploreMap extends React.Component {
                     onClose={this.onInfoWindowClose}
                     visible={this.state.showingInfoWindow}>
                     <div>
-                        <h1>{this.state.selectedPlace.name}</h1>
+                        <p>{this.state.selectedPlace.name}</p>
                     </div>
                 </InfoWindow>
             </Map>
