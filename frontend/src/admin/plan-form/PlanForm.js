@@ -27,7 +27,7 @@ class PlanForm extends Component {
       activatedEventForm: false,
       idEvents: this.getIdEvents(this.props.location.state ? this.props.location.state.data.events : []),
       errorMessage: undefined
-    }
+    };
     this.addEvent = this.addEvent.bind(this);
     this.savePlan = this.savePlan.bind(this);
     this.deleteEvent = this.deleteEvent.bind(this);
@@ -62,7 +62,7 @@ class PlanForm extends Component {
       activatedEventForm: value,
       event: event
     });
-  }
+  };
 
   addEvent() {
     let defaultEvent = {
@@ -102,21 +102,21 @@ class PlanForm extends Component {
       name: event.target.value,
       errorMessage: undefined
     });
-  }
+  };
 
   onStartDayChange = (event, value) => {
     this.setState({
       'start-day': value.toISOString().substr(0,10),
       errorMessage: undefined
     });
-  }
+  };
 
   onEndDayChange = (event, value) => {
     this.setState({
       'end-day': value.toISOString().substr(0,10),
       errorMessage: undefined
     });
-  }
+  };
 
   onEventChange(key, value) {
     let data = this.state.event;

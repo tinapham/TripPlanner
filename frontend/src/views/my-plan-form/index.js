@@ -44,7 +44,6 @@ class MyPlanForm extends Component {
                 }
             });
 
-            console.log(dayEvents);
             this.setState({
                 id: response.data.id,
                 'start-day': response.data['start-day'],

@@ -57,7 +57,7 @@ const LeftDrawer = (props) => {
       docked={true}
       open={navDrawerOpen}>
       <div style={styles.logo}>
-        <span><img style={styles.logo_mgm} src={require('../../static/resources/image/mgm-logo.svg')} alt="mgm-logo" /> </span>
+        <span>Planning trip </span>
       </div>
       <div style={styles.avatar.div}>
         <Avatar src={require('../../static/resources/image/defaultAvatar.png')}

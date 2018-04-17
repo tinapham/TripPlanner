@@ -79,7 +79,7 @@ class App extends React.Component {
                                 <Route path="*" component={Error} />
                             </Switch>
                         </Container >
-                        : <Redirect to={`${this.props.match.url}/login`} />
+                        : <Redirect to='/login' />
                 }
             </div>
         );
