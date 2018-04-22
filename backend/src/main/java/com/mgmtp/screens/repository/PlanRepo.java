@@ -21,13 +21,25 @@ public class PlanRepo {
                     jdbcTemplate.update("UPDATE Events SET start_time= ?, end_time= ?, attraction_id= ?, plan_id= ?  WHERE id = ?",
                             event.getStartTime(), event.getEndTime(), event.getAttraction().getId(), plan.getId(), event.getId());
                 } else {
-                    jdbcTemplate.update("INSERT INTO Events (start_time, end_time, attraction_id, plan_id) VALUES " +
-                                    "(?, ?, ?, ?)", event.getStartTime(), event.getEndTime(), event.getAttraction().getId(),
-                                plan.getId());
+//                    jdbcTemplate.update("INSERT INTO Events (start_time, end_time, attraction_id, plan_id) VALUES " +
+//                                    "(?, ?, ?, ?)", event.getStartTime(), event.getEndTime(), event.getAttraction().getId(),
+//                                plan.getId());
+                    addNewEvent(event, plan.getId());
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
+    public boolean addNewEvent(EventEntity event, Integer planId) {
+        try {
+            jdbcTemplate.update("INSERT INTO Events (start_time, end_time, attraction_id, plan_id) VALUES " +
+                            "(?, ?, ?, ?)", event.getStartTime(), event.getEndTime(), event.getAttraction().getId(),
+                    planId);
+        } catch (Exception e) {
             return false;
         }
         return true;

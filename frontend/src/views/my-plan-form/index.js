@@ -44,6 +44,8 @@ class MyPlanForm extends Component {
                 }
             });
 
+            console.log(response.data);
+
             this.setState({
                 id: response.data.id,
                 'start-day': response.data['start-day'],
@@ -52,6 +54,30 @@ class MyPlanForm extends Component {
                 dayEvents: dayEvents
             });
         }
+    };
+
+    addEvent = (event) => {
+        let dayEvents = [];
+        let dayEvent = {
+            index: undefined,
+            day: undefined,
+        };
+        let events = [...this.state.events, event];
+
+        events.map(function (event, index) {
+            if(dayEvent.day !== event['start-time'].substr(0,10)) {
+                dayEvent = {
+                    index: index,
+                    day: event['start-time'].substr(0,10),
+                };
+                dayEvents.push(dayEvent)
+            }
+        });
+
+        this.setState({
+            events: events,
+            dayEvents: dayEvents
+        });
     };
 
     savePlan = () => {
@@ -85,6 +111,7 @@ class MyPlanForm extends Component {
     };
 
     render() {
+        console.log(this.state);
         let startDay = this.state['start-day'] ? new Date(this.state['start-day']) : undefined;
         let endDay = this.state['end-day'] ? new Date(this.state['end-day']) : undefined;
         return (
@@ -138,7 +165,9 @@ class MyPlanForm extends Component {
 
                                 <div className="col-md-12 col-sm-12 col-xs-12" style={styles.map}>
                                     <div className="col-md-4 col-sm-12 col-xs-12">
-                                        <PlanningList data={this.state.events} dayEvents={this.state.dayEvents}/>
+                                        <PlanningList data={this.state.events}
+                                                      dayEvents={this.state.dayEvents}
+                                                      addEvent={this.addEvent}/>
                                     </div>
                                     <div className="col-md-8 col-sm-12 col-xs-12" style={styles.map}>
                                         <PlanningMap data={this.state.events}/>

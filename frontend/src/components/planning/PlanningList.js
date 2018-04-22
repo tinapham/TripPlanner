@@ -58,7 +58,7 @@ class PlanningList extends React.Component {
                         onClick={this.handleOpen}
                         icon={<ContentAdd/>}
                         secondary={true}/>
-                    <FormAddEvent open = {this.state.open} handleClose={this.handleClose}/>
+                    <FormAddEvent open = {this.state.open} handleClose={this.handleClose} addEvent={this.props.addEvent}/>
                 </List>
             </Paper>
         );
