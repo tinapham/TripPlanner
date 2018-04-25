@@ -1,8 +1,26 @@
 import React from 'react';
 import {Card, CardHeader, CardActions, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
+import FormAddEvent from '../../components/planning/FormAddEvent';
 
 class CurrentEventCard extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            open: false,
+        }
+    }
+
+    handleOpen = () => {
+        this.setState({ open: true });
+    };
+
+    handleClose = () => {
+        this.setState({ open: false });
+    };
+
+
     render() {
         return (
             <Card>
@@ -16,9 +34,10 @@ class CurrentEventCard extends React.Component {
                     {/*{this.props.data.attraction.description}*/}
                 {/*</CardText>*/}
                 <CardActions>
-                    <FlatButton label="Edit"/>
+                    <FlatButton label="Edit" onClick={this.handleOpen}/>
                     <FlatButton label="Delete"/>
                 </CardActions>
+                <FormAddEvent open = {this.state.open} handleClose={this.handleClose} data={this.props.data}/>
             </Card>
         );
     }

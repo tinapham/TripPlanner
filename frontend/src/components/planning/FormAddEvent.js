@@ -15,8 +15,12 @@ class FormAddEvent extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            beginDay: undefined,
-            endDay: undefined,
+            id: this.props.data ? this.props.data.id : undefined,
+            beginDay: this.props.data ? this.props.data['start-time'] : undefined,
+            beginTime: this.props.data ? this.props.data['start-time'] : undefined,
+            endDay: this.props.data ? this.props.data['end-time'] : undefined,
+            endTime: this.props.data ? this.props.data['end-time'] : undefined,
+            attraction: this.props.data ? this.props.data.attraction : undefined,
             errorBeginDay: undefined,
             errorBeginTime: undefined,
             errorEndDay: undefined,
