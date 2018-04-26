@@ -13,7 +13,8 @@ class PlanningMap extends React.Component {
             },
             activeMarker: {},
             selectedPlace: {},
-            showingInfoWindow: false
+            showingInfoWindow: false,
+            data: this.props.data,
         }
     }
 
@@ -62,8 +63,8 @@ class PlanningMap extends React.Component {
                     {/*name={'Current location'}*/}
                     {/*/>*/}
 
-                    {this.props.data ?
-                        this.props.data.map(function (event, index) {
+                    {this.state.data ?
+                        this.state.data.map(function (event, index) {
                             return (
                                 <Marker
                                     key={index}

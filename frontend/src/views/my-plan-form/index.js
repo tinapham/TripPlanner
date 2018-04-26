@@ -23,6 +23,7 @@ class MyPlanForm extends Component {
             accessToken: loggedIn(),
             name: arr[3] ? arr[3] : "",
         };
+        this.deleteEvent = this.deleteEvent.bind(this);
     }
 
     async componentDidMount() {
@@ -44,8 +45,6 @@ class MyPlanForm extends Component {
                 }
             });
 
-            console.log(response.data);
-
             this.setState({
                 id: response.data.id,
                 'start-day': response.data['start-day'],
@@ -62,13 +61,21 @@ class MyPlanForm extends Component {
             index: undefined,
             day: undefined,
         };
-        let events = [...this.state.events, event];
+        let events = this.state.events;
 
-        events.map(function (event, index) {
-            if(dayEvent.day !== event['start-time'].substr(0,10)) {
+        if(!event.id){
+            events.push(event);
+        } else {
+            //find the index by event.id
+            let index = events.map(function(e) { return e.id; }).indexOf(event.id);
+            events[index] = event;
+        }
+
+        events.map(function (element, index) {
+            if(dayEvent.day !== element['start-time'].substr(0,10)) {
                 dayEvent = {
                     index: index,
-                    day: event['start-time'].substr(0,10),
+                    day: element['start-time'].substr(0,10),
                 };
                 dayEvents.push(dayEvent)
             }
@@ -78,6 +85,16 @@ class MyPlanForm extends Component {
             events: events,
             dayEvents: dayEvents
         });
+    };
+
+    async deleteEvent(event) {
+        //find the index by event
+        let index = this.state.events.indexOf(event);
+        console.log(index);
+        await this.setState({
+            events: [...this.state.events.slice(0,index), this.state.events.slice(index+1)]
+        });
+        console.log(this.state.events);
     };
 
     savePlan = () => {
@@ -111,7 +128,6 @@ class MyPlanForm extends Component {
     };
 
     render() {
-        console.log(this.state);
         let startDay = this.state['start-day'] ? new Date(this.state['start-day']) : undefined;
         let endDay = this.state['end-day'] ? new Date(this.state['end-day']) : undefined;
         return (
@@ -167,7 +183,8 @@ class MyPlanForm extends Component {
                                     <div className="col-md-4 col-sm-12 col-xs-12">
                                         <PlanningList data={this.state.events}
                                                       dayEvents={this.state.dayEvents}
-                                                      addEvent={this.addEvent}/>
+                                                      addEvent={this.addEvent}
+                                                      deleteEvent={this.deleteEvent}/>
                                     </div>
                                     <div className="col-md-8 col-sm-12 col-xs-12" style={styles.map}>
                                         <PlanningMap data={this.state.events}/>

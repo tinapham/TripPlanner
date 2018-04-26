@@ -16,10 +16,10 @@ class FormAddEvent extends React.Component {
         super(props);
         this.state = {
             id: this.props.data ? this.props.data.id : undefined,
-            beginDay: this.props.data ? this.props.data['start-time'] : undefined,
-            beginTime: this.props.data ? this.props.data['start-time'] : undefined,
-            endDay: this.props.data ? this.props.data['end-time'] : undefined,
-            endTime: this.props.data ? this.props.data['end-time'] : undefined,
+            beginDay: this.props.data ? new Date(this.props.data['start-time']) : undefined,
+            beginTime: this.props.data ? new Date(this.props.data['start-time']) : undefined,
+            endDay: this.props.data ? new Date(this.props.data['end-time']) : undefined,
+            endTime: this.props.data ? new Date(this.props.data['end-time']) : undefined,
             attraction: this.props.data ? this.props.data.attraction : undefined,
             errorBeginDay: undefined,
             errorBeginTime: undefined,
@@ -83,7 +83,7 @@ class FormAddEvent extends React.Component {
     };
 
     toLocalDate = (date) => {
-        let month = date.getMonth() < 10 ? '0' + date.getMonth() : date.getMonth();
+        let month = date.getMonth() < 10 ? '0' + (date.getMonth() + 1) : date.getMonth();
         let day = date.getDate() < 10 ? '0' + date.getDate() : date.getDate();
         return date.getFullYear() + '-' + month + '-' + day;
     };
@@ -129,7 +129,6 @@ class FormAddEvent extends React.Component {
         });
 
         this.props.addEvent(this.state);
-
         this.props.handleClose();
 
     }
@@ -140,6 +139,7 @@ class FormAddEvent extends React.Component {
         let endDay = this.state.endDay ? new Date(this.state.endDay) : undefined;
         let startTime = this.state.beginTime ? new Date(this.state.beginTime) : undefined;
         let endTime = this.state.endTime ? new Date(this.state.endTime) : undefined;
+        let attractionName = this.state.attraction ? this.state.attraction.name : undefined;
 
         const list = [];
         if (this.state.dataAttractions)
@@ -172,8 +172,6 @@ class FormAddEvent extends React.Component {
                 onClick={this.submit}
             />,
         ];
-
-        // console.log(this.state);
 
         return (
             <Dialog
@@ -230,7 +228,7 @@ class FormAddEvent extends React.Component {
                     <div className="col-md-12 col-sm-12 col-xs-12">
                         <AutoComplete
                             floatingLabelText="Destination"
-                            value={this.state.attraction}
+                            searchText={attractionName}
                             hintText="Choose the next destination"
                             onUpdateInput={this.onAttractionChange}
                             filter={AutoComplete.noFilter}

@@ -34,6 +34,9 @@ class PlanningList extends React.Component {
 
     render() {
         const loadSubHeader = this.loadSubHeader;
+        const addEvent = this.props.addEvent;
+        const deleteEvent = this.props.deleteEvent;
+
         return (
 
             <Paper style={{maxHeight: 550, overflow: 'auto'}} zDepth={2}>
@@ -44,7 +47,9 @@ class PlanningList extends React.Component {
                                 <div key={index}>
                                     {loadSubHeader(index)}
                                     <ListItem>
-                                        <CurrentEventCard data={event}/>
+                                        <CurrentEventCard data={event}
+                                                          addEvent={addEvent}
+                                                          deleteEvent={deleteEvent}/>
                                     </ListItem>
                                 </div>
                             )
