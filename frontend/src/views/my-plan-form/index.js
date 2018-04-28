@@ -24,32 +24,36 @@ class MyPlanForm extends Component {
             name: arr[3] ? arr[3] : "",
         };
         this.deleteEvent = this.deleteEvent.bind(this);
+        this.savePlan = this.savePlan.bind(this);
     }
 
     async componentDidMount() {
         if (this.state.accessToken) {
-            let response = await axios.get(this.url_backend+this.state.name);
+            let response = await axios.get(this.url_backend + this.state.name);
 
             let dayEvents = [];
-            let dayEvent = {
-                index: undefined,
-                day: undefined,
-            };
-            response.data.events.map(function (event, index) {
-                if(dayEvent.day !== event['start-time'].substr(0,10)) {
-                    dayEvent = {
-                        index: index,
-                        day: event['start-time'].substr(0,10),
-                    };
-                    dayEvents.push(dayEvent)
-                }
-            });
+            if (response.data.events) {
+                let dayEvent = {
+                    index: undefined,
+                    day: undefined,
+                };
+                response.data.events.map(function (event, index) {
+                    if (dayEvent.day !== event['start-time'].substr(0, 10)) {
+                        dayEvent = {
+                            index: index,
+                            day: event['start-time'].substr(0, 10),
+                        };
+                        dayEvents.push(dayEvent)
+                    }
+                });
 
-            this.setState({
+
+            }
+            await this.setState({
                 id: response.data.id,
                 'start-day': response.data['start-day'],
                 'end-day': response.data['end-day'],
-                events: response.data.events,
+                events: response.data.events ? response.data.events : [],
                 dayEvents: dayEvents
             });
         }
@@ -63,19 +67,21 @@ class MyPlanForm extends Component {
         };
         let events = this.state.events;
 
-        if(!event.id){
+        if (!event.id) {
             events.push(event);
         } else {
             //find the index by event.id
-            let index = events.map(function(e) { return e.id; }).indexOf(event.id);
+            let index = events.map(function (e) {
+                return e.id;
+            }).indexOf(event.id);
             events[index] = event;
         }
 
         events.map(function (element, index) {
-            if(dayEvent.day !== element['start-time'].substr(0,10)) {
+            if (dayEvent.day !== element['start-time'].substr(0, 10)) {
                 dayEvent = {
                     index: index,
-                    day: element['start-time'].substr(0,10),
+                    day: element['start-time'].substr(0, 10),
                 };
                 dayEvents.push(dayEvent)
             }
@@ -87,42 +93,44 @@ class MyPlanForm extends Component {
         });
     };
 
+
     async deleteEvent(event) {
         //find the index by event
         let index = this.state.events.indexOf(event);
         await this.setState({
-            events: [...this.state.events.slice(0,index), ...this.state.events.slice(index+1)]
-        });
-        console.log(this.state.events);
-
-        let dayEvents = [];
-        let dayEvent = {
-            index: undefined,
-            day: undefined,
-        };
-        this.state.events.map(function (element, index) {
-            if(dayEvent.day !== element['start-time'].substr(0,10)) {
-                dayEvent = {
-                    index: index,
-                    day: element['start-time'].substr(0,10),
-                };
-                dayEvents.push(dayEvent)
-            }
+            events: [...this.state.events.slice(0, index), ...this.state.events.slice(index + 1)]
         });
 
-        await this.setState({
-            dayEvents: dayEvents
-        });
+        if (this.state.events) {
+            let dayEvents = [];
+            let dayEvent = {
+                index: undefined,
+                day: undefined,
+            };
+            this.state.events.map(function (element, index) {
+                if (dayEvent.day !== element['start-time'].substr(0, 10)) {
+                    dayEvent = {
+                        index: index,
+                        day: element['start-time'].substr(0, 10),
+                    };
+                    dayEvents.push(dayEvent)
+                }
+            });
+
+            await this.setState({
+                dayEvents: dayEvents
+            });
+        }
     };
 
-    savePlan = () => {
+    savePlan() {
         if (this.state.name === "") {
             this.setState({
                 nameErrorMessage: "This field is required"
             });
             return;
         }
-        this.props.save(this.state);
+        this.props.update(this.state.id, this.state);
 
     };
 
@@ -146,6 +154,7 @@ class MyPlanForm extends Component {
     };
 
     render() {
+        console.log(this.state);
         let startDay = this.state['start-day'] ? new Date(this.state['start-day']) : undefined;
         let endDay = this.state['end-day'] ? new Date(this.state['end-day']) : undefined;
         return (

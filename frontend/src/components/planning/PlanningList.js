@@ -43,8 +43,6 @@ class PlanningList extends React.Component {
         const loadSubHeader = this.loadSubHeader;
         const addEvent = this.props.addEvent;
         const deleteEvent = this.props.deleteEvent;
-        console.log('ahihi');
-        console.log(this.state.data);
 
         return (
 

@@ -6,6 +6,6 @@ import org.springframework.data.repository.query.Param;
 
 public interface PlanDAO extends JpaRepository<PlanEntity, Integer> {
 
-    PlanEntity getPlanEntityByName(@Param("name") String name);
+    PlanEntity getDistinctByName(@Param("name") String name);
 
 }

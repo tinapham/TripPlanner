@@ -34,7 +34,7 @@ public class PlanServiceImpl implements PlanService {
 
 	@Override
 	public PlanDTO findByName(String name) {
-		PlanEntity planEntity = planDAO.getPlanEntityByName(name);
+		PlanEntity planEntity = planDAO.getDistinctByName(name);
 		return PlanDTO.fromEntityByAdmin(planEntity);
 	}
 
@@ -93,7 +93,9 @@ public class PlanServiceImpl implements PlanService {
 		planEntity.setStartDay(planDTO.getStartDay());
 		planEntity.setEndDay(planDTO.getEndDay());
 		deleteDiffEvent(planEntity.getEvents(), planDTO.getEvents());
-		planEntity.setEvents(covertListEventDTOToEntity(planDTO.getEvents(), planEntity));
+		if (planDTO.getEvents() != null) {
+			planEntity.setEvents(covertListEventDTOToEntity(planDTO.getEvents(), planEntity));
+		}
 		planDAO.saveAndFlush(planEntity);
 	}
 

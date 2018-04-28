@@ -21,6 +21,7 @@ class App extends React.Component {
             isAdmin: false
         };
         this.savePlan = this.savePlan.bind(this);
+        this.updatePlan = this.updatePlan.bind(this);
     }
 
     async componentDidMount() {
@@ -55,7 +56,22 @@ class App extends React.Component {
             }
         });
         if (response.data === "SUCCESS") {
-            window.location.href = 'plan/'+data.name;
+            window.location.href = 'home/plan/'+data.name;
+        }
+    }
+
+    async updatePlan(id, data) {
+        console.log(this.url[1]+id);
+        let response = await axios({
+            method: 'put',
+            url: this.url[1] + id,
+            data: JSON.stringify(data),
+            headers: {
+                "Content-Type": "application/json; charset=utf8"
+            }
+        });
+        if (response.data === "SUCCESS") {
+            window.location.href = data.name;
         }
     }
 
@@ -73,9 +89,9 @@ class App extends React.Component {
                                 <Route path={`${this.props.match.url}/explore`}
                                        render={(props) => <ExplorePage {...props} data = {this.state.dataAttractions}/>} />
                                 <Route path={`${this.props.match.url}/plan`}
-                                       render={(props) => <MyPlanPage {...props} />} />
+                                       render={(props) => <MyPlanPage save={this.savePlan} update={this.updatePlan}{...props} />} />
                                 <Route path={`${this.props.match.url}/plan/:name`}
-                                       render={(props) => <MyPlanPage {...props} />} />
+                                       render={(props) => <MyPlanPage save={this.savePlan} update={this.updatePlan}{...props} />} />
                                 <Route path="*" component={Error} />
                             </Switch>
                         </Container >
