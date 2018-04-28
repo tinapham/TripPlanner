@@ -46,11 +46,11 @@ public class UserServiceImpl implements UserService {
         if (list == null) {
             return null;
         }
-        List<UserDTO> screenPlays = new ArrayList<>();
+        List<UserDTO> users = new ArrayList<>();
         for (UserEntity item : list) {
-            screenPlays.add(UserDTO.fromEntity(item));
+            users.add(UserDTO.fromEntity(item));
         }
-        return screenPlays;
+        return users;
     }
 
     @Override

@@ -22,16 +22,12 @@ class RegisterPage extends React.Component{
       passwordConfirm: "",
       match: undefined,
       checkPasswordType: undefined,
-      checkEmailType: undefined
     };
     this.register = this.register.bind(this)
   }
 
   onEmailChange = (event) => {
     this.setState({
-      checkEmailType: (!event.target.value.includes('@') || !event.target.value.includes('.'))
-                                ? "The email type is incorrect"
-                                : undefined,
       email: event.target.value
     });
   };
@@ -105,8 +101,7 @@ class RegisterPage extends React.Component{
                   hintText="E-mail"
                   value={this.state.email}
                   onChange={this.onEmailChange}
-                  floatingLabelText="E-mail"
-                  errorText={this.state.checkEmailType}
+                  floatingLabelText="Username"
                   fullWidth={true}
                   type="email"
                 />

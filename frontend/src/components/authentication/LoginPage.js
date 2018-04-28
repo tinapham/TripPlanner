@@ -22,7 +22,6 @@ class LoginPage extends React.Component{
       email: "",
       password: "",
       checkRememberMe: false,
-      emailErrorText: undefined,
       passwordErrorText: undefined
     };
     this.login = this.login.bind(this);
@@ -30,9 +29,6 @@ class LoginPage extends React.Component{
 
   onEmailChange = (event) => {
     this.setState({
-      emailErrorText: (!event.target.value.includes('@') || !event.target.value.includes('.'))
-        ? "The email type is incorrect"
-        : undefined,
       email: event.target.value
     });
   };
@@ -66,7 +62,7 @@ class LoginPage extends React.Component{
       window.location.href = "/";
     } else {
       this.setState({
-        emailErrorText: "Email or password is incorrect"
+        emailErrorText: "Username or password is incorrect"
       });
     }
   }
@@ -84,8 +80,7 @@ class LoginPage extends React.Component{
                   hintText="E-mail"
                   value={this.state.email}
                   onChange={this.onEmailChange}
-                  errorText={this.state.emailErrorText}
-                  floatingLabelText="E-mail"
+                  floatingLabelText="Username"
                   fullWidth={true}
                 />
                 <TextField

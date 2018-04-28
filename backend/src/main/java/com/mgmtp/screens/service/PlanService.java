@@ -23,6 +23,6 @@ public interface PlanService {
 
 	void updatePlan(int id, PlanDTO planDTO);
 
-	void addNewPlanWithName(String name);
+	void addNewPlanWithName(String name, String email);
 
 }

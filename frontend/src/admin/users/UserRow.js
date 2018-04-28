@@ -46,10 +46,10 @@ class UserRow extends React.Component {
         <TableRowColumn style={styles.columns.id}>{this.props.index}</TableRowColumn>
         <TableRowColumn style={styles.columns.email}>{this.props.data.email}</TableRowColumn>
         <TableRowColumn style={styles.columns.screenplays}>
-          {this.props.data["screenplays"].map(function (screenplay, index) {
+          {this.props.data["plans"].map(function (plan, index) {
             return (
               <div key={index}>
-                <p>{screenplay.name}</p>
+                <p>{plan.name}</p>
               </div>
             )
           })}

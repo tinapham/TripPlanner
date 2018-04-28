@@ -25,7 +25,7 @@ public class UserEntity implements Serializable {
     private boolean isAdmin;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<ScreenPlayEntity> screenplays;
+    private List<PlanEntity> plans;
 
     public UserEntity() {}
 
@@ -62,8 +62,8 @@ public class UserEntity implements Serializable {
 
     public void setAdmin(boolean admin) { isAdmin = admin; }
 
-    public List<ScreenPlayEntity> getScreenPlays() { return screenplays; }
+    public List<PlanEntity> getPlans() { return plans; }
 
-    public void setScreenPlays(List<ScreenPlayEntity> screenplays) { this.screenplays = screenplays; }
+    public void setPlans(List<PlanEntity> plans) { this.plans = plans; }
 
 }

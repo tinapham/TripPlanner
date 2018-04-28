@@ -42,7 +42,7 @@ class UserManagement extends React.Component {
               <TableRow>
                 <TableHeaderColumn style={styles.columns.id}>#</TableHeaderColumn>
                 <TableHeaderColumn style={styles.columns.email}>Email</TableHeaderColumn>
-                <TableHeaderColumn style={styles.columns.screenplays}>Screen-plays</TableHeaderColumn>
+                <TableHeaderColumn style={styles.columns.screenplays}>Plans</TableHeaderColumn>
                 <TableHeaderColumn style={styles.columns.action}>Action</TableHeaderColumn>
               </TableRow>
               {this.props.data.data.map(

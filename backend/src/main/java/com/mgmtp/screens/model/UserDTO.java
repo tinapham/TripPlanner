@@ -2,7 +2,7 @@ package com.mgmtp.screens.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.mgmtp.screens.entity.ScreenPlayEntity;
+import com.mgmtp.screens.entity.PlanEntity;
 import com.mgmtp.screens.entity.UserEntity;
 
 import java.io.Serializable;
@@ -19,15 +19,15 @@ public class UserDTO implements Serializable {
 
     private final String password;
 
-    private final List<ScreenPlayDTO> screenplays;
+    private final List<PlanDTO> plans;
 
     public UserDTO(@JsonProperty("id") Integer id, @JsonProperty("email") String email,
                    @JsonProperty("password") String password,
-                   @JsonProperty("screenplays") List<ScreenPlayDTO> screenplays) {
+                   @JsonProperty("plans") List<PlanDTO> plans) {
         this.id = id;
         this.email = email;
         this.password = password;
-        this.screenplays = screenplays;
+        this.plans = plans;
     }
 
     public Integer getId() { return id; }
@@ -36,13 +36,13 @@ public class UserDTO implements Serializable {
 
     public String getPassword() { return password; }
 
-    public List<ScreenPlayDTO> getScreenplays() { return screenplays; }
+    public List<PlanDTO> getPlans() { return plans; }
 
     public static UserDTO fromEntity(UserEntity userEntity) {
-        List<ScreenPlayDTO> screenplays = new ArrayList<>();
-        for (ScreenPlayEntity item : userEntity.getScreenPlays()) {
-            screenplays.add(ScreenPlayDTO.fromEntityByAdmin(item));
+        List<PlanDTO> plans = new ArrayList<>();
+        for (PlanEntity item : userEntity.getPlans()) {
+            plans.add(PlanDTO.fromEntityByAdmin(item));
         }
-        return new UserDTO(userEntity.getId(), userEntity.getEmail(), null , screenplays);
+        return new UserDTO(userEntity.getId(), userEntity.getEmail(), null , plans);
     }
 }

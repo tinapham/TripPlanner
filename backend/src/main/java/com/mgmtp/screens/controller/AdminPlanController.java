@@ -1,8 +1,8 @@
 package com.mgmtp.screens.controller;
 
 import com.mgmtp.screens.model.PlanDTO;
-import com.mgmtp.screens.model.ScreenPlayDTO;
 import com.mgmtp.screens.service.PlanService;
+import com.mgmtp.screens.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +21,8 @@ import static com.mgmtp.screens.constant.ResponseStatus.SUCCESS;
 public class AdminPlanController {
 
     private PlanService planService;
+
+    private UserService userService;
 
     @Autowired
     public AdminPlanController(PlanService planService) {
@@ -50,7 +52,8 @@ public class AdminPlanController {
     @PreAuthorize("hasAuthority('create:plan')")
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<String> addNewPlan(@RequestBody PlanDTO request) {
-        planService.addNewPlan(request);
+        String emailAuthorized = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
+        planService.addNewPlan(request, userService.getUserEntity(emailAuthorized));
         return ResponseEntity.ok(SUCCESS);
     }
 

@@ -1,7 +1,6 @@
 package com.mgmtp.screens.controller;
 
 import com.mgmtp.screens.model.PlanDTO;
-import com.mgmtp.screens.model.ScreenPlayDTO;
 import com.mgmtp.screens.service.PlanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,8 +28,10 @@ public class PlanController {
 
     @RequestMapping()
     @PreAuthorize("hasAuthority('read:plans')")
-    public ResponseEntity<List<PlanDTO>> getAll() {
-        List<PlanDTO> planDTOS = planService.findAll(true);
+    public ResponseEntity<List<PlanDTO>> getMyPlans() {
+        //Get user email authorized
+        String emailAuthorized = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
+        List<PlanDTO> planDTOS = planService.findAllByUser(emailAuthorized);
         if (planDTOS == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
@@ -50,7 +51,8 @@ public class PlanController {
     @PreAuthorize("hasAuthority('create:plan')")
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<String> addNewPlan(@RequestBody PlanDTO request) {
-        planService.addNewPlanWithName(request.getName());
+        String emailAuthorized = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
+        planService.addNewPlanWithName(request.getName(), emailAuthorized);
         return ResponseEntity.ok(SUCCESS);
     }
 
