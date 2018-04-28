@@ -26,9 +26,9 @@ const PlanManagement = (props) => {
             <TableRow>
               <TableHeaderColumn style={styles.columns.id}>#</TableHeaderColumn>
               <TableHeaderColumn style={styles.columns.name}>Name</TableHeaderColumn>
-              <TableHeaderColumn style={styles.columns.displayTime}>Start day</TableHeaderColumn>
-              <TableHeaderColumn style={styles.columns.screens}>End day</TableHeaderColumn>
-              <TableHeaderColumn style={styles.columns.apps}>Events</TableHeaderColumn>
+              <TableHeaderColumn style={styles.columns.startDay}>Start day</TableHeaderColumn>
+              <TableHeaderColumn style={styles.columns.endDay}>End day</TableHeaderColumn>
+              <TableHeaderColumn style={styles.columns.events}>Events</TableHeaderColumn>
               <TableHeaderColumn style={styles.columns.action}>Action</TableHeaderColumn>
             </TableRow>
             {props.data.data.map(

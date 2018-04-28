@@ -78,7 +78,9 @@ public class PlanServiceImpl implements PlanService {
         PlanEntity planEntity = new PlanEntity(planDTO.getName(),
                 planDTO.getStartDay(), planDTO.getEndDay(),
                 null, user);
-        planEntity.setEvents(covertListEventDTOToEntity(planDTO.getEvents(), planEntity));
+//        if (planDTO.getEvents() != null) {
+//            planEntity.setEvents(covertListEventDTOToEntity(planDTO.getEvents(), planEntity));
+//        }
         planDAO.save(planEntity);
     }
 

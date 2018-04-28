@@ -1,4 +1,4 @@
-import React  from 'react';
+import React from 'react';
 import './styles.css';
 import Container from '../Container/index';
 import Error from '../../components/error404/index.js';
@@ -8,6 +8,7 @@ import {Redirect, Route, Switch} from 'react-router-dom';
 import {loggedIn} from "../../components/authentication/oauth";
 import axios from "axios/index";
 import MyPlanPage from "../MyPlanPage";
+import MyPlanListPage from '../MyPlanListPage';
 
 class App extends React.Component {
 
@@ -22,6 +23,7 @@ class App extends React.Component {
         };
         this.savePlan = this.savePlan.bind(this);
         this.updatePlan = this.updatePlan.bind(this);
+        this.deletePlan = this.deletePlan.bind(this);
     }
 
     async componentDidMount() {
@@ -56,12 +58,18 @@ class App extends React.Component {
             }
         });
         if (response.data === "SUCCESS") {
-            window.location.href = 'home/plan/'+data.name;
+            if(window.location.href !== 'http://localhost:3000/home/plan') {
+                //when create a new plan from dashboard => navigate to MyPlan
+                window.location.href = 'plan/'+data.name;
+            } else {
+                //when create a new plan from My Plans => navigate back to My Plans
+                window.location.href = 'plans';
+            }
         }
     }
 
     async updatePlan(id, data) {
-        console.log(this.url[1]+id);
+        console.log(this.url[1] + id);
         let response = await axios({
             method: 'put',
             url: this.url[1] + id,
@@ -71,11 +79,25 @@ class App extends React.Component {
             }
         });
         if (response.data === "SUCCESS") {
-            window.location.href = data.name;
+            window.location.href = '../plans';
         }
     }
 
-    render(){
+    async deletePlan(id, position) {
+        let response = await axios({
+            method: 'delete',
+            url: this.url[1] + id
+        });
+        if (response.data === "SUCCESS") {
+            let dataPlans = this.state.dataPlans;
+            dataPlans.splice(position, 1);
+            this.setState({
+                dataPlans: dataPlans
+            });
+        }
+    }
+
+    render() {
         return (
             <div>
                 {
@@ -83,23 +105,29 @@ class App extends React.Component {
                         ? < Container isAdmin={this.state.isAdmin} email={this.state.email}>
                             <Switch>
                                 <Route exact path={this.props.match.url}
-                                       render={(props) => <HomePage save={this.savePlan} {...props} />}  />
+                                       render={(props) => <HomePage save={this.savePlan} {...props} />}/>
                                 <Route path={`${this.props.match.url}/dashboard`}
-                                       render={(props) => <HomePage save={this.savePlan} {...props} />} />
+                                       render={(props) => <HomePage save={this.savePlan} {...props} />}/>
                                 <Route path={`${this.props.match.url}/explore`}
-                                       render={(props) => <ExplorePage {...props} data = {this.state.dataAttractions}/>} />
+                                       render={(props) => <ExplorePage {...props} data={this.state.dataAttractions}/>}/>
                                 <Route path={`${this.props.match.url}/plan`}
-                                       render={(props) => <MyPlanPage save={this.savePlan} update={this.updatePlan}{...props} />} />
+                                       render={(props) => <MyPlanPage save={this.savePlan}
+                                                                      update={this.updatePlan}{...props} />}/>
                                 <Route path={`${this.props.match.url}/plan/:name`}
-                                       render={(props) => <MyPlanPage save={this.savePlan} update={this.updatePlan}{...props} />} />
-                                <Route path="*" component={Error} />
+                                       render={(props) => <MyPlanPage save={this.savePlan}
+                                                                      update={this.updatePlan}{...props} />}/>
+                                <Route path={`${this.props.match.url}/plans`}
+                                       render={(props) => <MyPlanListPage data={this.state.dataPlans}
+                                                                          delete={this.deletePlan}/>}/>
+                                <Route path="*" component={Error}/>
                             </Switch>
-                        </Container >
-                        : <Redirect to='/login' />
+                        </Container>
+                        : <Redirect to='/login'/>
                 }
             </div>
         );
     }
 
 }
+
 export default App;

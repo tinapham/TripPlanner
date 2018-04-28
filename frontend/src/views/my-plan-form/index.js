@@ -28,7 +28,7 @@ class MyPlanForm extends Component {
     }
 
     async componentDidMount() {
-        if (this.state.accessToken) {
+        if (this.state.accessToken && this.state.name) {
             let response = await axios.get(this.url_backend + this.state.name);
 
             let dayEvents = [];
@@ -130,7 +130,11 @@ class MyPlanForm extends Component {
             });
             return;
         }
-        this.props.update(this.state.id, this.state);
+        if (this.state.id) {
+            this.props.update(this.state.id, this.state);
+        } else {
+            this.props.save(this.state);
+        }
 
     };
 

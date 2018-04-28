@@ -31,7 +31,7 @@ class PlanRow extends React.Component {
 
   render() {
     const location = {
-      pathname: '/admin/plan-form',
+      pathname: '/home/plan/',
       state: { data: this.props.data }
     }
     const actions = [
@@ -51,9 +51,9 @@ class PlanRow extends React.Component {
       <TableRow key={this.props.index}>
         <TableRowColumn style={styles.columns.id}>{this.props.index}</TableRowColumn>
         <TableRowColumn style={styles.columns.name}>{this.props.data.name}</TableRowColumn>
-        <TableRowColumn style={styles.columns.displayTime}>{this.props.data["start-day"]}</TableRowColumn>
-        <TableRowColumn style={styles.columns.screens}>{this.props.data["end-day"]}</TableRowColumn>
-        <TableRowColumn style={styles.columns.apps}>
+        <TableRowColumn style={styles.columns.startDay}>{this.props.data["start-day"]}</TableRowColumn>
+        <TableRowColumn style={styles.columns.endDay}>{this.props.data["end-day"]}</TableRowColumn>
+        <TableRowColumn style={styles.columns.events}>
           {this.props.data["events"] ?
               this.props.data["events"].map(function (event, index) {
                 return (

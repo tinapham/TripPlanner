@@ -25,8 +25,9 @@ public class AdminPlanController {
     private UserService userService;
 
     @Autowired
-    public AdminPlanController(PlanService planService) {
+    public AdminPlanController(PlanService planService, UserService userService) {
         this.planService = planService;
+        this.userService = userService;
     }
 
     @RequestMapping()

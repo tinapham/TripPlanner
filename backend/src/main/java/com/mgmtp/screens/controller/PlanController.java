@@ -1,7 +1,9 @@
 package com.mgmtp.screens.controller;
 
+import com.mgmtp.screens.entity.UserEntity;
 import com.mgmtp.screens.model.PlanDTO;
 import com.mgmtp.screens.service.PlanService;
+import com.mgmtp.screens.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,9 +23,14 @@ public class PlanController {
 
     private PlanService planService;
 
+    private UserService userService;
+
     @Autowired
-    public PlanController(PlanService planService) {
+    public PlanController(PlanService planService, UserService userService) {
+
         this.planService = planService;
+        this.userService = userService;
+
     }
 
     @RequestMapping()
@@ -52,7 +59,7 @@ public class PlanController {
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<String> addNewPlan(@RequestBody PlanDTO request) {
         String emailAuthorized = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
-        planService.addNewPlanWithName(request.getName(), emailAuthorized);
+        planService.addNewPlan(request, userService.getUserEntity(emailAuthorized));
         return ResponseEntity.ok(SUCCESS);
     }
 
@@ -67,7 +74,7 @@ public class PlanController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    @PreAuthorize("hasAuthority('delete:screenPlay')")
+    @PreAuthorize("hasAuthority('delete:plan')")
     public ResponseEntity<?> deleteById(@PathVariable int id) {
         if (!planService.isExist(id)) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ERROR);
