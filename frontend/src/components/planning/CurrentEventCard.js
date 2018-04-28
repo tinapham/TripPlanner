@@ -25,6 +25,12 @@ class CurrentEventCard extends React.Component {
         this.props.deleteEvent(this.props.data);
     };
 
+    componentDidUpdate(prevProps, prevState) {
+        if (prevProps.data !== this.props.data ) {
+            this.setState({ data: this.props.data });
+        }
+    }
+
     render() {
         return (
             <Card>

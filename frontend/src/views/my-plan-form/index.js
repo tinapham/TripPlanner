@@ -90,11 +90,29 @@ class MyPlanForm extends Component {
     async deleteEvent(event) {
         //find the index by event
         let index = this.state.events.indexOf(event);
-        console.log(index);
         await this.setState({
-            events: [...this.state.events.slice(0,index), this.state.events.slice(index+1)]
+            events: [...this.state.events.slice(0,index), ...this.state.events.slice(index+1)]
         });
         console.log(this.state.events);
+
+        let dayEvents = [];
+        let dayEvent = {
+            index: undefined,
+            day: undefined,
+        };
+        this.state.events.map(function (element, index) {
+            if(dayEvent.day !== element['start-time'].substr(0,10)) {
+                dayEvent = {
+                    index: index,
+                    day: element['start-time'].substr(0,10),
+                };
+                dayEvents.push(dayEvent)
+            }
+        });
+
+        await this.setState({
+            dayEvents: dayEvents
+        });
     };
 
     savePlan = () => {

@@ -46,6 +46,12 @@ class PlanningMap extends React.Component {
             });
     };
 
+    componentDidUpdate(prevProps, prevState) {
+        if (prevProps.data !== this.props.data ) {
+            this.setState({ data: this.props.data });
+        }
+    }
+
     render() {
         const onMarkerClick = this.onMarkerClick;
         return (

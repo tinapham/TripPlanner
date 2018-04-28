@@ -14,6 +14,7 @@ class PlanningList extends React.Component {
         super(props);
         this.state = {
             open: false,
+            data: this.props.data,
         }
     }
 
@@ -32,17 +33,25 @@ class PlanningList extends React.Component {
         return current ? <Subheader>{current.day}</Subheader> : undefined
     };
 
+    componentDidUpdate(prevProps, prevState) {
+        if (prevProps.data !== this.props.data ) {
+            this.setState({ data: this.props.data });
+        }
+    }
+
     render() {
         const loadSubHeader = this.loadSubHeader;
         const addEvent = this.props.addEvent;
         const deleteEvent = this.props.deleteEvent;
+        console.log('ahihi');
+        console.log(this.state.data);
 
         return (
 
             <Paper style={{maxHeight: 550, overflow: 'auto'}} zDepth={2}>
                 <List>
-                    {this.props.data ?
-                        this.props.data.map(function (event, index) {
+                    {this.state.data ?
+                        this.state.data.map(function (event, index) {
                             return (
                                 <div key={index}>
                                     {loadSubHeader(index)}
