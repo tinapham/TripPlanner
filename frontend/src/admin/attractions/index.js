@@ -36,7 +36,7 @@ class AttractionManagement extends React.Component {
                 <TableHeaderColumn style={styles.columns.lat}>Longitude</TableHeaderColumn>
                 <TableHeaderColumn style={styles.columns.lat}>Type</TableHeaderColumn>
                 <TableHeaderColumn style={styles.columns.description}>Description</TableHeaderColumn>
-                <TableHeaderColumn style={styles.columns.description}>Comments</TableHeaderColumn>
+                {/*<TableHeaderColumn style={styles.columns.description}>Comments</TableHeaderColumn>*/}
                 <TableHeaderColumn style={styles.columns.action}>Action</TableHeaderColumn>
               </TableRow>
               {this.props.data.data.map(

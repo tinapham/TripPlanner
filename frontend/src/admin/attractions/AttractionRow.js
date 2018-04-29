@@ -57,7 +57,7 @@ class AttractionRow extends React.Component {
         <TableRowColumn style={styles.columns.lat}>{this.props.data.lng}</TableRowColumn>
         <TableRowColumn style={styles.columns.lat}>{this.props.data.type}</TableRowColumn>
         <TableRowColumn style={styles.columns.description}>{this.props.data.description.substring(0,10)}...</TableRowColumn>
-        <TableRowColumn style={styles.columns.description}>
+        {/*<TableRowColumn style={styles.columns.description}>*/}
           {/*{this.props.data["screenplays"].map(function (screenplay, index) {*/}
             {/*return (*/}
               {/*<div key={index}>*/}
@@ -65,7 +65,7 @@ class AttractionRow extends React.Component {
               {/*</div>*/}
             {/*)*/}
           {/*})}*/}
-        </TableRowColumn>
+        {/*</TableRowColumn>*/}
         <TableRowColumn style={styles.columns.action}>
           <Link className="button" to={location}>
             <FloatingActionButton zDepth={0}

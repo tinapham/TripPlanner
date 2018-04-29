@@ -19,10 +19,21 @@
         </createTable>
 
         <insert tableName="users">
-            <column name="id">1</column>
             <column name="email">admin</column>
             <column name="password">240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9
             </column> <!--admin123-->
+        </insert>
+
+        <insert tableName="users">
+            <column name="email">alice</column>
+            <column name="password">8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92
+            </column> <!--123456-->
+        </insert>
+
+        <insert tableName="users">
+            <column name="email">trace</column>
+            <column name="password">8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92
+            </column> <!--123456-->
         </insert>
 
         <update tableName="users">
@@ -57,14 +68,44 @@
         <sql dbms="postgresql"
              splitStatements="true"
              stripComments="true">
-            insert into attractions(name, address, lat, lng, type, description) values ('29/3 park', '33 Điện Biên Phủ,
-            Thạch Gián, Da Nang, Vietnam', 16.065548, 108.204486, 'Park', 'Spacious city memorial park featuring hiking
-            trails, paths, landscaped valleys and a lake.');
-            insert into attractions(name, address, lat, lng, type, description) values ('Ban Co Peak', 'Thọ Quang, Sơn
-            Trà, Da Nang, Vietnam', 16.118949, 108.271949, 'Tourist Attraction', '');
-            insert into attractions(name, address, lat, lng, type, description) values ('Asia Park', '1 Phan Đăng Lưu,
-            Hoà Cường Bắc, Hải Châu, Da Nang, Vietnam', 16.039258, 108.228534, 'Park', 'Amusement park with a massive
-            Ferris wheel and other rides plus themed areas based on Asian countries.');
+            insert into attractions(name, address, lat, lng, type, description) values ('29/3 park',
+            '33 Điện Biên Phủ, Thạch Gián, Da Nang', 16.065548, 108.204486, 'Park',
+            'Spacious city memorial park featuring hiking trails, paths, landscaped valleys and a lake.');
+
+            insert into attractions(name, address, lat, lng, type, description) values ('Ban Co Peak',
+            'Thọ Quang, Sơn Trà, Đà Nẵng', 16.118949, 108.271949, 'Tourist Attraction', '');
+
+            insert into attractions(name, address, lat, lng, type, description) values ('Asia Park',
+            '1 Phan Đăng Lưu, Hoà Cường Bắc, Hải Châu, Đà Nẵng', 16.039258, 108.228534, 'Park',
+            'Amusement park with a massive Ferris wheel and other rides plus themed areas based on Asian countries.');
+
+            insert into attractions(name, address, lat, lng, type, description) values ('Dragon Bridge',
+            'Nguyễn Văn Linh, An Hải Trung, Đà Nẵng', 16.061210, 108.226976, 'Bridge',
+            'Dragon-shaped bridge spanning the Han River, featuring colorful night illumination and fire shows.');
+
+            insert into attractions(name, address, lat, lng, type, description) values ('Non Nuoc Pagoda',
+            '98 Huyền Trân Công Chúa, Hòa Hải, Ngũ Hành Sơn, Đà Nẵng', 16.004199, 108.264244, 'Buddhist Temple', '');
+
+            insert into attractions(name, address, lat, lng, type, description) values ('The Marble Mountains',
+            '52 Huyền Trân Công Chúa, Hoà Hải, Ngũ Hành Sơn, Đà Nẵng', 16.003922, 108.262854, 'Tourist Attraction',
+            'Network of 5 marble mountains with multiple caves, elaborate temples and viewing outlooks.');
+
+            insert into attractions(name, address, lat, lng, type, description) values ('Hoa Trung Lake',
+            'Hòa Vang, Da Nang', 16.079906, 108.055420, 'Lake', '');
+
+            insert into attractions(name, address, lat, lng, type, description) values ('Son Tra Banyan Tree',
+            'Thọ Quang, Sơn Trà, Đà Nẵng', 16.122540, 108.331703, 'Heritage Preservation',
+            '800 year old banyan tree');
+
+            insert into attractions(name, address, lat, lng, type, description) values ('Linh Ung Pagoda',
+            'Hoàng Sa, Thọ Quang, Sơn Trà, Đà Nẵng', 16.100288, 108.277856, 'Buddhist Temple',
+            'Buddhist temple, pagoda and large statue located on an elevated slope with sea and skyline views.');
+
+            insert into attractions(name, address, lat, lng, type, description) values ('Sun World Ba Na Hills',
+            'Hòa Vang, Đà Nẵng', 15.997735, 107.988077, 'Tourist Attraction', '');
+
+            insert into attractions(name, address, lat, lng, type, description) values ('Than Tai Hot Springs Park',
+            'QL14G, Hoà Phú, Hòa Vang, Đà Nẵng', 15.967851, 108.019805, 'Tourist Attraction', '');
         </sql>
     </changeSet>
 
@@ -94,7 +135,8 @@
         <sql dbms="postgresql"
              splitStatements="true"
              stripComments="true">
-            insert into plans(name, start_day, end_day) values ('Summer trip', '2018-04-01', '2018-04-03');
+            insert into plans(name, start_day, end_day, user_id) values ('Summer trip', '2018-04-01', '2018-04-02', 2);
+            insert into plans(name, start_day, end_day, user_id) values ('30/4 Holiday', '2018-04-30', '2018-04-30', 3);
         </sql>
     </changeSet>
 
@@ -130,8 +172,20 @@
                                  referencedTableName="attractions"/>
 
         <sql>
-            insert into events(start_time, end_time, attraction_id, plan_id) values ('2018-01-04 13:30', '2018-01-04
-            16:30', 1, 1);
+            insert into events(start_time, end_time, attraction_id, plan_id) values ('2018-04-01 7:00',
+            '2018-04-01 9:30', 2, 1);
+            insert into events(start_time, end_time, attraction_id, plan_id) values ('2018-04-01 9:30',
+            '2018-04-01 10:30', 8, 1);
+            insert into events(start_time, end_time, attraction_id, plan_id) values ('2018-04-01 10:30',
+            '2018-04-01 14:00', 9, 1);
+            insert into events(start_time, end_time, attraction_id, plan_id) values ('2018-04-02 9:00',
+            '2018-04-02 16:00', 10, 1);
+            insert into events(start_time, end_time, attraction_id, plan_id) values ('2018-04-30 8:00',
+            '2018-04-02 9:30', 6, 2);
+            insert into events(start_time, end_time, attraction_id, plan_id) values ('2018-04-30 9:30',
+            '2018-04-02 12:00', 5, 2);
+            insert into events(start_time, end_time, attraction_id, plan_id) values ('2018-04-30 16:00',
+            '2018-04-02 21:30', 3, 2);
         </sql>
 
     </changeSet>

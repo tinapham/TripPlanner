@@ -31,7 +31,7 @@ class PlanRow extends React.Component {
 
   render() {
     const location = {
-      pathname: '/home/plan/',
+      pathname: '/admin/plan-form/',
       state: { data: this.props.data }
     }
     const actions = [
