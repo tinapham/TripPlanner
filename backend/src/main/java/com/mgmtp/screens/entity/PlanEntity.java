@@ -31,6 +31,9 @@ public class PlanEntity implements Serializable {
 	@JoinColumn(name = "user_id", nullable = false)
 	private UserEntity user;
 
+	@OneToMany(mappedBy = "plan", cascade = CascadeType.ALL)
+	private List<TransactionEntity> transactions;
+
 	public PlanEntity() { }
 
 	public PlanEntity(String name, String startDay, String endDay, List<EventEntity> events, UserEntity user) {
@@ -46,6 +49,16 @@ public class PlanEntity implements Serializable {
 		this.startDay = startDay;
 		this.endDay = endDay;
 		this.events = events;
+	}
+
+	public PlanEntity(String name, String startDay, String endDay, List<EventEntity> events, UserEntity user,
+					  List<TransactionEntity> transactions) {
+		this.name = name;
+		this.startDay = startDay;
+		this.endDay = endDay;
+		this.events = events;
+		this.user = user;
+		this.transactions = transactions;
 	}
 
 	public Integer getId() { return id; }
@@ -71,5 +84,9 @@ public class PlanEntity implements Serializable {
 	public UserEntity getUser() { return user; }
 
 	public void setUser(UserEntity user) { this.user = user; }
+
+	public List<TransactionEntity> getTransactions() { return transactions; }
+
+	public void setTransactions(List<TransactionEntity> transactions) { this.transactions = transactions; }
 
 }
