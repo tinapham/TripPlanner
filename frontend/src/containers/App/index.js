@@ -9,7 +9,6 @@ import {loggedIn} from "../../components/authentication/oauth";
 import axios from "axios/index";
 import MyPlanPage from "../MyPlanPage";
 import MyPlanListPage from '../MyPlanListPage';
-import TransactionPage from "../TransactionPage";
 
 class App extends React.Component {
 
@@ -118,19 +117,21 @@ class App extends React.Component {
                                 <Route path={`${this.props.match.url}/explore`}
                                        render={(props) => <ExplorePage {...props} data={this.state.dataAttractions}/>}/>
                                 <Route path={`${this.props.match.url}/plan`}
-                                       render={(props) => <MyPlanPage save={this.savePlan}
+                                       render={(props) => <MyPlanPage listTourGuide={this.state.dataTourGuides}
+                                                                      save={this.savePlan}
                                                                       update={this.updatePlan}{...props} />}/>
                                 <Route path={`${this.props.match.url}/plan/:name`}
-                                       render={(props) => <MyPlanPage save={this.savePlan}
+                                       render={(props) => <MyPlanPage listTourGuide={this.state.dataTourGuides}
+                                                                      save={this.savePlan}
                                                                       update={this.updatePlan}{...props} />}/>
                                 <Route path={`${this.props.match.url}/plans`}
                                        render={(props) => <MyPlanListPage data={this.state.dataPlans}
                                                                           delete={this.deletePlan}/>}/>
                                 <Route path={`${this.props.match.url}/transaction/plan/:id`}
-                                       render={(props) => <TransactionPage data={this.state.dataTourGuides}
+                                       render={(props) => <MyPlanPage data={this.state.dataTourGuides}
                                                                           delete={this.deletePlan}/>}/>
                                 <Route path={`${this.props.match.url}/transaction/:id`}
-                                       render={(props) => <TransactionPage data={this.state.dataTourGuides}
+                                       render={(props) => <MyPlanPage data={this.state.dataTourGuides}
                                                                        delete={this.deletePlan}/>}/>
                                 <Route path="*" component={Error}/>
                             </Switch>

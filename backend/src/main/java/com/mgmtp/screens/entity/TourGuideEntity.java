@@ -22,9 +22,6 @@ public class TourGuideEntity implements Serializable {
     private String experience;
 
     @Column()
-    private boolean gender;
-
-    @Column()
     private float price;
 
     @Column()
@@ -35,18 +32,16 @@ public class TourGuideEntity implements Serializable {
 
     public TourGuideEntity() {}
 
-    public TourGuideEntity(String name, String experience, boolean gender, float price) {
+    public TourGuideEntity(String name, String experience, float price) {
         this.name = name;
         this.experience = experience;
-        this.gender = gender;
         this.price = price;
     }
 
-    public TourGuideEntity(String name, String experience, boolean gender, float price, String description,
+    public TourGuideEntity(String name, String experience, float price, String description,
                            List<TransactionEntity> transactions) {
         this.name = name;
         this.experience = experience;
-        this.gender = gender;
         this.price = price;
         this.description = description;
         this.transactions = transactions;
@@ -57,8 +52,6 @@ public class TourGuideEntity implements Serializable {
     public String getName() { return name; }
 
     public String getExperience() { return experience; }
-
-    public boolean isGender() { return gender; }
 
     public float getPrice() { return price; }
 
@@ -75,8 +68,6 @@ public class TourGuideEntity implements Serializable {
     public void setExperience(String experience) {
         this.experience = experience;
     }
-
-    public void setGender(boolean gender) { this.gender = gender; }
 
     public void setPrice(float price) { this.price = price; }
 

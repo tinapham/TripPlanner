@@ -19,16 +19,15 @@ const styles = {
     },
     buttons: {
         marginTop: 30,
-        float: 'right'
+        margin: '12px 0',
     },
     saveButton: {
-        marginLeft: 5
+        marginLeft: 5,
+        marginRight: 10,
+        color : pink500
     },
-    buttonAdd: {
-        margin: 12
-    },
-    dangerButton:{
-        backgroundColor: red500
+    buttonCancel: {
+        marginRight: 10,
     },
     helperTextStyle:{
         color: orange500

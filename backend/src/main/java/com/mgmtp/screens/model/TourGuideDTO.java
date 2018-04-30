@@ -20,19 +20,16 @@ public class TourGuideDTO implements Serializable {
 
     private String experience;
 
-    private boolean gender; //false is male, true is female
-
     private float price;
 
     private String description;
 
     private TourGuideDTO(@JsonProperty("id") Integer id, @JsonProperty("name") String name,
-                        @JsonProperty("experience") String experience, @JsonProperty("gender") boolean gender,
-                        @JsonProperty("price") float price, @JsonProperty("description") String description) {
+                         @JsonProperty("experience") String experience, @JsonProperty("price") float price,
+                         @JsonProperty("description") String description) {
         this.id = id;
         this.name = name;
         this.experience = experience;
-        this.gender = gender;
         this.price = price;
         this.description = description;
     }
@@ -42,8 +39,6 @@ public class TourGuideDTO implements Serializable {
     public String getName() { return name; }
 
     public String getExperience() { return experience; }
-
-    public boolean isGender() { return gender; }
 
     public float getPrice() { return price; }
 
@@ -55,6 +50,6 @@ public class TourGuideDTO implements Serializable {
 //            plans.add(PlanDTO.fromEntityByAdmin(item));
 //        }
         return new TourGuideDTO(tourGuideEntity.getId(), tourGuideEntity.getName(), tourGuideEntity.getExperience() ,
-                tourGuideEntity.isGender(), tourGuideEntity.getPrice(), tourGuideEntity.getDescription());
+                                tourGuideEntity.getPrice(), tourGuideEntity.getDescription());
     }
 }
