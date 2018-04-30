@@ -20,6 +20,8 @@ import {
 } from 'material-ui/Stepper';
 import AutoComplete from 'material-ui/AutoComplete';
 import MenuItem from 'material-ui/MenuItem';
+import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
+import Toggle from 'material-ui/Toggle';
 
 class MyPlanForm extends Component {
 
@@ -32,6 +34,8 @@ class MyPlanForm extends Component {
             name: arr[3] ? arr[3] : "",
             finished: false,
             stepIndex: 0,
+            numberOfDays: 0,
+            total: 0,
             // listTourGuide: this.props.listTourGuide? this.props.listTourGuide : [],
         };
         this.deleteEvent = this.deleteEvent.bind(this);
@@ -58,10 +62,17 @@ class MyPlanForm extends Component {
                     }
                 });
             }
+
+            let tourGuide = response.data.transaction ? response.data.transaction['tour-guide'] : undefined;
+
             this.setState({
                 id: response.data.id,
                 'start-day': response.data['start-day'],
                 'end-day': response.data['end-day'],
+                numberOfDays: this.totalDays(response.data['start-day'], response.data['end-day']),
+                total: tourGuide ?
+                    tourGuide.price * this.totalDays(response.data['start-day'], response.data['end-day'])
+                    : 0,
                 events: response.data.events ? response.data.events : [],
                 dayEvents: dayEvents,
                 transaction: response.data.transaction,
@@ -162,14 +173,22 @@ class MyPlanForm extends Component {
     };
 
     onStartDayChange = (event, value) => {
+        let tourGuide = this.state.transaction ? this.state.transaction['tour-guide'] : undefined;
+        let numberOfDays = this.totalDays(this.toLocalDate(value), this.state['end-day']);
         this.setState({
             'start-day': this.toLocalDate(value),
+            numberOfDays: numberOfDays,
+            total: tourGuide ? tourGuide.price * numberOfDays : 0,
         });
     };
 
     onEndDayChange = (event, value) => {
+        let tourGuide = this.state.transaction ? this.state.transaction['tour-guide'] : undefined;
+        let numberOfDays = this.totalDays(this.state['start-day'], this.toLocalDate(value));
         this.setState({
             'end-day': this.toLocalDate(value),
+            numberOfDays: this.totalDays(this.state['start-day'], this.toLocalDate(value)),
+            total: tourGuide ? tourGuide.price * numberOfDays : 0,
         });
     };
 
@@ -214,20 +233,29 @@ class MyPlanForm extends Component {
         );
     }
 
+    totalDays = (firstDate, secondDate) => {
+        let start = firstDate ? new Date(firstDate).getTime() : -1;
+        let end = secondDate ? new Date(secondDate).getTime() : -1;
+        if (start === -1 && end !== -1) start = end;
+        if (end === -1 && start !== -1) end = start;
+        return Math.round((end - start) / (1000 * 60 * 60 * 24)) + 1;
+    };
+
     onTourGuideChange = (searchText, dataSource, params) => {
         let data = this.props.listTourGuide ? this.props.listTourGuide.find(function (element) {
             return element.name === searchText;
         }) : undefined;
+        let numberOfDays = this.totalDays(this.state['start-day'], this.state['end-day']);
         this.setState({
             transaction: {
                 ...this.state.transaction,
                 "tour-guide": data,
-            }
+            },
+            total: data ? data.price * numberOfDays : 0,
         });
     };
 
     render() {
-        console.log(this.props);
         const {finished, stepIndex} = this.state;
         let startDay = this.state['start-day'] ? new Date(this.state['start-day']) : undefined;
         let endDay = this.state['end-day'] ? new Date(this.state['end-day']) : undefined;
@@ -323,7 +351,7 @@ class MyPlanForm extends Component {
                             <div className="row">
                                 <div className="col-md-12 col-sm-12 col-xs-12">
                                     <PageBase title='Private Tour Guide'>
-                                        <div className="col-md-12 col-sm-12 col-xs-12">
+                                        <div>
                                             <div className="col-md-4 col-sm-12 col-xs-12">
                                                 <AutoComplete
                                                     floatingLabelText="Tour guide's name"
@@ -359,9 +387,7 @@ class MyPlanForm extends Component {
                                                     floatingLabelText="Description"
                                                     fullWidth={true}
                                                     type="text"
-                                                    value={this.state.transaction ?
-                                                        this.state.transaction['tour-guide'].description
-                                                        : undefined}
+                                                    value={tourGuide ? tourGuide.description : undefined}
                                                     disabled={true}
                                                     multiLine={true}
                                                     rows={1}
@@ -377,12 +403,87 @@ class MyPlanForm extends Component {
                     <Step>
                         <StepLabel>Payment</StepLabel>
                         <StepContent>
-                            <p>
-                                Try out different ad text to see what brings in the most customers,
-                                and learn how to enhance your ads using features like ad extensions.
-                                If you run into any problems with your ads, find out how to tell if
-                                they're running and how to resolve approval issues.
-                            </p>
+                            <div className="row">
+                                <div className="col-md-12 col-sm-12 col-xs-12">
+                                    <PageBase title='Order Overview'>
+                                        <div>
+                                            <div className="col-md-6 col-sm-12 col-xs-12">
+                                                <TextField
+                                                    floatingLabelText="Number of days"
+                                                    fullWidth={true}
+                                                    type="text"
+                                                    value={this.state.numberOfDays}
+                                                    disabled={true}
+                                                />
+                                            </div>
+                                            <div className="col-md-6 col-sm-12 col-xs-12">
+                                                <TextField
+                                                    floatingLabelText="Total"
+                                                    fullWidth={true}
+                                                    type="text"
+                                                    value={'$' + this.state.total}
+                                                    disabled={true}
+                                                />
+                                            </div>
+                                            <div className="col-md-12 col-sm-12 col-xs-12">
+                                                <Card>
+                                                    <CardHeader
+                                                        title="CREDIT/ DEBIT CARD"
+                                                        actAsExpander={true}
+                                                        showExpandableButton={true}
+                                                    />
+                                                    <CardText expandable={true}>
+                                                        <TextField
+                                                            floatingLabelText="Card Number"
+                                                            fullWidth={true}
+                                                            type="text"
+                                                            value={this.state.numberOfDays}
+                                                        />
+                                                        <TextField
+                                                            floatingLabelText="Expire time (MM/YY)"
+                                                            fullWidth={true}
+                                                            type="text"
+                                                            value={'$' + this.state.total}
+                                                        />
+                                                        <TextField
+                                                            floatingLabelText="CCV"
+                                                            fullWidth={true}
+                                                            type="text"
+                                                            value={'$' + this.state.total}
+                                                        />
+                                                        <TextField
+                                                            floatingLabelText="Name on the card"
+                                                            fullWidth={true}
+                                                            type="text"
+                                                            value={'$' + this.state.total}
+                                                        />
+                                                        <RaisedButton
+                                                            label='Pay Now'
+                                                            disableTouchRipple={true}
+                                                            disableFocusRipple={true}
+                                                            onClick={this.savePlan}
+                                                            backgroundColor={green600}
+                                                            labelColor={white}
+                                                            style={{marginLeft: '90%'}}
+                                                        />
+                                                    </CardText>
+                                                </Card>
+                                            </div>
+                                            <div className="col-md-4 col-sm-12 col-xs-12">
+                                                <Toggle
+                                                    label="Already paid ?"
+                                                    thumbStyle={styles.thumbOff}
+                                                    trackStyle={styles.trackOff}
+                                                    thumbSwitchedStyle={styles.thumbSwitched}
+                                                    trackSwitchedStyle={styles.trackSwitched}
+                                                    labelStyle={styles.toggleLabel}
+                                                    style={styles.toggleDiv}
+                                                />
+                                            </div>
+                                        </div>
+                                    </PageBase>
+                                </div>
+                            </div>
                             <div style={styles.buttons}>
                                 <RaisedButton
                                     label='Submit'

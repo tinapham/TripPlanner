@@ -1,20 +1,17 @@
-import { pink500, grey400, red500, orange500} from 'material-ui/styles/colors';
+import { red100, red400, green100, green500, grey900, orange500} from 'material-ui/styles/colors';
 const styles = {
     map: {
         height: '550px',
-    },
-    plusCircle: {
-        color : pink500
     },
     labelApps:{
         display: `block`
     },
     toggleDiv: {
-        marginTop: 40,
+        marginTop: 20,
         marginBottom: 5
     },
     toggleLabel: {
-        color: grey400,
+        color: grey900,
         fontWeight: 100
     },
     buttons: {
@@ -24,7 +21,6 @@ const styles = {
     saveButton: {
         marginLeft: 5,
         marginRight: 10,
-        color : pink500
     },
     buttonCancel: {
         marginRight: 10,
@@ -34,6 +30,18 @@ const styles = {
     },
     checkbox: {
         marginTop: 20,
+    },
+    thumbOff: {
+        backgroundColor: red400,
+    },
+    trackOff: {
+        backgroundColor: red100,
+    },
+    thumbSwitched: {
+        backgroundColor: green500,
+    },
+    trackSwitched: {
+        backgroundColor: green100,
     },
 }
 export default styles;
