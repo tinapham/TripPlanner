@@ -22,12 +22,13 @@ class MyPlanForm extends Component {
         this.state = {
             accessToken: loggedIn(),
             name: arr[3] ? arr[3] : "",
+            checked: false,
         };
         this.deleteEvent = this.deleteEvent.bind(this);
         this.savePlan = this.savePlan.bind(this);
     }
 
-    async componentDidMount() {
+    async componentWillMount() {
         if (this.state.accessToken && this.state.name) {
             let response = await axios.get(this.url_backend + this.state.name);
 
@@ -49,12 +50,13 @@ class MyPlanForm extends Component {
 
 
             }
-            await this.setState({
+            this.setState({
                 id: response.data.id,
                 'start-day': response.data['start-day'],
                 'end-day': response.data['end-day'],
                 events: response.data.events ? response.data.events : [],
-                dayEvents: dayEvents
+                dayEvents: dayEvents,
+                transaction: response.data.transaction,
             });
         }
     };
@@ -123,6 +125,22 @@ class MyPlanForm extends Component {
         }
     };
 
+    updateCheck = () => {
+        this.setState((oldState) => {
+            return {
+                checked: !oldState.checked,
+            };
+        });
+    };
+
+    handleRequestDelete = () => {
+        alert('You clicked the delete button.');
+    };
+
+    handleClick = () => {
+        alert('You clicked the Chip.');
+    };
+
     savePlan() {
         if (this.state.name === "") {
             this.setState({
@@ -159,6 +177,7 @@ class MyPlanForm extends Component {
 
     render() {
         console.log(this.state);
+
         let startDay = this.state['start-day'] ? new Date(this.state['start-day']) : undefined;
         let endDay = this.state['end-day'] ? new Date(this.state['end-day']) : undefined;
         return (
@@ -223,6 +242,7 @@ class MyPlanForm extends Component {
                                 </div>
 
                                 <div style={styles.buttons}>
+
                                     <Link to="/home/plans">
                                         <RaisedButton
                                             label="Cancel"
@@ -230,7 +250,7 @@ class MyPlanForm extends Component {
                                         />
                                     </Link>
 
-                                    <RaisedButton label="Save"
+                                    <RaisedButton label="Submit"
                                                   onClick={this.savePlan}
                                                   style={styles.saveButton}
                                                   type="submit"

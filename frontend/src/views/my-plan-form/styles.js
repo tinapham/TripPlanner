@@ -32,6 +32,9 @@ const styles = {
     },
     helperTextStyle:{
         color: orange500
-    }
+    },
+    checkbox: {
+        marginTop: 20,
+    },
 }
 export default styles;

@@ -20,17 +20,20 @@ public class TransactionEntity implements Serializable {
 	@Column()
 	private float cost;
 
+	@Column()
+	private String status;
+
 	@ManyToOne
 	@JoinColumn(name = "guide_id", nullable = false)
 	private TourGuideEntity tourGuide;
 
-	@ManyToOne
+	@OneToOne
 	@JoinColumn(name = "plan_id", nullable = false)
 	private PlanEntity plan;
 
 	public TransactionEntity() { }
 
-	public TransactionEntity(float hours, float cost) {
+	public TransactionEntity(float hours, float cost, String status) {
 		this.hours = hours;
 		this.cost = cost;
 	}
@@ -60,5 +63,9 @@ public class TransactionEntity implements Serializable {
 	public PlanEntity getPlan() { return plan; }
 
 	public void setPlan(PlanEntity plan) { this.plan = plan; }
+
+	public String getStatus() { return status; }
+
+	public void setStatus(String status) { this.status = status; }
 
 }

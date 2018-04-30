@@ -26,9 +26,9 @@ public class TourGuideDTO implements Serializable {
 
     private String description;
 
-    public TourGuideDTO(@JsonProperty("id") Integer id, @JsonProperty("name") String name,
+    private TourGuideDTO(@JsonProperty("id") Integer id, @JsonProperty("name") String name,
                         @JsonProperty("experience") String experience, @JsonProperty("gender") boolean gender,
-                        @JsonProperty("gender") float price, @JsonProperty("description") String description) {
+                        @JsonProperty("price") float price, @JsonProperty("description") String description) {
         this.id = id;
         this.name = name;
         this.experience = experience;

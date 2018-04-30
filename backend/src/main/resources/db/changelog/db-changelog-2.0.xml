@@ -20,16 +20,14 @@
              splitStatements="true"
              stripComments="true">
             insert into tour_guides(name, experience, gender, price, description) values ('Thuan Pham', '7 years', false,
-                                    15, 'I was born and raised in Da Nang city. As a a well-experienced Local guide,
-                                    I have been guiding tourists around Da Nang and other nearby sites for over 8 years.
-                                    I would like to not only tell you about Vietnam’s history in genenally,
-                                    about history and culture in particular, but also show you how local people live and
+                                    15, 'I have been guiding tourists around Da Nang and other nearby sites for over 8 years.
+                                    I would like to not only tell you about Vietnam’s history, but also show you how local people live and
                                     work and help you understand their hopes and dreams.');
 
             insert into tour_guides(name, experience, gender, price, description) values ('Tam Le', '5 years', false,
-                                    10, 'I'm very passionate about guiding tourists traveling to my area of expertise Central Vietnam
+                                    10, 'I am very passionate about guiding tourists traveling to my area of expertise Central Vietnam
                                     or Heritage Road of Central Vietnam including Hoi An ancient town, My Son sanctuary,
-                                    Cham Biosphere Reserve, Hue Imperial City, The DMZ, Hamburger Hill and Phong Nha Ke Bang National Park.
+                                    Cham Biosphere Reserve.
                                     Let me be your company for your whole trip to Central Vietnam.');
 
             insert into tour_guides(name, experience, gender, price, description) values ('Duyen Nguyen', '10 years',
@@ -37,23 +35,20 @@
                                     as well as different regions in Vietnam for 10 years.
                                     I love my green country so much and I am proud of its amazing nature,
                                     deep orient culture blended with local traditional customs and long rich history.
-                                    Moreover I used to be an English teacher in Hue University of Foreign Languages.
                                     Therefore, my English skills are excellent enabling valued customers to communicate
                                     at a very high level of the issues of history, cultures, architectures, war,...');
 
             insert into tour_guides(name, experience, gender, price, description) values ('Ha Vu', '1 years', true,
-                                    7.5, 'Hello everyone, I am 25 years old.
-                                    I graduated from Foreign trade university 2 years ago.
-                                    Now I'm a freelancer working as partime tour guide and translator.
+                                    7.5, 'Hello everyone, I graduated from Foreign trade university 2 years ago.
+                                    Now I am a freelancer working as part time tour guide and translator.
                                     I myself have travelled to a lot of places in Vietnam.
                                     I can speak English and Chinese very well.
-                                    If you want to travel to Hanoi or any places in Vietnam.
-                                    I will be very happy to guide you to visit beautiful places in Vietnam.');
+                                    I will be very happy to guide you to visit beautiful places in Da Nang.');
 
             insert into tour_guides(name, experience, gender, price, description) values ('Huu Duong', '2 years', false,
                                     9, 'Dear my valued clients,
                                     I am a local tour guide in Vietnam. I can guide you through Hoi An ancient town, Da Nang city,
-                                    My Son holly land and Hue Imperial City in the middle of Vietnam.
+                                    My Son holly land in the middle of Vietnam.
                                     I can arrange an A/C car to pick cruise ship passengers up at the cruise ship entrance
                                     (Chan May, Tien Sa), the airport, train station, hotel lobby, bus stop or road.
                                     I can arrange a golf package during your stay in Da Nang City (Montgomerie Links,
@@ -73,7 +68,7 @@
                 <constraints nullable="false"/>
             </column>
             <column name="plan_id" type="int">
-                <constraints nullable="false"/>
+                <constraints nullable="false" unique="true"/>
             </column>
             <column name="hours" type="float"/>
             <column name="cost" type="float"/>

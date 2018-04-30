@@ -8,42 +8,50 @@ import java.io.Serializable;
 
 public class TransactionDTO implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@JsonInclude(JsonInclude.Include.NON_EMPTY)
-	private Integer id;
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    private Integer id;
 
-	@JsonProperty("hours")
-	private float hours;
+    @JsonProperty("hours")
+    private float hours;
 
-	@JsonProperty("cost")
-	private float cost;
+    @JsonProperty("cost")
+    private float cost;
 
-	@JsonInclude(JsonInclude.Include.NON_EMPTY)
-	@JsonProperty("tour-guide")
-	private TourGuideDTO tourGuide;
+    @JsonProperty("status")
+    private String status;
 
-	public TransactionDTO(@JsonProperty("id") Integer id, @JsonProperty("hours") float hours,
-						  @JsonProperty("cost") float cost, @JsonProperty("tour-guide") TourGuideDTO tourGuide) {
-		this.id = id;
-		this.cost = cost;
-		this.hours = hours;
-		this.tourGuide = tourGuide;
-	}
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    @JsonProperty("tour-guide")
+    private TourGuideDTO tourGuide;
 
-	public Integer getId() {
-		return id;
-	}
+    private TransactionDTO(@JsonProperty("id") Integer id, @JsonProperty("hours") float hours,
+                          @JsonProperty("cost") float cost, @JsonProperty("status") String status,
+                          @JsonProperty("tour-guide") TourGuideDTO tourGuide) {
+        this.id = id;
+        this.cost = cost;
+        this.hours = hours;
+        this.status = status;
+        this.tourGuide = tourGuide;
+    }
 
-	public float getHours() { return hours; }
+    public Integer getId() {
+        return id;
+    }
 
-	public float getCost() { return cost; }
+    public float getHours() { return hours; }
 
-	public TourGuideDTO getTourGuide() { return tourGuide; }
+    public float getCost() { return cost; }
 
-	public static TransactionDTO fromEntity(TransactionEntity transaction) {
-		TourGuideDTO tourGuideDTO = TourGuideDTO.fromEntity(transaction.getTourGuide());
-		return new TransactionDTO(transaction.getId(), transaction.getHours(), transaction.getCost(), tourGuideDTO);
-	}
+    public TourGuideDTO getTourGuide() { return tourGuide; }
+
+    public String getStatus() { return status; }
+
+    public static TransactionDTO fromEntity(TransactionEntity transaction) {
+        TourGuideDTO tourGuideDTO = TourGuideDTO.fromEntity(transaction.getTourGuide());
+        return new TransactionDTO(transaction.getId(), transaction.getHours(), transaction.getCost(),
+                                transaction.getStatus(), tourGuideDTO);
+    }
 
 }

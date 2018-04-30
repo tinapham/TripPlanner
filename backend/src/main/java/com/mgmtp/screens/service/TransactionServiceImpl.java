@@ -19,8 +19,10 @@ public class TransactionServiceImpl implements TransactionService {
 
     @Autowired
     public TransactionServiceImpl(TransactionDAO transactionDAO, TransactionRepo transactionRepo) {
+
         this.transactionDAO = transactionDAO;
         this.transactionRepo = transactionRepo;
+
     }
 
     @Override
@@ -49,23 +51,31 @@ public class TransactionServiceImpl implements TransactionService {
 
     @Override
     public TransactionDTO findByPlan(PlanEntity planEntity) {
+
         TransactionEntity transactionEntity = transactionDAO.getDistinctByPlan(planEntity);
         return TransactionDTO.fromEntity(transactionEntity);
+
     }
 
     @Override
-    public void addNewTransaction(TransactionDTO transactionDTO, Integer planId, Integer tourGuideId) {
-        TransactionEntity transactionEntity = new TransactionEntity(transactionDTO.getHours(), transactionDTO.getCost());
-        transactionRepo.addNewTransaction(transactionEntity, planId, tourGuideId);
+    public void addNewTransaction(TransactionDTO transactionDTO, Integer planId) {
+
+        TransactionEntity transactionEntity = new TransactionEntity(transactionDTO.getHours(), transactionDTO.getCost(),
+                                                                    transactionDTO.getStatus());
+        transactionRepo.addNewTransaction(transactionEntity, planId, transactionDTO.getTourGuide().getId());
+
     }
 
     @Override
     @Transactional
-    public void updateTransaction(int id, TransactionDTO transactionDTO) {
-        TransactionEntity transactionEntity = transactionDAO.findOne(id);
+    public void updateTransaction(TransactionDTO transactionDTO) {
+
+        TransactionEntity transactionEntity = transactionDAO.findOne(transactionDTO.getId());
         transactionEntity.setHours(transactionDTO.getHours());
         transactionEntity.setCost(transactionDTO.getCost());
+
         transactionRepo.updateTransaction(transactionEntity, transactionDTO.getTourGuide().getId());
+
     }
 
 }

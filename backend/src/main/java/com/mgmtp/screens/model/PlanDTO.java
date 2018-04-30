@@ -25,18 +25,21 @@ public class PlanDTO implements Serializable {
 	@JsonProperty("end-day")
 	private final String endDay;
 
-	@JsonInclude(JsonInclude.Include.NON_EMPTY)
 	@JsonProperty("events")
 	private List<EventDTO> events;
 
+	@JsonProperty("transaction")
+	private TransactionDTO transaction;
+
 	public PlanDTO(@JsonProperty("id") Integer id, @JsonProperty("name") String name,
 				  @JsonProperty("start-day") String startDay, @JsonProperty("end-day") String endDay,
-				  @JsonProperty("events") List<EventDTO> events) {
+				  @JsonProperty("events") List<EventDTO> events, @JsonProperty("transaction") TransactionDTO transaction) {
 		this.id = id;
 		this.name = name;
 		this.startDay = startDay;
 		this.endDay = endDay;
 		this.events = events;
+		this.transaction = transaction;
 	}
 
 	public Integer getId() {
@@ -51,14 +54,15 @@ public class PlanDTO implements Serializable {
 
 	public List<EventDTO> getEvents() { return events; }
 
-	public void setEvents(List<EventDTO> events) { this.events = events; }
+	public TransactionDTO getTransaction() { return transaction; }
 
 	public static PlanDTO fromEntityByAdmin(PlanEntity input) {
 		List<EventDTO> events = new ArrayList<>();
 		for (EventEntity item : input.getEvents()) {
 			events.add(EventDTO.fromEntityByAdmin(item));
 		}
-		return new PlanDTO(input.getId(), input.getName(), input.getStartDay(), input.getEndDay(), events);
+		TransactionDTO transaction = TransactionDTO.fromEntity(input.getTransaction());
+		return new PlanDTO(input.getId(), input.getName(), input.getStartDay(), input.getEndDay(), events, transaction);
 	}
 
 }

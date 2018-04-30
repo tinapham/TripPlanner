@@ -9,11 +9,12 @@ import {loggedIn} from "../../components/authentication/oauth";
 import axios from "axios/index";
 import MyPlanPage from "../MyPlanPage";
 import MyPlanListPage from '../MyPlanListPage';
+import TransactionPage from "../TransactionPage";
 
 class App extends React.Component {
 
     url_backend = process.env.REACT_APP_BACKEND_URL + "api/";
-    url = [this.url_backend + "attraction/", this.url_backend + "plan/"];
+    url = [this.url_backend + "attraction/", this.url_backend + "plan/", this.url_backend + "tour-guide/"];
 
     constructor() {
         super();
@@ -41,7 +42,8 @@ class App extends React.Component {
                 }));
             this.setState({
                 dataAttractions: data[0].data,
-                dataPlans: data[1].data
+                dataPlans: data[1].data,
+                dataTourGuides: data[2].data
             });
         } else {
             axios.defaults.headers.common = undefined;
@@ -69,7 +71,6 @@ class App extends React.Component {
     }
 
     async updatePlan(id, data) {
-        console.log(this.url[1] + id);
         let response = await axios({
             method: 'put',
             url: this.url[1] + id,
@@ -79,7 +80,11 @@ class App extends React.Component {
             }
         });
         if (response.data === "SUCCESS") {
-            window.location.href = '../plans';
+            if(data.checked) {
+                window.location.href = '../transaction/plan/'+data.id;
+            } else {
+                window.location.href = '../plans';
+            }
         }
     }
 
@@ -98,6 +103,8 @@ class App extends React.Component {
     }
 
     render() {
+        // console.log(this.state);
+
         return (
             <div>
                 {
@@ -119,6 +126,12 @@ class App extends React.Component {
                                 <Route path={`${this.props.match.url}/plans`}
                                        render={(props) => <MyPlanListPage data={this.state.dataPlans}
                                                                           delete={this.deletePlan}/>}/>
+                                <Route path={`${this.props.match.url}/transaction/plan/:id`}
+                                       render={(props) => <TransactionPage data={this.state.dataTourGuides}
+                                                                          delete={this.deletePlan}/>}/>
+                                <Route path={`${this.props.match.url}/transaction/:id`}
+                                       render={(props) => <TransactionPage data={this.state.dataTourGuides}
+                                                                       delete={this.deletePlan}/>}/>
                                 <Route path="*" component={Error}/>
                             </Switch>
                         </Container>

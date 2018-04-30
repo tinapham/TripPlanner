@@ -16,8 +16,8 @@ public interface TransactionService {
 
 	TransactionDTO findByPlan(PlanEntity planEntity);
 
-	void addNewTransaction(TransactionDTO transactionDTO, Integer planId, Integer tourGuideId);
+	void addNewTransaction(TransactionDTO transactionDTO, Integer planId);
 
-	void updateTransaction(int id, TransactionDTO transactionDTO);
+	void updateTransaction(TransactionDTO transactionDTO);
 
 }
