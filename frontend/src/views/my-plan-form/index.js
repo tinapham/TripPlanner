@@ -12,15 +12,10 @@ import {Link} from 'react-router-dom';
 import styles from './styles';
 import {white, green600} from 'material-ui/styles/colors';
 import axios from "axios/index";
-import {
-    Step,
-    Stepper,
-    StepLabel,
-    StepContent,
-} from 'material-ui/Stepper';
+import {Step, Stepper, StepLabel, StepContent} from 'material-ui/Stepper';
 import AutoComplete from 'material-ui/AutoComplete';
 import MenuItem from 'material-ui/MenuItem';
-import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
+import CreditCard from '../../components/planning/CreditCard';
 import Toggle from 'material-ui/Toggle';
 
 class MyPlanForm extends Component {
@@ -36,13 +31,13 @@ class MyPlanForm extends Component {
             stepIndex: 0,
             numberOfDays: 0,
             total: 0,
-            // listTourGuide: this.props.listTourGuide? this.props.listTourGuide : [],
+            paymentToken: undefined,
         };
         this.deleteEvent = this.deleteEvent.bind(this);
         this.savePlan = this.savePlan.bind(this);
     }
 
-    async componentWillMount() {
+    async componentDidMount() {
         if (this.state.name) {
             let response = await axios.get(this.url_backend + this.state.name);
 
@@ -144,13 +139,24 @@ class MyPlanForm extends Component {
         }
     };
 
-    savePlan() {
+    async savePlan() {
         if (this.state.name === "") {
-            this.setState({
+            await this.setState({
                 nameErrorMessage: "This field is required"
             });
             return;
         }
+
+        await this.setState({
+            transaction: {
+                ...this.state.transaction,
+                days: this.state.numberOfDays,
+                cost: this.state.total,
+            },
+        });
+
+        console.log(this.state.transaction);
+
         if (this.state.id) {
             this.props.update(this.state.id, this.state);
         } else {
@@ -189,6 +195,16 @@ class MyPlanForm extends Component {
             'end-day': this.toLocalDate(value),
             numberOfDays: this.totalDays(this.state['start-day'], this.toLocalDate(value)),
             total: tourGuide ? tourGuide.price * numberOfDays : 0,
+        });
+    };
+
+    onPaymentTokenChange = (value) => {
+        this.setState({
+            paymentToken: value,
+            transaction: {
+                ...this.state.transaction,
+                paid: true,
+            }
         });
     };
 
@@ -256,6 +272,9 @@ class MyPlanForm extends Component {
     };
 
     render() {
+        console.log(this.state);
+
+        let idPaid = this.state.transaction ? this.state.transaction.paid : false;
         const {finished, stepIndex} = this.state;
         let startDay = this.state['start-day'] ? new Date(this.state['start-day']) : undefined;
         let endDay = this.state['end-day'] ? new Date(this.state['end-day']) : undefined;
@@ -283,7 +302,7 @@ class MyPlanForm extends Component {
                             <div className="row">
                                 <div className="col-md-12 col-sm-12 col-xs-12">
                                     <PageBase title="My Plan">
-                                        <div className="col-md-12 col-sm-12 col-xs-12">
+                                        <div>
                                             <div className="col-md-4 col-sm-12 col-xs-12">
                                                 <TextField
                                                     id="name"
@@ -327,16 +346,14 @@ class MyPlanForm extends Component {
                                                 />
                                             </div>
 
-                                            <div className="col-md-12 col-sm-12 col-xs-12" style={styles.map}>
-                                                <div className="col-md-4 col-sm-12 col-xs-12">
-                                                    <PlanningList data={this.state.events}
-                                                                  dayEvents={this.state.dayEvents}
-                                                                  addEvent={this.addEvent}
-                                                                  deleteEvent={this.deleteEvent}/>
-                                                </div>
-                                                <div className="col-md-8 col-sm-12 col-xs-12" style={styles.map}>
-                                                    <PlanningMap data={this.state.events}/>
-                                                </div>
+                                            <div className="col-md-4 col-sm-12 col-xs-12">
+                                                <PlanningList data={this.state.events}
+                                                              dayEvents={this.state.dayEvents}
+                                                              addEvent={this.addEvent}
+                                                              deleteEvent={this.deleteEvent}/>
+                                            </div>
+                                            <div className="col-md-8 col-sm-12 col-xs-12" style={styles.map}>
+                                                <PlanningMap data={this.state.events}/>
                                             </div>
                                         </div>
                                     </PageBase>
@@ -426,48 +443,11 @@ class MyPlanForm extends Component {
                                                 />
                                             </div>
                                             <div className="col-md-12 col-sm-12 col-xs-12">
-                                                <Card>
-                                                    <CardHeader
-                                                        title="CREDIT/ DEBIT CARD"
-                                                        actAsExpander={true}
-                                                        showExpandableButton={true}
-                                                    />
-                                                    <CardText expandable={true}>
-                                                        <TextField
-                                                            floatingLabelText="Card Number"
-                                                            fullWidth={true}
-                                                            type="text"
-                                                            value={this.state.numberOfDays}
-                                                        />
-                                                        <TextField
-                                                            floatingLabelText="Expire time (MM/YY)"
-                                                            fullWidth={true}
-                                                            type="text"
-                                                            value={'$' + this.state.total}
-                                                        />
-                                                        <TextField
-                                                            floatingLabelText="CCV"
-                                                            fullWidth={true}
-                                                            type="text"
-                                                            value={'$' + this.state.total}
-                                                        />
-                                                        <TextField
-                                                            floatingLabelText="Name on the card"
-                                                            fullWidth={true}
-                                                            type="text"
-                                                            value={'$' + this.state.total}
-                                                        />
-                                                        <RaisedButton
-                                                            label='Pay Now'
-                                                            disableTouchRipple={true}
-                                                            disableFocusRipple={true}
-                                                            onClick={this.savePlan}
-                                                            backgroundColor={green600}
-                                                            labelColor={white}
-                                                            style={{marginLeft: '90%'}}
-                                                        />
-                                                    </CardText>
-                                                </Card>
+                                                {
+                                                    // isPaid ?
+                                                        <CreditCard id={this.state.id} getToken={this.onPaymentTokenChange}/>
+                                                        // : undefined
+                                                }
                                             </div>
                                             <div className="col-md-4 col-sm-12 col-xs-12">
                                                 <Toggle
@@ -478,6 +458,8 @@ class MyPlanForm extends Component {
                                                     trackSwitchedStyle={styles.trackSwitched}
                                                     labelStyle={styles.toggleLabel}
                                                     style={styles.toggleDiv}
+                                                    disabled={true}
+                                                    toggled={idPaid}
                                                 />
                                             </div>
                                         </div>

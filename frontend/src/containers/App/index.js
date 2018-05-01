@@ -70,20 +70,18 @@ class App extends React.Component {
     }
 
     async updatePlan(id, data) {
+        let path = data.paymentToken ? this.url[1] + id + '/' + data.paymentToken : this.url[1] + id;
+
         let response = await axios({
             method: 'put',
-            url: this.url[1] + id,
+            url: path,
             data: JSON.stringify(data),
             headers: {
                 "Content-Type": "application/json; charset=utf8"
             }
         });
         if (response.data === "SUCCESS") {
-            if(data.checked) {
-                window.location.href = '../transaction/plan/'+data.id;
-            } else {
-                window.location.href = '../plans';
-            }
+            window.location.href = '../plans';
         }
     }
 

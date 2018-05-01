@@ -1,7 +1,7 @@
 import { red100, red400, green100, green500, grey900, orange500} from 'material-ui/styles/colors';
 const styles = {
     map: {
-        height: '550px',
+        height: '500px',
     },
     labelApps:{
         display: `block`

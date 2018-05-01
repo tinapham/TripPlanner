@@ -2,6 +2,7 @@ package com.mgmtp.screens.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.security.SecureRandom;
 import java.util.List;
 
 @Entity
@@ -9,6 +10,8 @@ import java.util.List;
 public class PlanEntity implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+
+	private static SecureRandom random = new SecureRandom();
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,6 +26,9 @@ public class PlanEntity implements Serializable {
 
 	@Column(name = "end_day")
 	private String endDay;
+
+	@Column(name = "payment_token")
+	private String paymentToken;
 
 	@OneToMany(mappedBy = "plan", cascade = CascadeType.ALL)
 	private List<EventEntity> events;
@@ -42,6 +48,7 @@ public class PlanEntity implements Serializable {
 		this.endDay = endDay;
 		this.events = events;
 		this.user = user;
+		this.paymentToken = generateToken();
 	}
 
 	public PlanEntity(String name, String startDay, String endDay, List<EventEntity> events) {
@@ -49,6 +56,7 @@ public class PlanEntity implements Serializable {
 		this.startDay = startDay;
 		this.endDay = endDay;
 		this.events = events;
+		this.paymentToken = generateToken();
 	}
 
 	public PlanEntity(String name, String startDay, String endDay, List<EventEntity> events, UserEntity user,
@@ -59,6 +67,7 @@ public class PlanEntity implements Serializable {
 		this.events = events;
 		this.user = user;
 		this.transaction = transaction;
+		this.paymentToken = generateToken();
 	}
 
 	public Integer getId() { return id; }
@@ -88,5 +97,13 @@ public class PlanEntity implements Serializable {
 	public TransactionEntity getTransaction() { return transaction; }
 
 	public void setTransaction(TransactionEntity transaction) { this.transaction = transaction; }
+
+	public String getPaymentToken() { return paymentToken; }
+
+	private String generateToken() {
+		long longToken = Math.abs(random.nextLong());
+		String random = Long.toString(longToken, 16);
+		return (random);
+	}
 
 }

@@ -122,6 +122,7 @@
             <column name="user_id" type="int" defaultValueNumeric="1">
                 <constraints nullable="false"/>
             </column>
+            <column name="payment_token" type="text"/>
         </createTable>
 
         <addForeignKeyConstraint baseColumnNames="user_id"
@@ -135,8 +136,10 @@
         <sql dbms="postgresql"
              splitStatements="true"
              stripComments="true">
-            insert into plans(name, start_day, end_day, user_id) values ('Summer trip', '2018-04-01', '2018-04-02', 2);
-            insert into plans(name, start_day, end_day, user_id) values ('30/4 Holiday', '2018-04-30', '2018-04-30', 3);
+            insert into plans(name, start_day, end_day, user_id, payment_token) values ('Summer trip', '2018-04-01',
+                            '2018-04-02', 2, '568fa31fa6e97a89');
+            insert into plans(name, start_day, end_day, user_id, payment_token) values ('30-4 Holiday', '2018-04-30',
+                            '2018-04-30', 3, '55dea043474e18b3');
         </sql>
     </changeSet>
 

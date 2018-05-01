@@ -15,13 +15,13 @@ public class TransactionEntity implements Serializable {
 	private Integer id;
 
 	@Column()
-	private float hours;
+	private float days;
 
 	@Column()
 	private float cost;
 
 	@Column()
-	private String status;
+	private boolean paid;
 
 	@ManyToOne
 	@JoinColumn(name = "guide_id", nullable = false)
@@ -33,14 +33,14 @@ public class TransactionEntity implements Serializable {
 
 	public TransactionEntity() { }
 
-	public TransactionEntity(float hours, float cost, String status) {
-		this.hours = hours;
+	public TransactionEntity(float hours, float cost) {
+		this.days = days;
 		this.cost = cost;
 	}
 
-	public TransactionEntity(Integer id, float hours, float cost) {
+	public TransactionEntity(Integer id, float days, float cost) {
 		this.id = id;
-		this.hours = hours;
+		this.days = days;
 		this.cost = cost;
 	}
 
@@ -48,9 +48,9 @@ public class TransactionEntity implements Serializable {
 
 	public void setId(Integer id) { this.id = id; }
 
-	public float getHours() { return hours; }
+	public float getDays() { return days; }
 
-	public void setHours(float hours) { this.hours = hours; }
+	public void setDays(float hours) { this.days = days; }
 
 	public float getCost() { return cost; }
 
@@ -64,8 +64,8 @@ public class TransactionEntity implements Serializable {
 
 	public void setPlan(PlanEntity plan) { this.plan = plan; }
 
-	public String getStatus() { return status; }
+	public boolean isPaid() { return paid; }
 
-	public void setStatus(String status) { this.status = status; }
+	public void setPaid(boolean paid) { this.paid = paid; }
 
 }

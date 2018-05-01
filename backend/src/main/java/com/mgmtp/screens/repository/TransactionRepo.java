@@ -13,19 +13,8 @@ public class TransactionRepo {
 
     public boolean addNewTransaction(TransactionEntity transaction, Integer planId, Integer tourGuideId) {
         try {
-            jdbcTemplate.update("INSERT INTO Transactions (hours, cost, guide_id, plan_id) VALUES " +
-                            "(?, ?, ?, ?)", transaction.getHours(), transaction.getCost(), tourGuideId, planId);
-        } catch (Exception e) {
-            return false;
-        }
-        return true;
-    }
-
-    public boolean updateTransaction(TransactionEntity transaction, Integer tourGuideId) {
-        try {
-            jdbcTemplate.update("UPDATE Transactions SET hours = ?, cost= ?, guide_id= ? WHERE id = ?" +
-                    "(?, ?, ?, ?)", transaction.getHours(), transaction.getCost(), tourGuideId,
-                    transaction.getId());
+            jdbcTemplate.update("INSERT INTO Transactions (days, cost, guide_id, plan_id) VALUES " +
+                            "(?, ?, ?, ?)", transaction.getDays(), transaction.getCost(), tourGuideId, planId);
         } catch (Exception e) {
             return false;
         }

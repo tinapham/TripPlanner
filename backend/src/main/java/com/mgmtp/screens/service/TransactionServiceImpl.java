@@ -2,6 +2,7 @@ package com.mgmtp.screens.service;
 
 import com.mgmtp.screens.entity.*;
 import com.mgmtp.screens.model.*;
+import com.mgmtp.screens.repository.TourGuideDAO;
 import com.mgmtp.screens.repository.TransactionDAO;
 import com.mgmtp.screens.repository.TransactionRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,12 +18,13 @@ public class TransactionServiceImpl implements TransactionService {
 
     private TransactionRepo transactionRepo;
 
-    @Autowired
-    public TransactionServiceImpl(TransactionDAO transactionDAO, TransactionRepo transactionRepo) {
+    private TourGuideDAO tourGuideDAO;
 
+    @Autowired
+    public TransactionServiceImpl(TransactionDAO transactionDAO, TransactionRepo transactionRepo, TourGuideDAO tourGuideDAO) {
         this.transactionDAO = transactionDAO;
         this.transactionRepo = transactionRepo;
-
+        this.tourGuideDAO = tourGuideDAO;
     }
 
     @Override
@@ -36,20 +38,6 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    public List<TransactionDTO> findAllByUser(UserEntity user) {
-//        List<TransactionEntity> list = planDAO.findAll();
-//        if (list == null || !isPrivate) {
-//            return null;
-//        }
-//        List<PlanDTO> planDTOS = new ArrayList<>();
-//        for (PlanEntity item : list) {
-//            planDTOS.add(PlanDTO.fromEntityByAdmin(item));
-//        }
-//        return planDTOS;
-        return null;
-    }
-
-    @Override
     public TransactionDTO findByPlan(PlanEntity planEntity) {
 
         TransactionEntity transactionEntity = transactionDAO.getDistinctByPlan(planEntity);
@@ -60,8 +48,7 @@ public class TransactionServiceImpl implements TransactionService {
     @Override
     public void addNewTransaction(TransactionDTO transactionDTO, Integer planId) {
 
-        TransactionEntity transactionEntity = new TransactionEntity(transactionDTO.getHours(), transactionDTO.getCost(),
-                                                                    transactionDTO.getStatus());
+        TransactionEntity transactionEntity = new TransactionEntity(transactionDTO.getDays(), transactionDTO.getCost());
         transactionRepo.addNewTransaction(transactionEntity, planId, transactionDTO.getTourGuide().getId());
 
     }
@@ -71,10 +58,22 @@ public class TransactionServiceImpl implements TransactionService {
     public void updateTransaction(TransactionDTO transactionDTO) {
 
         TransactionEntity transactionEntity = transactionDAO.findOne(transactionDTO.getId());
-        transactionEntity.setHours(transactionDTO.getHours());
+        transactionEntity.setDays(transactionDTO.getDays());
         transactionEntity.setCost(transactionDTO.getCost());
 
-        transactionRepo.updateTransaction(transactionEntity, transactionDTO.getTourGuide().getId());
+        TourGuideEntity tourGuideEntity = tourGuideDAO.findOne(transactionDTO.getTourGuide().getId());
+        transactionEntity.setTourGuide(tourGuideEntity);
+
+        transactionDAO.saveAndFlush(transactionEntity);
+
+    }
+
+    @Override
+    public void updatePaidStatus (Integer transactionId, boolean status) {
+
+        TransactionEntity transactionEntity = transactionDAO.findOne(transactionId);
+        transactionEntity.setPaid(status);
+        transactionDAO.saveAndFlush(transactionEntity);
 
     }
 

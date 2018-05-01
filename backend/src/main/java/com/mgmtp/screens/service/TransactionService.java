@@ -12,12 +12,12 @@ public interface TransactionService {
 
 	void deleteById(Integer id);
 
-	List<TransactionDTO> findAllByUser(UserEntity user);
-
 	TransactionDTO findByPlan(PlanEntity planEntity);
 
 	void addNewTransaction(TransactionDTO transactionDTO, Integer planId);
 
 	void updateTransaction(TransactionDTO transactionDTO);
+
+	void updatePaidStatus (Integer transactionId, boolean status);
 
 }

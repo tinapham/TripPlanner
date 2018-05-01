@@ -4,6 +4,7 @@ import com.mgmtp.screens.entity.*;
 import com.mgmtp.screens.model.AttractionDTO;
 import com.mgmtp.screens.model.EventDTO;
 import com.mgmtp.screens.model.PlanDTO;
+import com.mgmtp.screens.model.TransactionDTO;
 import com.mgmtp.screens.repository.EventDAO;
 import com.mgmtp.screens.repository.PlanDAO;
 import com.mgmtp.screens.repository.PlanRepo;
@@ -23,11 +24,15 @@ public class PlanServiceImpl implements PlanService {
 
     private UserService userService;
 
+    private TransactionService transactionService;
+
     @Autowired
-    public PlanServiceImpl(PlanDAO planDAO, EventDAO eventDAO, UserService userService) {
+    public PlanServiceImpl(PlanDAO planDAO, EventDAO eventDAO, UserService userService,
+                           TransactionService transactionService) {
         this.eventDAO = eventDAO;
         this.planDAO = planDAO;
         this.userService = userService;
+        this.transactionService = transactionService;
     }
 
     @Override
@@ -101,13 +106,60 @@ public class PlanServiceImpl implements PlanService {
     }
 
     @Override
+    public String getPaymentToken(Integer planId) {
+        PlanEntity planEntity = planDAO.findOne(planId);
+        return planEntity.getPaymentToken();
+    }
+
+    @Override
     @Transactional
     public void updatePlan(int id, PlanDTO planDTO) {
+
         PlanEntity planEntity = planDAO.findOne(id);
+
         planEntity.setName(planDTO.getName());
         planEntity.setStartDay(planDTO.getStartDay());
         planEntity.setEndDay(planDTO.getEndDay());
+
+        TransactionDTO transactionDTO = planDTO.getTransaction();
+        if (transactionDTO.getId() != null) {
+            transactionService.updateTransaction(transactionDTO);
+        } else {
+            transactionService.addNewTransaction(transactionDTO, planDTO.getId());
+        }
+
         deleteDiffEvent(planEntity.getEvents(), planDTO.getEvents());
+        if (planDTO.getEvents() != null) {
+            planEntity.setEvents(covertListEventDTOToEntity(planDTO.getEvents(), planEntity));
+        }
+
+        planDAO.saveAndFlush(planEntity);
+    }
+
+    @Override
+    @Transactional
+    public void updatePlan(int id, PlanDTO planDTO, String token) {
+
+        PlanEntity planEntity = planDAO.findOne(id);
+
+        planEntity.setName(planDTO.getName());
+        planEntity.setStartDay(planDTO.getStartDay());
+        planEntity.setEndDay(planDTO.getEndDay());
+
+        TransactionDTO transactionDTO = planDTO.getTransaction();
+        if (transactionDTO.getId() != null) {
+            transactionService.updateTransaction(transactionDTO);
+        } else {
+            transactionService.addNewTransaction(transactionDTO, planDTO.getId());
+        }
+
+        if (planEntity.getPaymentToken().equals(token)) {
+            TransactionDTO transaction = transactionService.findByPlan(planEntity);
+            if (transaction.getId() != null) {
+                transactionService.updatePaidStatus(transaction.getId(), true);
+            }
+        }
+
         if (planDTO.getEvents() != null) {
             planEntity.setEvents(covertListEventDTOToEntity(planDTO.getEvents(), planEntity));
         }

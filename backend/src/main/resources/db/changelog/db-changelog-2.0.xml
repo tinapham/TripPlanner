@@ -46,9 +46,9 @@
             <column name="plan_id" type="int">
                 <constraints nullable="false" unique="true"/>
             </column>
-            <column name="hours" type="float"/>
+            <column name="days" type="float"/>
             <column name="cost" type="float"/>
-            <column name="status" type="text"/>
+            <column name="paid" type="boolean"/>
         </createTable>
 
         <addForeignKeyConstraint baseColumnNames="plan_id"
@@ -70,8 +70,8 @@
         <sql dbms="postgresql"
              splitStatements="true"
              stripComments="true">
-            insert into transactions(guide_id, plan_id, hours, cost, status) values (2, 1, 14, 140, 'paid');
-            insert into transactions(guide_id, plan_id, hours, cost, status) values (4, 2, 9.5, 71.25, 'unpaid');
+            insert into transactions(guide_id, plan_id, days, cost, paid) values (2, 1, 2, 120, false);
+            insert into transactions(guide_id, plan_id, days, cost, paid) values (4, 2, 1, 45, false);
         </sql>
     </changeSet>
 

@@ -46,7 +46,7 @@ class PlanningList extends React.Component {
 
         return (
 
-            <Paper style={{maxHeight: 550, overflow: 'auto'}} zDepth={2}>
+            <Paper style={{maxHeight: 500, overflow: 'auto'}} zDepth={2}>
                 <List>
                     {this.state.data ?
                         this.state.data.map(function (event, index) {

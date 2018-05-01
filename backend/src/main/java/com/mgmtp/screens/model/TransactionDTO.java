@@ -13,26 +13,26 @@ public class TransactionDTO implements Serializable {
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     private Integer id;
 
-    @JsonProperty("hours")
-    private float hours;
+    @JsonProperty("days")
+    private float days;
 
     @JsonProperty("cost")
     private float cost;
 
-    @JsonProperty("status")
-    private String status;
+    @JsonProperty("paid")
+    private boolean paid;
 
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     @JsonProperty("tour-guide")
     private TourGuideDTO tourGuide;
 
-    private TransactionDTO(@JsonProperty("id") Integer id, @JsonProperty("hours") float hours,
-                          @JsonProperty("cost") float cost, @JsonProperty("status") String status,
+    private TransactionDTO(@JsonProperty("id") Integer id, @JsonProperty("hours") float days,
+                          @JsonProperty("cost") float cost, @JsonProperty("paid") boolean paid,
                           @JsonProperty("tour-guide") TourGuideDTO tourGuide) {
         this.id = id;
         this.cost = cost;
-        this.hours = hours;
-        this.status = status;
+        this.days = days;
+        this.paid = paid;
         this.tourGuide = tourGuide;
     }
 
@@ -40,18 +40,18 @@ public class TransactionDTO implements Serializable {
         return id;
     }
 
-    public float getHours() { return hours; }
+    public float getDays() { return days; }
 
     public float getCost() { return cost; }
 
     public TourGuideDTO getTourGuide() { return tourGuide; }
 
-    public String getStatus() { return status; }
+    public boolean isPaid() { return paid; }
 
     public static TransactionDTO fromEntity(TransactionEntity transaction) {
         TourGuideDTO tourGuideDTO = TourGuideDTO.fromEntity(transaction.getTourGuide());
-        return new TransactionDTO(transaction.getId(), transaction.getHours(), transaction.getCost(),
-                                transaction.getStatus(), tourGuideDTO);
+        return new TransactionDTO(transaction.getId(), transaction.getDays(), transaction.getCost(),
+                                transaction.isPaid(), tourGuideDTO);
     }
 
 }
