@@ -1,0 +1,40 @@
+Id,Name,Shape Library,Page ID,Contained By,Line Source,Line Destination,Source Arrow,Destination Arrow,Text Area 1,Text Area 2,Text Area 3
+1,Page,,,,,,,,Page 1,,
+2,Actor,UML,1,12,,,,,,,
+3,Process,Flowchart Shapes,1,12,,,,,WebBrowser,,
+4,Process,Flowchart Shapes,1,12,,,,,Application,,
+5,Process,Flowchart Shapes,1,12,,,,,:Plan,,
+6,Process,Flowchart Shapes,1,12|14,,,,,,,
+7,Process,Flowchart Shapes,1,12|14,,,,,,,
+8,Process,Flowchart Shapes,1,12|14,,,,,,,
+9,Process,Flowchart Shapes,1,12,,,,,:Event,,
+10,Process,Flowchart Shapes,1,12|16,,,,,,,
+11,Process,Flowchart Shapes,1,12|16,,,,,,,
+12,Option Loop,UML,1,,,,,,interaction Planning Trip,,
+13,Process,Flowchart Shapes,1,12,,,,,:Attraction,,
+14,Alternative,UML,1,12,,,,,alt click Create btn,[success],[failed]
+15,Process,Flowchart Shapes,1,12|16,,,,,,,
+16,Alternative,UML,1,12,,,,,alt click Add new Event,[success],[Else]
+17,Process,Flowchart Shapes,1,12|16,,,,,,,
+18,Line,,1,,3,,None,None,,,
+19,Line,,1,,2,,None,None,,,
+20,Line,,1,,4,,None,None,,,
+21,Line,,1,,5,,None,None,,,
+22,Line,,1,,9,,None,None,,,
+23,Line,,1,,19,6,None,Arrow,Enter name &  choose list type,,
+24,Line,,1,,6,8,None,Arrow,Request create new plan,,
+25,Line,,1,,8,7,None,Arrow,CreatePlan(),,
+26,Line,,1,,19,10,None,Arrow,Enter start day   & end day,,
+27,Line,,1,,7,8,None,Open Arrow,return plan data,,
+28,Line,,1,,10,15,None,Arrow,request resources,,
+29,Line,,1,,17,15,None,Open Arrow,recommended attraction data,,
+30,Line,,1,,13,,None,None,,,
+31,Line,,1,,7,8,None,Open Arrow,return failed,,
+32,Line,,1,,8,6,None,Open Arrow,return error msg,,
+33,Line,,1,,8,6,None,Open Arrow,My Plan page,,
+34,Line,,1,,15,17,None,Arrow,getRecommendedList(),,
+35,Line,,1,,17,15,None,Open Arrow,null data,,
+36,Line,,1,,15,10,None,Open Arrow,display form,,
+37,Line,,1,,19,10,None,Arrow,Fill the form   & click OK,,
+38,Line,,1,,10,11,None,Arrow,display in plan page,,
+39,Line,,1,,15,10,None,Open Arrow,return error msg,,

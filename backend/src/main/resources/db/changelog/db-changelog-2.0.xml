@@ -40,11 +40,9 @@
             <column name="id" type="int" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="guide_id" type="int">
-                <constraints nullable="false"/>
-            </column>
+            <column name="guide_id" type="int"/>
             <column name="plan_id" type="int">
-                <constraints nullable="false" unique="true"/>
+                <constraints unique="true"/>
             </column>
             <column name="days" type="float"/>
             <column name="cost" type="float"/>

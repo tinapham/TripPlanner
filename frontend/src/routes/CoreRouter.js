@@ -48,8 +48,12 @@ class CoreRouter extends React.Component{
         return (
             <Router>
                 <Switch>
-                    <Redirect exact from='/' to='/home'/>
-                    <Route path="/home" render={(props) => <App {...props}/>}/>
+                    {
+                        this.state.isAdmin ?
+                            <Redirect exact from='/' to='/home'/>
+                            : <Redirect exact from='/' to='/admin'/>
+                    }
+                        <Route path="/home" render={(props) => <App {...props}/>}/>
                     {
                         this.state.isAdmin ?
                             <Route path='/admin'

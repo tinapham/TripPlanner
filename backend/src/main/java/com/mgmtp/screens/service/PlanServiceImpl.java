@@ -5,9 +5,7 @@ import com.mgmtp.screens.model.AttractionDTO;
 import com.mgmtp.screens.model.EventDTO;
 import com.mgmtp.screens.model.PlanDTO;
 import com.mgmtp.screens.model.TransactionDTO;
-import com.mgmtp.screens.repository.EventDAO;
-import com.mgmtp.screens.repository.PlanDAO;
-import com.mgmtp.screens.repository.PlanRepo;
+import com.mgmtp.screens.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,13 +24,20 @@ public class PlanServiceImpl implements PlanService {
 
     private TransactionService transactionService;
 
+    private TourGuideDAO tourGuideDAO;
+
+    private TransactionDAO transactionDAO;
+
     @Autowired
     public PlanServiceImpl(PlanDAO planDAO, EventDAO eventDAO, UserService userService,
-                           TransactionService transactionService) {
+                           TransactionService transactionService, TourGuideDAO tourGuideDAO,
+                           TransactionDAO transactionDAO) {
         this.eventDAO = eventDAO;
         this.planDAO = planDAO;
         this.userService = userService;
         this.transactionService = transactionService;
+        this.tourGuideDAO = tourGuideDAO;
+        this.transactionDAO = transactionDAO;
     }
 
     @Override
@@ -79,30 +84,23 @@ public class PlanServiceImpl implements PlanService {
     }
 
     @Override
+    @Transactional
     public void addNewPlan(PlanDTO planDTO, UserEntity user) {
+
         PlanEntity planEntity = new PlanEntity(planDTO.getName(),
                 planDTO.getStartDay(), planDTO.getEndDay(),
                 null, user);
-//        if (planDTO.getEvents() != null) {
-//            planEntity.setEvents(covertListEventDTOToEntity(planDTO.getEvents(), planEntity));
-//        }
-        planDAO.save(planEntity);
-    }
 
-    @Override
-    public void addNewPlan(PlanDTO planDTO) {
-        PlanEntity planEntity = new PlanEntity(planDTO.getName(),
-                planDTO.getStartDay(), planDTO.getEndDay(),
-                null);
-        planEntity.setEvents(covertListEventDTOToEntity(planDTO.getEvents(), planEntity));
+        if (planDTO.getEvents() != null) {
+            planEntity.setEvents(covertListEventDTOToEntity(planDTO.getEvents(), planEntity));
+        }
         planDAO.save(planEntity);
-    }
 
-    @Override
-    public void addNewPlanWithName(String name, String email) {
-        UserEntity userEntity = userService.getUserEntity(email);
-        PlanEntity planEntity = new PlanEntity(name, null, null, null, userEntity);
-        planDAO.save(planEntity);
+        TransactionEntity transactionEntity = new TransactionEntity(tourGuideDAO.findOne(1), false);
+        PlanEntity planEntity1 = planDAO.getDistinctByName(planDTO.getName());
+        transactionEntity.setPlan(planEntity1);
+        transactionDAO.saveAndFlush(transactionEntity);
+
     }
 
     @Override
@@ -123,10 +121,14 @@ public class PlanServiceImpl implements PlanService {
 
         TransactionDTO transactionDTO = planDTO.getTransaction();
         if (transactionDTO.getId() != null) {
+            System.out.print(transactionDTO.getId());
             transactionService.updateTransaction(transactionDTO);
         } else {
+            System.out.print(transactionDTO.getCost());
             transactionService.addNewTransaction(transactionDTO, planDTO.getId());
         }
+
+
 
         deleteDiffEvent(planEntity.getEvents(), planDTO.getEvents());
         if (planDTO.getEvents() != null) {

@@ -19,16 +19,22 @@ const styles = {
             width: '5%'
         },
         name: {
-            width: '25%'
+            width: '15%'
         },
         startDay: {
-            width: '15%'
+            width: '10%'
         },
         endDay: {
-            width: '15%'
+            width: '10%'
         },
         events: {
-            width: '30%'
+            width: '20%'
+        },
+        guide: {
+            width: '15%'
+        },
+        cost: {
+            width: '15%'
         },
         action: {
             width: '10%'

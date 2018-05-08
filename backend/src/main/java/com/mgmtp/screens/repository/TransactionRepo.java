@@ -13,8 +13,9 @@ public class TransactionRepo {
 
     public boolean addNewTransaction(TransactionEntity transaction, Integer planId, Integer tourGuideId) {
         try {
-            jdbcTemplate.update("INSERT INTO Transactions (days, cost, guide_id, plan_id) VALUES " +
-                            "(?, ?, ?, ?)", transaction.getDays(), transaction.getCost(), tourGuideId, planId);
+            jdbcTemplate.update("INSERT INTO Transactions (days, cost, guide_id, plan_id, paid) VALUES " +
+                            "(?, ?, ?, ?, ?)", transaction.getDays(), transaction.getCost(), tourGuideId, planId,
+                            transaction.isPaid());
         } catch (Exception e) {
             return false;
         }

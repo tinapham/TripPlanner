@@ -49,7 +49,10 @@ public class TransactionDTO implements Serializable {
     public boolean isPaid() { return paid; }
 
     public static TransactionDTO fromEntity(TransactionEntity transaction) {
-        TourGuideDTO tourGuideDTO = TourGuideDTO.fromEntity(transaction.getTourGuide());
+        TourGuideDTO tourGuideDTO = null;
+        if (transaction.getTourGuide() !=  null) {
+            tourGuideDTO = TourGuideDTO.fromEntity(transaction.getTourGuide());
+        }
         return new TransactionDTO(transaction.getId(), transaction.getDays(), transaction.getCost(),
                                 transaction.isPaid(), tourGuideDTO);
     }

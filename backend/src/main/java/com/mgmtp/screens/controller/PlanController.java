@@ -68,7 +68,6 @@ public class PlanController {
 
         String emailAuthorized = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
         planService.addNewPlan(request, userService.getUserEntity(emailAuthorized));
-
         return ResponseEntity.ok(SUCCESS);
 
     }
@@ -80,7 +79,6 @@ public class PlanController {
         if (!planService.isExist(id)) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ERROR);
         }
-
         planService.updatePlan(id, request);
         return ResponseEntity.ok(SUCCESS);
     }

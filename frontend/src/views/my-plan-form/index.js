@@ -62,14 +62,14 @@ class MyPlanForm extends Component {
 
             this.setState({
                 id: response.data.id,
-                'start-day': response.data['start-day'],
-                'end-day': response.data['end-day'],
+                'start-day': response.data['start-day']? response.data['start-day']: undefined,
+                'end-day': response.data['end-day']? response.data['end-day']: undefined,
                 numberOfDays: this.totalDays(response.data['start-day'], response.data['end-day']),
                 total: tourGuide ?
                     tourGuide.price * this.totalDays(response.data['start-day'], response.data['end-day'])
                     : 0,
                 events: response.data.events ? response.data.events : [],
-                dayEvents: dayEvents,
+                dayEvents: dayEvents? dayEvents: [],
                 transaction: response.data.transaction,
             });
         }
@@ -81,7 +81,7 @@ class MyPlanForm extends Component {
             index: undefined,
             day: undefined,
         };
-        let events = this.state.events;
+        let events = this.state.events ? this.state.events : [];
 
         if (!event.id) {
             events.push(event);

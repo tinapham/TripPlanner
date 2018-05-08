@@ -29,6 +29,8 @@ class MyPlanList extends Component {
                                 <TableHeaderColumn style={styles.columns.startDay}>Start day</TableHeaderColumn>
                                 <TableHeaderColumn style={styles.columns.endDay}>End day</TableHeaderColumn>
                                 <TableHeaderColumn style={styles.columns.events}>Events</TableHeaderColumn>
+                                <TableHeaderColumn style={styles.columns.guide}>Tour guide</TableHeaderColumn>
+                                <TableHeaderColumn style={styles.columns.cost}>Total cost</TableHeaderColumn>
                                 <TableHeaderColumn style={styles.columns.action}>Action</TableHeaderColumn>
                             </TableRow>
                             {this.props.data ?

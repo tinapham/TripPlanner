@@ -16,228 +16,229 @@ import styles from './styles';
 
 class PlanForm extends Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      id: this.props.location.state ? this.props.location.state.data.id : undefined,
-      name: this.props.location.state ? this.props.location.state.data.name : "",
-      'start-day': this.props.location.state ? this.props.location.state.data['start-day'] : "",
-      'end-day': this.props.location.state ? this.props.location.state.data['end-day'] : "",
-      events: this.props.location.state ? this.props.location.state.data.events : [],
-      activatedEventForm: false,
-      idEvents: this.getIdEvents(this.props.location.state ? this.props.location.state.data.events : []),
-      errorMessage: undefined
-    };
-    this.addEvent = this.addEvent.bind(this);
-    this.savePlan = this.savePlan.bind(this);
-    this.deleteEvent = this.deleteEvent.bind(this);
-    this.updateEvent = this.updateEvent.bind(this);
-    this.onEventChange = this.onEventChange.bind(this);
-  }
-
-  getIdEvents(events) {
-    let idEvents = [];
-    if (events.length > 0) {
-      events.map((event, i) => {
-        idEvents.push(event.id)
-      })
-    }
-    return idEvents;
-  }
-
-  updateEvent(dragIndex, hoverIndex) {
-    const {events} = this.state;
-    const dragScreen = events[dragIndex]
-    this.setState(
-      update(this.state, {
-        events: {
-          $splice: [[dragIndex, 1], [hoverIndex, 0, dragScreen]],
-        },
-      }),
-    )
-  }
-
-  showEventForm = (value, event) => {
-    this.setState({
-      activatedEventForm: value,
-      event: event
-    });
-  };
-
-  addEvent() {
-    let defaultEvent = {
-      id: -Number(new Date()),
-      "start-time": new Date().toISOString(),
-      "end-time": new Date().toISOString(),
-      attraction: this.props.attractions[0]
-    };
-    this.setState({
-      events: [...this.state.events, defaultEvent],
-      activatedEventForm: true,
-      event: defaultEvent
-    });
-  }
-
-  savePlan() {
-    if (this.state.name === "") {
-      this.setState({
-        errorMessage: "This field is required"
-      })
-    } else {
-      let {events} = this.state;
-      events.map((event, i) => {
-        event.id = this.state.idEvents[i]
-      });
-      if (this.state.id) {
-        this.props.update(this.state.id, this.state)
-      } else {
-        this.props.save(this.state);
-      }
+    constructor(props) {
+        super(props);
+        this.state = {
+            id: this.props.location.state ? this.props.location.state.data.id : undefined,
+            name: this.props.location.state ? this.props.location.state.data.name : "",
+            'start-day': this.props.location.state ? this.props.location.state.data['start-day'] : "",
+            'end-day': this.props.location.state ? this.props.location.state.data['end-day'] : "",
+            events: this.props.location.state ? this.props.location.state.data.events : [],
+            transaction: this.props.location.state ? this.props.location.state.data.transaction : undefined,
+            activatedEventForm: false,
+            idEvents: this.getIdEvents(this.props.location.state ? this.props.location.state.data.events : []),
+            errorMessage: undefined
+        };
+        this.addEvent = this.addEvent.bind(this);
+        this.savePlan = this.savePlan.bind(this);
+        this.deleteEvent = this.deleteEvent.bind(this);
+        this.updateEvent = this.updateEvent.bind(this);
+        this.onEventChange = this.onEventChange.bind(this);
     }
 
-  }
+    getIdEvents(events) {
+        let idEvents = [];
+        if (events.length > 0) {
+            events.map((event, i) => {
+                idEvents.push(event.id)
+            })
+        }
+        return idEvents;
+    }
 
-  onNameChange = (event) => {
-    this.setState({
-      name: event.target.value,
-      errorMessage: undefined
-    });
-  };
+    updateEvent(dragIndex, hoverIndex) {
+        const {events} = this.state;
+        const dragScreen = events[dragIndex]
+        this.setState(
+            update(this.state, {
+                events: {
+                    $splice: [[dragIndex, 1], [hoverIndex, 0, dragScreen]],
+                },
+            }),
+        )
+    }
 
-  onStartDayChange = (event, value) => {
-    this.setState({
-      'start-day': value.toISOString().substr(0,10),
-      errorMessage: undefined
-    });
-  };
+    showEventForm = (value, event) => {
+        this.setState({
+            activatedEventForm: value,
+            event: event
+        });
+    };
 
-  onEndDayChange = (event, value) => {
-    this.setState({
-      'end-day': value.toISOString().substr(0,10),
-      errorMessage: undefined
-    });
-  };
+    addEvent() {
+        let defaultEvent = {
+            id: -Number(new Date()),
+            "start-time": new Date().toISOString(),
+            "end-time": new Date().toISOString(),
+            attraction: this.props.attractions[0]
+        };
+        this.setState({
+            events: [...this.state.events, defaultEvent],
+            activatedEventForm: true,
+            event: defaultEvent
+        });
+    }
 
-  onEventChange(key, value) {
-    let data = this.state.event;
-    data[key] = value;
-    this.setState(
-      update(this.state, {
-        event: {
-          $set: data
-        },
-      }),
-    );
-  }
+    savePlan() {
+        if (this.state.name === "") {
+            this.setState({
+                errorMessage: "This field is required"
+            })
+        } else {
+            let {events} = this.state;
+            events.map((event, i) => {
+                event.id = this.state.idEvents[i]
+            });
+            if (this.state.id) {
+                this.props.update(this.state.id, this.state)
+            } else {
+                this.props.save(this.state);
+            }
+        }
 
-  deleteEvent(position) {
-    this.setState({
-      events: [...this.state.events.slice(0, position),
-        ...this.state.events.slice(position + 1)],
-      activatedEventForm: false,
-    });
-  }
+    }
 
-  render() {
-    let startDay = this.state['start-day']? new Date(this.state['start-day']): undefined;
-    let endDay = this.state['end-day']? new Date(this.state['end-day']): undefined;
-    return (
-      <div className="row">
-        <div className="col-md-6 col-sm-12 col-xs-12">
-          <PageBase title="Trip Planning">
-            <div>
-              <TextField
-                id="name"
-                name="name"
-                floatingLabelText="Name"
-                fullWidth={true}
-                type="text"
-                hintText="eg: Summer Trip, Christmas Holiday, ..."
-                value={this.state.name}
-                onChange={this.onNameChange}
-                ref="name"
-                errorText={this.state.errorMessage}
-              />
+    onNameChange = (event) => {
+        this.setState({
+            name: event.target.value,
+            errorMessage: undefined
+        });
+    };
 
-              <DatePicker
-                id="start-day"
-                name="start-day"
-                floatingLabelText="Start day"
-                hintText="Start day"
-                fullWidth={true}
-                value={startDay}
-                onChange={this.onStartDayChange}
-                ref="start-day"
-                errorText={this.state.errorMessage}
-                openToYearSelection={true}
-              />
+    onStartDayChange = (event, value) => {
+        this.setState({
+            'start-day': value.toISOString().substr(0, 10),
+            errorMessage: undefined
+        });
+    };
 
-              <DatePicker
-                id="end-day"
-                name="end-day"
-                floatingLabelText="End day"
-                hintText="End day"
-                fullWidth={true}
-                value={endDay}
-                onChange={this.onEndDayChange}
-                ref="start-day"
-                errorText={this.state.errorMessage}
-                openToYearSelection={true}
-              />
+    onEndDayChange = (event, value) => {
+        this.setState({
+            'end-day': value.toISOString().substr(0, 10),
+            errorMessage: undefined
+        });
+    };
 
-              <div style={styles.toggleDiv}>
-                <label>Events:</label>
-                <div className="text-left">
-                  <div className="tags">
-                    <LabelContainer events={this.state.events}
-                                    deleteEvent={this.deleteEvent}
-                                    onClick={this.showEventForm}
-                                    updateEvent={this.updateEvent}/>
-                  </div>
+    onEventChange(key, value) {
+        let data = this.state.event;
+        data[key] = value;
+        this.setState(
+            update(this.state, {
+                event: {
+                    $set: data
+                },
+            }),
+        );
+    }
+
+    deleteEvent(position) {
+        this.setState({
+            events: [...this.state.events.slice(0, position),
+                ...this.state.events.slice(position + 1)],
+            activatedEventForm: false,
+        });
+    }
+
+    render() {
+        let startDay = this.state['start-day'] ? new Date(this.state['start-day']) : undefined;
+        let endDay = this.state['end-day'] ? new Date(this.state['end-day']) : undefined;
+        return (
+            <div className="row">
+                <div className="col-md-6 col-sm-12 col-xs-12">
+                    <PageBase title="Trip Planning">
+                        <div>
+                            <TextField
+                                id="name"
+                                name="name"
+                                floatingLabelText="Name"
+                                fullWidth={true}
+                                type="text"
+                                hintText="eg: Summer Trip, Christmas Holiday, ..."
+                                value={this.state.name}
+                                onChange={this.onNameChange}
+                                ref="name"
+                                errorText={this.state.errorMessage}
+                            />
+
+                            <DatePicker
+                                id="start-day"
+                                name="start-day"
+                                floatingLabelText="Start day"
+                                hintText="Start day"
+                                fullWidth={true}
+                                value={startDay}
+                                onChange={this.onStartDayChange}
+                                ref="start-day"
+                                errorText={this.state.errorMessage}
+                                openToYearSelection={true}
+                            />
+
+                            <DatePicker
+                                id="end-day"
+                                name="end-day"
+                                floatingLabelText="End day"
+                                hintText="End day"
+                                fullWidth={true}
+                                value={endDay}
+                                onChange={this.onEndDayChange}
+                                ref="start-day"
+                                errorText={this.state.errorMessage}
+                                openToYearSelection={true}
+                            />
+
+                            <div style={styles.toggleDiv}>
+                                <label>Events:</label>
+                                <div className="text-left">
+                                    <div className="tags">
+                                        <LabelContainer events={this.state.events}
+                                                        deleteEvent={this.deleteEvent}
+                                                        onClick={this.showEventForm}
+                                                        updateEvent={this.updateEvent}/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <RaisedButton
+                                label="Add New Event"
+                                primary={true}
+                                style={styles.buttonAdd}
+                                onClick={this.addEvent}
+                                icon={<ContentAdd/>}
+                            />
+                            <Divider/>
+
+                            <div style={styles.buttons}>
+                                <Link to="/admin/plans">
+                                    <RaisedButton
+                                        label="Cancel"
+                                        icon={<AvNotInterested/>}
+                                    />
+                                </Link>
+
+                                <RaisedButton label="Save"
+                                              onClick={this.savePlan}
+                                              style={styles.saveButton}
+                                              type="submit"
+                                              icon={<ContentSave/>}
+                                              secondary={true}/>
+                            </div>
+                        </div>
+                    </PageBase>
                 </div>
-              </div>
-
-              <RaisedButton
-                label="Add New Event"
-                primary={true}
-                style={styles.buttonAdd}
-                onClick={this.addEvent}
-                icon={<ContentAdd/>}
-              />
-              <Divider/>
-
-              <div style={styles.buttons}>
-                <Link to="/admin/plans">
-                  <RaisedButton
-                    label="Cancel"
-                    icon={<AvNotInterested/>}
-                  />
-                </Link>
-
-                <RaisedButton label="Save"
-                              onClick={this.savePlan}
-                              style={styles.saveButton}
-                              type="submit"
-                              icon={<ContentSave/>}
-                              secondary={true}/>
-              </div>
+                <div className="col-md-6 col-sm-12 col-xs-12">
+                    {
+                        this.state.activatedEventForm
+                            ? <EventForm event={this.state.event}
+                                         attractions={this.props.attractions}
+                                         onEventChange={this.onEventChange}
+                                         showEventForm={this.showEventForm}
+                            />
+                            : undefined
+                    }
+                </div>
             </div>
-          </PageBase>
-        </div>
-        <div className="col-md-6 col-sm-12 col-xs-12">
-          {
-            this.state.activatedEventForm
-              ? <EventForm event={this.state.event}
-                           attractions = {this.props.attractions}
-                           onEventChange = {this.onEventChange}
-                           showEventForm={this.showEventForm}
-              />
-              : undefined
-          }
-        </div>
-      </div>
-    )
-  }
+        )
+    }
 }
 
 export default PlanForm;

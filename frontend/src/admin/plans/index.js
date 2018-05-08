@@ -11,39 +11,41 @@ import styles from './styles';
 
 
 const PlanManagement = (props) => {
-  return (
-    <PageBase title="Plan Management" navigation="Application / Plans">
+    return (
+        <PageBase title="Plan Management" navigation="Application / Plans">
 
-      <div className='dashboard'>
-        <Link to="/admin/plan-form">
-          <FloatingActionButton style={styles.floatingActionButton} backgroundColor={pink500}>
-            <ContentAdd/>
-          </FloatingActionButton>
-        </Link>
+            <div className='dashboard'>
+                <Link to="/admin/plan-form">
+                    <FloatingActionButton style={styles.floatingActionButton} backgroundColor={pink500}>
+                        <ContentAdd/>
+                    </FloatingActionButton>
+                </Link>
 
-        <Table>
-          <TableBody displayRowCheckbox={false}>
-            <TableRow>
-              <TableHeaderColumn style={styles.columns.id}>#</TableHeaderColumn>
-              <TableHeaderColumn style={styles.columns.name}>Name</TableHeaderColumn>
-              <TableHeaderColumn style={styles.columns.startDay}>Start day</TableHeaderColumn>
-              <TableHeaderColumn style={styles.columns.endDay}>End day</TableHeaderColumn>
-              <TableHeaderColumn style={styles.columns.events}>Events</TableHeaderColumn>
-              <TableHeaderColumn style={styles.columns.action}>Action</TableHeaderColumn>
-            </TableRow>
-            {props.data.data.map(
-              (element, index) => <PlanRow
-                key={index}
-                data={element}
-                delete={props.data.delete}
-                index={index + 1}
-              />
-            )}
-          </TableBody>
-        </Table>
-      </div>
-    </PageBase>
-  );
+                <Table>
+                    <TableBody displayRowCheckbox={false}>
+                        <TableRow>
+                            <TableHeaderColumn style={styles.columns.id}>#</TableHeaderColumn>
+                            <TableHeaderColumn style={styles.columns.name}>Name</TableHeaderColumn>
+                            <TableHeaderColumn style={styles.columns.startDay}>Start day</TableHeaderColumn>
+                            <TableHeaderColumn style={styles.columns.endDay}>End day</TableHeaderColumn>
+                            <TableHeaderColumn style={styles.columns.events}>Events</TableHeaderColumn>
+                            <TableHeaderColumn style={styles.columns.guide}>Tour guide</TableHeaderColumn>
+                            <TableHeaderColumn style={styles.columns.cost}>Total cost</TableHeaderColumn>
+                            <TableHeaderColumn style={styles.columns.action}>Action</TableHeaderColumn>
+                        </TableRow>
+                        {props.data.data.map(
+                            (element, index) => <PlanRow
+                                key={index}
+                                data={element}
+                                delete={props.data.delete}
+                                index={index + 1}
+                            />
+                        )}
+                    </TableBody>
+                </Table>
+            </div>
+        </PageBase>
+    );
 };
 
 export default PlanManagement;

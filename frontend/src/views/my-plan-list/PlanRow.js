@@ -65,6 +65,18 @@ class PlanRow extends React.Component {
                         : undefined
                     }
                 </TableRowColumn>
+                <TableRowColumn style={styles.columns.guide}>
+                    {this.props.data["transaction"] ?
+                        this.props.data.transaction['tour-guide'].name
+                        : undefined
+                    }
+                </TableRowColumn>
+                <TableRowColumn style={styles.columns.cost}>
+                    {this.props.data["transaction"] ?
+                        '$' + this.props.data.transaction.cost
+                        : undefined
+                    }
+                </TableRowColumn>
                 <TableRowColumn style={styles.columns.action}>
                     <Link className="button" to={location}>
                         <FloatingActionButton zDepth={0}

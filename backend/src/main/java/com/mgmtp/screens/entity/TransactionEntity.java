@@ -24,24 +24,23 @@ public class TransactionEntity implements Serializable {
 	private boolean paid;
 
 	@ManyToOne
-	@JoinColumn(name = "guide_id", nullable = false)
+	@JoinColumn(name = "guide_id")
 	private TourGuideEntity tourGuide;
 
 	@OneToOne
-	@JoinColumn(name = "plan_id", nullable = false)
+	@JoinColumn(name = "plan_id")
 	private PlanEntity plan;
 
 	public TransactionEntity() { }
 
-	public TransactionEntity(float hours, float cost) {
+	public TransactionEntity(float days, float cost) {
 		this.days = days;
 		this.cost = cost;
 	}
 
-	public TransactionEntity(Integer id, float days, float cost) {
-		this.id = id;
-		this.days = days;
-		this.cost = cost;
+	public TransactionEntity(TourGuideEntity tourGuide, boolean paid) {
+		this.tourGuide = tourGuide;
+		this.paid = paid;
 	}
 
 	public Integer getId() { return id; }
