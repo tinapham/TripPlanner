@@ -13,14 +13,13 @@ const data = {
         {text: 'Explore', icon: <Assessment/>, link: '/home/explore'},
         {text: 'My plans', icon: <ActionFlightTakeoff/>, link: '/home/plans'},
         {text: 'Profile', icon: <Group/>, link: '/home/profile'},
-        {text: 'About us', icon: <AccountBalance/>, link: '/home/about_us'},
         {text: 'Sign out', icon: <Exit/>, link: '/login'}
     ],
     adminMenus: [
         {text: 'Attraction Management', icon: <Assessment/>, link: '/admin/attractions'},
         {text: 'Plan Management', icon: <ActionFlightTakeoff/>, link: '/admin/plans'},
         {text: 'User Management', icon: <Group/>, link: '/admin/users'},
-        {text: 'About us', icon: <AccountBalance/>, link: '/admin/about_us'},
+        {text: 'Data Analysis', icon: <AccountBalance/>, link: '/admin/chart'},
         {text: 'Sign out', icon: <Exit/>, link: '/login'}
     ],
     componentName: [

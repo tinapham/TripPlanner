@@ -58,13 +58,25 @@ public class PlanDTO implements Serializable {
 
 	public static PlanDTO fromEntityByAdmin(PlanEntity input) {
 		List<EventDTO> events = new ArrayList<>();
-		for (EventEntity item : input.getEvents()) {
-			events.add(EventDTO.fromEntityByAdmin(item));
+		try {
+			List<EventEntity> eventEntities = input.getEvents();
+			if(eventEntities != null ) {
+				for (EventEntity item : eventEntities) {
+					events.add(EventDTO.fromEntityByAdmin(item));
+				}
+			}
+		} catch (Exception e) {
+			System.out.println("Null Point");
 		}
-		TransactionDTO transaction = null;
-		if(input.getTransaction() != null) {
-			transaction = TransactionDTO.fromEntity(input.getTransaction());
+		TransactionDTO transaction = new TransactionDTO();
+		try {
+			if(input.getTransaction() != null) {
+				transaction = TransactionDTO.fromEntity(input.getTransaction());
+			}
+		} catch (Exception e) {
+			System.out.println("Null Point");
 		}
+
 		return new PlanDTO(input.getId(), input.getName(), input.getStartDay(), input.getEndDay(), events, transaction);
 	}
 

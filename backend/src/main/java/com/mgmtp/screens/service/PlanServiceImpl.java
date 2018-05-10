@@ -48,6 +48,7 @@ public class PlanServiceImpl implements PlanService {
     @Override
     public PlanDTO findByName(String name) {
         PlanEntity planEntity = planDAO.getDistinctByName(name);
+
         return PlanDTO.fromEntityByAdmin(planEntity);
     }
 

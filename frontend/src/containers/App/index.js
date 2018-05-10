@@ -59,7 +59,7 @@ class App extends React.Component {
             }
         });
         if (response.data === "SUCCESS") {
-            if(window.location.href !== 'http://localhost:3000/home/plan') {
+            if(window.location.href == 'http://localhost:3000/home/dashboard') {
                 //when create a new plan from dashboard => navigate to MyPlan
                 window.location.href = 'plan/'+data.name;
             } else {
@@ -108,8 +108,9 @@ class App extends React.Component {
                     this.state.accessToken
                         ? < Container isAdmin={this.state.isAdmin} email={this.state.email}>
                             <Switch>
-                                <Route exact path={this.props.match.url}
-                                       render={(props) => <HomePage save={this.savePlan} {...props} />}/>
+                                <Redirect exact from={this.props.match.url} to={`${this.props.match.url}/dashboard`}/>
+                                {/*<Route exact path={this.props.match.url}*/}
+                                       {/*render={(props) => <HomePage save={this.savePlan} {...props} />}/>*/}
                                 <Route path={`${this.props.match.url}/dashboard`}
                                        render={(props) => <HomePage save={this.savePlan} {...props} />}/>
                                 <Route path={`${this.props.match.url}/explore`}

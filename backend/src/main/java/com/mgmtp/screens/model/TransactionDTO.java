@@ -26,7 +26,10 @@ public class TransactionDTO implements Serializable {
     @JsonProperty("tour-guide")
     private TourGuideDTO tourGuide;
 
-    private TransactionDTO(@JsonProperty("id") Integer id, @JsonProperty("hours") float days,
+    public TransactionDTO() {
+    }
+
+    public TransactionDTO(@JsonProperty("id") Integer id, @JsonProperty("hours") float days,
                           @JsonProperty("cost") float cost, @JsonProperty("paid") boolean paid,
                           @JsonProperty("tour-guide") TourGuideDTO tourGuide) {
         this.id = id;

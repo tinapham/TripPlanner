@@ -24,6 +24,16 @@ public class AttractionDTO implements Serializable {
 
 	private final String description;
 
+	public AttractionDTO() {
+
+		this.name = "";
+		this.address = "";
+		this.lat = 0;
+		this.lng = 0;
+		this.type = "";
+		this.description = "";
+	}
+
 	public AttractionDTO(@JsonProperty("id") Integer id, @JsonProperty("name") String name,
 					 @JsonProperty("address") String address, @JsonProperty("lat") double lat,
 					 @JsonProperty("lng") double lng, @JsonProperty("type") String type,

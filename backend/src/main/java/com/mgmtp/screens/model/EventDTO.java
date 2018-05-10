@@ -23,6 +23,13 @@ public class EventDTO implements Serializable {
 	@JsonProperty("attraction")
 	private AttractionDTO attraction;
 
+	public EventDTO() {
+		this.id = null;
+		this.startTime = "";
+		this.endTime = "";
+		this.attraction = new AttractionDTO();
+	}
+
 	public EventDTO(@JsonProperty("id") Integer id, @JsonProperty("start-time") String startTime,
 					@JsonProperty("end-time") String endTime, @JsonProperty("attraction") AttractionDTO attraction) {
 		this.id = id;
