@@ -16,8 +16,13 @@ public class ChartServiceImpl implements ChartService {
         this.transactionRepo = transactionRepo;
     }
 
-    public List<BarChartDTO> getBarChartData() {
+    public List<BarChartDTO> getTourGuideChartData() {
         return transactionRepo.getBarChartData();
     }
+
+    public List<BarChartDTO> getMonthChartData() {
+        return transactionRepo.getMonthChart();
+    }
+
 
 }

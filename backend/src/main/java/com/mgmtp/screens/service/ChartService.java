@@ -5,6 +5,8 @@ import java.util.List;
 
 public interface ChartService {
 
-	List<BarChartDTO> getBarChartData();
+	List<BarChartDTO> getTourGuideChartData();
+
+	List<BarChartDTO> getMonthChartData();
 
 }

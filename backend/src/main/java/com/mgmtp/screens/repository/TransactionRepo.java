@@ -45,4 +45,21 @@ public class TransactionRepo {
         return list;
     }
 
+    public List<BarChartDTO> getMonthChart() {
+        List<BarChartDTO> list = new ArrayList<>();
+        try {
+            List<Map<String, Object>> rows = jdbcTemplate.queryForList("SELECT substr(plans.start_day, 0, 8), sum(cost)" +
+                    "FROM transactions, plans " +
+                    "where transactions.plan_id = plans.id " +
+                    "GROUP BY substr(plans.start_day, 0, 8) ORDER BY substr(plans.start_day, 0, 8)");
+            for (Map row : rows) {
+                BarChartDTO customer = new BarChartDTO(row.get("substr").toString(), Float.parseFloat(row.get("sum").toString()));
+                list.add(customer);
+            }
+        } catch (Exception e) {
+            return null;
+        }
+        return list;
+    }
+
 }

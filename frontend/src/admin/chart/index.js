@@ -1,37 +1,34 @@
 import React, {Component} from 'react';
 import '../Admin.css';
 import PageBase from '../../components/page-base/index';
-import {LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, Legend} from 'recharts';
-import {PieChart, Pie, Sector, Cell} from 'recharts';
+import {BarChart, Bar, CartesianGrid, XAxis, YAxis, Tooltip, Legend} from 'recharts';
+import {VictoryPie, VictoryContainer} from 'victory';
 import axios from "axios/index";
 import styles from './styles';
-const data = [{name: 'Group A', value: 400}, {name: 'Group B', value: 300},
-    {name: 'Group C', value: 300}, {name: 'Group D', value: 200}, {name: 'Group D', value: 200},
-    {name: 'Group D', value: 200}];
-const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', 'rgba(146, 16, 167, 0.87)'];
+import {BottomNavigation, BottomNavigationItem} from 'material-ui/BottomNavigation';
+import IconLocationOn from 'material-ui/svg-icons/communication/location-on';
 
-const RADIAN = Math.PI / 180;
-const renderCustomizedLabel = ({cx, cy, midAngle, innerRadius, outerRadius, percent, name}) => {
-    const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
-    const x = cx + 0.4*radius * Math.cos(-midAngle * RADIAN);
-    const y = cy + radius * Math.sin(-midAngle * RADIAN);
-
-    return (
-        <text x={x} y={y} fill="white" textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central">
-            {`${name} ${(percent * 100).toFixed(0)}%`}
-        </text>
-    );
-};
-
+const nearbyIcon = <IconLocationOn/>;
+const COLORS = [
+    '#0088FE',
+    '#00C49F',
+    '#FFBB28',
+    '#FF8042',
+    '#b816ff',
+];
 class Chart extends Component {
 
     url_backend = process.env.REACT_APP_BACKEND_URL + "api/chart/";
-    url = [this.url_backend + "bar"];
+    url = [this.url_backend + "guide", this.url_backend + "month"];
 
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            selectedIndex: 0,
+        };
     }
+
+    select = (index) => this.setState({selectedIndex: index});
 
     async componentDidMount() {
         let data = [];
@@ -45,70 +42,71 @@ class Chart extends Component {
                 data = [...promises];
             }));
         this.setState({
-            barChart: data[0].data,
+            tourGuideChart: data[0].data,
+            monthChart: data[1].data
         });
-    }
-
-    componentDidUpdate(prevProps, prevState) {
-        if (prevState.barChart !== this.state.barChart ) {
-            this.setState({ barChart: this.state.barChart });
-        }
     }
 
     render() {
         console.log(this.state);
-        let data1 = [
-            {
-                name: 'Page A',
-                pv: 100,
-                uv: 200,
-            },
-            {
-                name: 'Page B',
-                pv: 200,
-                uv: 300
-            },
-            {
-                name: 'Page C',
-                pv: 350,
-                uv: 100
-            }];
-        let bar = this.state.barChart ? this.state.barChart : undefined;
+        const data2 = this.state.monthChart ? this.state.monthChart : [];
+        let bar = this.state.tourGuideChart ? this.state.tourGuideChart : [];
+        let sum = bar ? bar.reduce((total, el) => {
+            return total + el.value;
+        }, 0) : 0;
         return (
             <div>
-                <PageBase title="Total cost per Tour guide"
+                <PageBase title="Data Analysis"
                           navigation="Application / Chart">
                     <div>
-                        {/*<LineChart width={800} height={500} data={data1}*/}
-                                   {/*margin={{top: 5, right: 30, left: 20, bottom: 5}}>*/}
-                            {/*<CartesianGrid strokeDasharray="3 3"/>*/}
-                            {/*<XAxis dataKey="name"/>*/}
-                            {/*<YAxis/>*/}
-                            {/*<Tooltip/>*/}
-                            {/*<Legend/>*/}
-                            {/*<Line type="monotone" dataKey="pv" stroke="#8884d8"/>*/}
-                            {/*<Line type="monotone" dataKey="uv" stroke="#82ca9d"/>*/}
-                        {/*</LineChart>*/}
+                        <BottomNavigation selectedIndex={this.state.selectedIndex}>
+                            <BottomNavigationItem
+                                label="Tour Guide"
+                                icon={nearbyIcon}
+                                onClick={() => this.select(0)}
+                            />
+                            <BottomNavigationItem
+                                label="Month"
+                                icon={nearbyIcon}
+                                onClick={() => this.select(1)}
+                            />
+                        </BottomNavigation>
 
-                        <PieChart width={800} height={500}
-                                  onMouseEnter={this.onPieEnter}
-                                  style={styles.barChart}
-                        >
-                            <Pie
-                                data={bar}
-                                cx={400}
-                                cy={250}
-                                labelLine={false}
-                                label={renderCustomizedLabel}
-                                // label={bar}
-                                outerRadius={200}
-                                fill="#8884d8"
-                            >
-                                {
-                                    data.map((entry, index) => <Cell key={index} fill={COLORS[index % COLORS.length]}/>)
-                                }
-                            </Pie>
-                        </PieChart>
+                        {this.state.selectedIndex == 0 ?
+                            <div>
+                                <VictoryPie
+                                    height={400}
+                                    containerComponent={<VictoryContainer/>}
+                                    colorScale={COLORS}
+                                    data={bar}
+                                    x="name"
+                                    y="value"
+                                    animate={{
+                                        duration: 2000,
+                                    }}
+                                    width={1200}
+                                    labels={d => `${d.x}: ${(d.y / sum * 100).toFixed(0)}%`}
+                                />
+
+                                <h4 style={{textAlign: 'center'}}>Total revenue per tour guide (%)</h4>
+                            </div> : undefined
+                        }
+
+                        {this.state.selectedIndex == 1 ?
+                            <div>
+                                <BarChart width={600} height={500} data={data2}
+                                          style={styles.barChart}>
+                                    <CartesianGrid strokeDasharray="3 3"/>
+                                    <XAxis dataKey="name"/>
+                                    <YAxis/>
+                                    <Tooltip/>
+                                    <Legend/>
+                                    <Bar dataKey="value" fill="#8884d8"/>
+                                </BarChart>
+                                <h4 style={{textAlign: 'center'}}>Total revenue per recent months ($)</h4>
+                            </div> : undefined
+                        }
+
                     </div>
                 </PageBase>
             </div>

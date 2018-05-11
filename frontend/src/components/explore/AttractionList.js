@@ -2,19 +2,7 @@ import React from 'react';
 import {GridList, GridTile} from 'material-ui/GridList';
 import IconButton from 'material-ui/IconButton';
 import StarBorder from 'material-ui/svg-icons/toggle/star-border';
-
-const styles = {
-    root: {
-        display: 'flex',
-        flexWrap: 'wrap',
-        justifyContent: 'space-around',
-    },
-    gridList: {
-        width: '100%',
-        height: 550,
-        overflowY: 'auto',
-    },
-};
+import styles from './styles';
 
 class AttractionList extends React.Component {
 

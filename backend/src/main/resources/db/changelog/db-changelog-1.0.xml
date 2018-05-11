@@ -60,52 +60,113 @@
                 <constraints nullable="false"/>
             </column>
 
-            <column name="type" type="varchar(50)"/>
+            <column name="type_id" type="integer"/>
 
-            <column name="description" type="varchar(1000)"/>
+            <column name="description" type="text"/>
         </createTable>
 
         <sql dbms="postgresql"
              splitStatements="true"
              stripComments="true">
-            insert into attractions(name, address, lat, lng, type, description) values ('29/3 park',
-            '33 Điện Biên Phủ, Thạch Gián, Da Nang', 16.065548, 108.204486, 'Park',
+            insert into attractions(name, address, lat, lng, type_id, description) values ('29/3 park',
+            '33 Điện Biên Phủ, Thạch Gián, Da Nang', 16.065548, 108.204486, '1',
             'Spacious city memorial park featuring hiking trails, paths, landscaped valleys and a lake.');
 
-            insert into attractions(name, address, lat, lng, type, description) values ('Ban Co Peak',
-            'Thọ Quang, Sơn Trà, Đà Nẵng', 16.118949, 108.271949, 'Tourist Attraction', '');
+            insert into attractions(name, address, lat, lng, type_id, description) values ('Ban Co Peak',
+            'Thọ Quang, Sơn Trà, Đà Nẵng', 16.118949, 108.271949, '2', '');
 
-            insert into attractions(name, address, lat, lng, type, description) values ('Asia Park',
-            '1 Phan Đăng Lưu, Hoà Cường Bắc, Hải Châu, Đà Nẵng', 16.039258, 108.228534, 'Park',
-            'Amusement park with a massive Ferris wheel and other rides plus themed areas based on Asian countries.');
+            insert into attractions(name, address, lat, lng, type_id, description) values ('Asia Park',
+            '1 Phan Đăng Lưu, Hoà Cường Bắc, Hải Châu, Đà Nẵng', 16.039258, 108.228534, '1',
+            '- Open time: Monday to Sunday: 15:00 – 22:00
+            *Sun Group – one of Asia’s Premier Real Estate developers – has chosen the resort town of Da Nang, on Vietnam’s central coast to develop an original amusement and culture park named Sun World Danang Wonder (Asia Park).
+            *The Amusement Park of Sun World Danang Wonder (Asia Park) brings together a complete package of rides, attractions, shows, restaurants and retail to allow for a wonderful evening out. Popular attractions such as four roller coasters, several attractions for children as well as high speed thrill rides are available and a Monorail encircles the park area.
+            *The Cultural park allows guests to enjoy the historical architecture, performing arts and wonderful cuisines of ten Asian countries including Japan, Indonesia, Singapore, South Korea, India, Nepal, Thailand, Cambodia, China and Vietnam. Each country is represented with fascinating landscaped gardens, as well as interpretations of historic or natural landmarks.
+            ');
 
-            insert into attractions(name, address, lat, lng, type, description) values ('Dragon Bridge',
-            'Nguyễn Văn Linh, An Hải Trung, Đà Nẵng', 16.061210, 108.226976, 'Bridge',
-            'Dragon-shaped bridge spanning the Han River, featuring colorful night illumination and fire shows.');
+            insert into attractions(name, address, lat, lng, type_id, description) values ('Dragon Bridge',
+            'Nguyễn Văn Linh, An Hải Trung, Đà Nẵng', 16.061210, 108.226976, '3',
+            'The Dragon Bridge is a bridge with a dragon over the Han River at Da Nang, Vietnam. Dragon Bridge is 666m long, 37.5m wide and has six lanes for traffic.It opened to traffic on March 29, 2013, at a cost of nearly 1.5 trillion VND.
+            *Main span was completed on October 26, 2011. The bridge was opened to traffic on March 29, 2013, the 38th anniversary of the liberation of Da Nang City. This modern bridge crosses the Han River at the Le Dinh Duong/Bach Dang traffic circle, providing the shortest road link from the Da Nang International Airport to other main roads in Da Nang City, and a more direct route to My Khe Beach and Non Nuoc Beach on the eastern edge of the City. The bridge was designed and built in the shape of a dragon and to breathe fire and water.
+            *Fire and Water Breathing The dragon on the bridge can breathe fire in 2 minutes with 3 minutes of water breathing after, making it an incredible highlight in Danang City. The water is sprayed out in a powerful blast reflecting the aspiration of Danang City. Fire and Water Performance: At 9.pm every weekends and holidays.
+            *With the lights changing, the bridge turns to many color. And with the lights reflections of the river water, the view is spectacular. During the show, no vehicle can go across the bridge, so if you want to take motobike there, you must go ealier. You can book the cruise boat ticket, enjoy beauty of Han river, then they will take you to the dock near the dragon’s head. Check carrefully that they do take you there.');
 
-            insert into attractions(name, address, lat, lng, type, description) values ('Non Nuoc Pagoda',
-            '98 Huyền Trân Công Chúa, Hòa Hải, Ngũ Hành Sơn, Đà Nẵng', 16.004199, 108.264244, 'Buddhist Temple', '');
+            insert into attractions(name, address, lat, lng, type_id, description) values ('Non Nuoc Pagoda',
+            '98 Huyền Trân Công Chúa, Hòa Hải, Ngũ Hành Sơn, Đà Nẵng', 16.004199, 108.264244, '4', '');
 
-            insert into attractions(name, address, lat, lng, type, description) values ('The Marble Mountains',
-            '52 Huyền Trân Công Chúa, Hoà Hải, Ngũ Hành Sơn, Đà Nẵng', 16.003922, 108.262854, 'Tourist Attraction',
-            'Network of 5 marble mountains with multiple caves, elaborate temples and viewing outlooks.');
+            insert into attractions(name, address, lat, lng, type_id, description) values ('The Marble Mountains',
+            '52 Huyền Trân Công Chúa, Hoà Hải, Ngũ Hành Sơn, Đà Nẵng', 16.003922, 108.262854, '2',
+            'Network of 5 marble mountains with multiple caves, elaborate temples and viewing outlooks.
+            *Kim Son (mountain of metal), Moc Son (Mountain of Wood), Thuy Son (Mountain of Water), Hoa Son (Mountain of Fire), and Tho Son (Mountain of Earth). Marble Mountains have attractive sights such as Da Chong tunnel, Ba Tho Cave, Hades Cave, Huyen Khong Cave, Linh Ung Pagoda, Vong Giang Tower, etc., which is suitable for spiritual tourism. At the feet of the mountains, there is a village of marble sculptural arts over 300 years of age. It is the place for tourists to see with their own eyes the stone sculptural arts of talent craftsmen, and tourists can choose their most favourite products as souvenirs.
+            *- Open time: 07:00 – 17:30 on weekdays.
+            *- Best time 07:00 – 10:00; 14:30 – 17:30
+            *- Price range: 1.00 USD
+            *- Tips: At the foot of the mountain is a village of art sculpture. You can buy stoneware products, jewelry, etc. as souvenirs and observe the artisans creating products.');
 
-            insert into attractions(name, address, lat, lng, type, description) values ('Hoa Trung Lake',
-            'Hòa Vang, Da Nang', 16.079906, 108.055420, 'Lake', '');
+            insert into attractions(name, address, lat, lng, type_id, description) values ('Hoa Trung Lake',
+            'Hòa Vang, Da Nang', 16.079906, 108.055420, '5', '');
 
-            insert into attractions(name, address, lat, lng, type, description) values ('Son Tra Banyan Tree',
-            'Thọ Quang, Sơn Trà, Đà Nẵng', 16.122540, 108.331703, 'Heritage Preservation',
+            insert into attractions(name, address, lat, lng, type_id, description) values ('Son Tra Banyan Tree',
+            'Thọ Quang, Sơn Trà, Đà Nẵng', 16.122540, 108.331703, '6',
             '800 year old banyan tree');
 
-            insert into attractions(name, address, lat, lng, type, description) values ('Linh Ung Pagoda',
-            'Hoàng Sa, Thọ Quang, Sơn Trà, Đà Nẵng', 16.100288, 108.277856, 'Buddhist Temple',
-            'Buddhist temple, pagoda and large statue located on an elevated slope with sea and skyline views.');
+            insert into attractions(name, address, lat, lng, type_id, description) values ('Linh Ung Pagoda',
+            'Hoàng Sa, Thọ Quang, Sơn Trà, Đà Nẵng', 16.100288, 108.277856, '4',
+            'Linh Ung pagoda is the largest pagoda of scale and artistic architecture. It is so famous for the huge statue of Lady Buddha – 67m high.
+            *Linh Ung – Bai But pagoda features perfect harmony between the modern and traditional architectures of Vietnamese pagodas, especially in the three-entrance gate, the main chamber and the ancestors’ house.
+            *On the way to see Linh Ung pagoda, you will pass a giant 3 doors gate, then you will surprise how spectacular it is. Just behind the entrance gate, there is a lovely courtyard with different kind of bonsai trees and 18 statues of aghast showing their expression. It is such a good place for your photos.
+            *- There are many steps to the gate, so if you don’t want to walk a lot, it is better that you ask the driver to stop at the hilltop parking.
+            *- You should see it at night, when it is cooler and the incredible view of all the lights of the city.
+            *- You need bring good camera and tripod to capture the beautiful sights. Taking panoramic photos here is great idea.');
 
-            insert into attractions(name, address, lat, lng, type, description) values ('Sun World Ba Na Hills',
-            'Hòa Vang, Đà Nẵng', 15.997735, 107.988077, 'Tourist Attraction', '');
+            insert into attractions(name, address, lat, lng, type_id, description) values ('Sun World Ba Na Hills',
+            'Hòa Vang, Đà Nẵng', 15.997735, 107.988077, '2',
+            '25 km to the southwest of Da Nang at an altitude of 1,487m, Sun World Ba Na Hills are considered as “One temperate place in the tropical forest” because the climate is cool all the year round and you can enjoy four seasons within a single day.
+            *In addition, Ba Na cable cars hold two Guinness World Records: the world’s longest single cable car system (5,042.62 m long) and the world highest gap between its departure and arrival station (1,291.81 m high). A series of four star hotel with 137 rooms and standard restaurants which can serve every demand of tourists.
+            *- Tel: (+84)236.3791999 or (+84)236.3791791.
+            *- Website: www.banahills.com.vn
+            *- Ticket prices:
+            *Adult: 700.000vnđ
+            *Children: 600.000vnđ (1m-1,3m)
+            *
+            *Price for Danang resident with condition (*) :
+            *Adult: 400.000vnđ
+            *Children: 300.000vnđ (1m-1,3m) ');
 
-            insert into attractions(name, address, lat, lng, type, description) values ('Than Tai Hot Springs Park',
-            'QL14G, Hoà Phú, Hòa Vang, Đà Nẵng', 15.967851, 108.019805, 'Tourist Attraction', '');
+            insert into attractions(name, address, lat, lng, type_id, description) values ('Than Tai Hot Springs Park',
+            'QL14G, Hoà Phú, Hòa Vang, Đà Nẵng', 15.967851, 108.019805, '2',
+            'Located in Ba Na Nui Chua nature reserve, Phu Tuc village, Hoa Phu commune, Hoa Vang district, Da Nang city. Nui Than Tai Hot Spring Park can be said is a masterpiece that the nature has endowed the capital of Central Vietnam
+            *- Open time: 7h00 – 22h00
+            *- Best time: 15h00 – 19h00
+            *- Visit duration: 4 hours
+            *- What to explore: Long Huyet Lake, Mineral Water Wall sightseeing area, Long Tien Cave, Son Than Temple, God of Wealth Than Tai Statue, Hot Springs bath, etc.');
+        </sql>
+    </changeSet>
+
+    <changeSet id="create_type" author="anhquynhpham">
+        <createTable tableName="type">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <sql dbms="postgresql"
+             splitStatements="true"
+             stripComments="true">
+            insert into type(name) values ('Park');
+            insert into type(name) values ('Tourist Attraction');
+            insert into type(name) values ('Bridge');
+            insert into type(name) values ('Buddhist Temple');
+            insert into type(name) values ('Lake');
+            insert into type(name) values ('Heritage Preservation');
+            insert into type(name) values ('Restaurant');
+            insert into type(name) values ('Market');
+            insert into type(name) values ('Souvenir');
+            insert into type(name) values ('Coffee');
+            insert into type(name) values ('Spa/Wellness');
+            insert into type(name) values ('Bar/Pub');
         </sql>
     </changeSet>
 

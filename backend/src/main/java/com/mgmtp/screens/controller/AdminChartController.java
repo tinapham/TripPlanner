@@ -34,14 +34,31 @@ public class AdminChartController {
 
     }
 
-    @RequestMapping(value = "/bar")
+    @RequestMapping(value = "/guide")
     @PreAuthorize("hasAuthority('read:charts')")
-    public ResponseEntity<List<BarChartDTO>> getBarChart() {
+    public ResponseEntity<List<BarChartDTO>> getGuideChart() {
 
         //Get user email authorized
         String emailAuthorized = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
 
-        List<BarChartDTO> chartDTOS = chartService.getBarChartData();
+        List<BarChartDTO> chartDTOS = chartService.getTourGuideChartData();
+
+        if (chartDTOS == null) {
+            return ResponseEntity.ok(null);
+        }
+
+        return ResponseEntity.ok(chartDTOS);
+
+    }
+
+    @RequestMapping(value = "/month")
+    @PreAuthorize("hasAuthority('read:charts')")
+    public ResponseEntity<List<BarChartDTO>> getMonthChart() {
+
+        //Get user email authorized
+        String emailAuthorized = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
+
+        List<BarChartDTO> chartDTOS = chartService.getMonthChartData();
 
         if (chartDTOS == null) {
             return ResponseEntity.ok(null);

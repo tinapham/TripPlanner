@@ -180,6 +180,19 @@ class FormAddEvent extends React.Component {
                 open={this.props.open}
             >
                 <form>
+                    <div className="col-md-12 col-sm-12 col-xs-12">
+                        <AutoComplete
+                            floatingLabelText="Destination"
+                            searchText={attractionName}
+                            hintText="Choose the next destination"
+                            onUpdateInput={this.onAttractionChange}
+                            filter={AutoComplete.noFilter}
+                            openOnFocus={true}
+                            fullWidth={true}
+                            dataSource={list}
+                            listStyle={{overflowY: 'auto',}}
+                        />
+                    </div>
                     <div className="col-md-6 col-sm-12 col-xs-12">
                         <DatePicker
                             id="begin-day"
@@ -224,18 +237,7 @@ class FormAddEvent extends React.Component {
                             errorText={this.state.errorEndTime}
                         />
                     </div>
-                    <div className="col-md-12 col-sm-12 col-xs-12">
-                        <AutoComplete
-                            floatingLabelText="Destination"
-                            searchText={attractionName}
-                            hintText="Choose the next destination"
-                            onUpdateInput={this.onAttractionChange}
-                            filter={AutoComplete.noFilter}
-                            openOnFocus={true}
-                            fullWidth={true}
-                            dataSource={list}
-                        />
-                    </div>
+
                 </form>
             </Dialog>
         );

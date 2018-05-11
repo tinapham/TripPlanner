@@ -33,7 +33,7 @@ class PlanningList extends React.Component {
         return current ? <Subheader>{current.day}</Subheader> : undefined
     };
 
-    componentDidUpdate(prevProps, prevState) {
+    componentDidUpdate(prevProps) {
         if (prevProps.data !== this.props.data ) {
             this.setState({ data: this.props.data });
         }
