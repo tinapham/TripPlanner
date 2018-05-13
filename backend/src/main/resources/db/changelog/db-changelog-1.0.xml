@@ -2,6 +2,35 @@
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <changeSet id="create_type" author="anhquynhpham">
+        <createTable tableName="type">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <sql dbms="postgresql"
+             splitStatements="true"
+             stripComments="true">
+            insert into type(name) values ('Park');
+            insert into type(name) values ('Tourist Attraction');
+            insert into type(name) values ('Bridge');
+            insert into type(name) values ('Buddhist Temple');
+            insert into type(name) values ('Lake');
+            insert into type(name) values ('Heritage Preservation');
+            insert into type(name) values ('Restaurant');
+            insert into type(name) values ('Market');
+            insert into type(name) values ('Souvenir');
+            insert into type(name) values ('Coffee');
+            insert into type(name) values ('Spa/Wellness');
+            insert into type(name) values ('Bar/Pub');
+        </sql>
+    </changeSet>
+
+
     <changeSet id="create_user" author="anhquynhpham">
         <createTable tableName="users">
             <column name="id" type="int" autoIncrement="true">
@@ -64,6 +93,14 @@
 
             <column name="description" type="text"/>
         </createTable>
+
+        <addForeignKeyConstraint baseColumnNames="type_id"
+                                 baseTableName="attractions"
+                                 constraintName="type_fk"
+                                 onDelete="CASCADE"
+                                 onUpdate="CASCADE"
+                                 referencedColumnNames="id"
+                                 referencedTableName="type"/>
 
         <sql dbms="postgresql"
              splitStatements="true"
@@ -142,33 +179,6 @@
         </sql>
     </changeSet>
 
-    <changeSet id="create_type" author="anhquynhpham">
-        <createTable tableName="type">
-            <column name="id" type="int" autoIncrement="true">
-                <constraints primaryKey="true" nullable="false"/>
-            </column>
-            <column name="name" type="varchar(100)">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-
-        <sql dbms="postgresql"
-             splitStatements="true"
-             stripComments="true">
-            insert into type(name) values ('Park');
-            insert into type(name) values ('Tourist Attraction');
-            insert into type(name) values ('Bridge');
-            insert into type(name) values ('Buddhist Temple');
-            insert into type(name) values ('Lake');
-            insert into type(name) values ('Heritage Preservation');
-            insert into type(name) values ('Restaurant');
-            insert into type(name) values ('Market');
-            insert into type(name) values ('Souvenir');
-            insert into type(name) values ('Coffee');
-            insert into type(name) values ('Spa/Wellness');
-            insert into type(name) values ('Bar/Pub');
-        </sql>
-    </changeSet>
 
     <changeSet id="create_plan" author="anhquynhpham">
         <createTable tableName="plans">

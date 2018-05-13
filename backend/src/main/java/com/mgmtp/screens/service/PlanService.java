@@ -19,9 +19,9 @@ public interface PlanService {
 
 	void addNewPlan(PlanDTO planDTO, UserEntity user);
 
-	void updatePlan(int id, PlanDTO planDTO);
+	void updatePlan(int id, PlanDTO planDTO, UserEntity user);
 
-	void updatePlan(int id, PlanDTO planDTO, String token);
+	void updatePlan(int id, PlanDTO planDTO, String token, UserEntity user);
 
 	String getPaymentToken(Integer planId);
 

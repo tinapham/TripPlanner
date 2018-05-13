@@ -1,6 +1,8 @@
 package com.mgmtp.screens.service;
 
 import com.mgmtp.screens.entity.AttractionEntity;
+import com.mgmtp.screens.entity.TypeEntity;
+import com.mgmtp.screens.entity.UserEntity;
 import com.mgmtp.screens.model.AttractionDTO;
 import com.mgmtp.screens.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,12 +16,15 @@ public class AttractionServiceImpl implements AttractionService {
 
 	private AttractionDAO attractionDAO;
 
-	private EventDAO eventDAO;
+	private AttractionRepo attractionRepo;
+
+	private TypeDAO typeDAO;
 
 	@Autowired
-	public AttractionServiceImpl(AttractionDAO attractionDAO, EventDAO eventDAO) {
-		this.eventDAO = eventDAO;
+	public AttractionServiceImpl(AttractionDAO attractionDAO, AttractionRepo attractionRepo, TypeDAO typeDAO) {
+		this.typeDAO = typeDAO;
 		this.attractionDAO = attractionDAO;
+		this.attractionRepo = attractionRepo;
 	}
 
 	@Override
@@ -55,10 +60,19 @@ public class AttractionServiceImpl implements AttractionService {
 	}
 
 	@Override
+	public List<AttractionDTO> findAllByUser(UserEntity userEntity){
+		List<AttractionDTO> list = attractionRepo.getAllByUser(userEntity);
+		return list;
+	}
+
+
+	@Override
 	public void addNewAttraction(AttractionDTO attractionDTO) {
+		TypeEntity type = typeDAO.getTypeEntityByName(attractionDTO.getType());
+
 		AttractionEntity attractionEntity = new AttractionEntity(attractionDTO.getName(),
 				attractionDTO.getAddress(), attractionDTO.getLat(),
-				attractionDTO.getLng(), attractionDTO.getType(),
+				attractionDTO.getLng(), type,
 				attractionDTO.getDescription());
 		attractionDAO.save(attractionEntity);
 	}
@@ -71,7 +85,9 @@ public class AttractionServiceImpl implements AttractionService {
 			attractionEntity.setAddress(attractionDTO.getAddress());
 			attractionEntity.setLat(attractionDTO.getLat());
 			attractionEntity.setLng(attractionDTO.getLng());
-			attractionEntity.setType(attractionDTO.getType());
+
+			TypeEntity type = typeDAO.getTypeEntityByName(attractionDTO.getType());
+			attractionEntity.setType(type);
 			attractionEntity.setDescription(attractionDTO.getDescription());
 			attractionDAO.save(attractionEntity);
 		}

@@ -12,32 +12,30 @@ public class AttractionDTO implements Serializable {
 	@JsonInclude(JsonInclude.Include.NON_EMPTY)
 	private Integer id;
 
-	private final String name;
+	private String name;
 
-	private final String address;
+	private String address;
 
-	private final double lat;
+	private double lat;
 
-	private final double lng;
+	private double lng;
 
-	private final String type;
+	private String type;
 
-	private final String description;
+	private String description;
+
+	@JsonProperty("favorite")
+	private FavoriteDTO favorite;
 
 	public AttractionDTO() {
-
-		this.name = "";
-		this.address = "";
 		this.lat = 0;
 		this.lng = 0;
-		this.type = "";
-		this.description = "";
 	}
 
-	public AttractionDTO(@JsonProperty("id") Integer id, @JsonProperty("name") String name,
-					 @JsonProperty("address") String address, @JsonProperty("lat") double lat,
-					 @JsonProperty("lng") double lng, @JsonProperty("type") String type,
-					 @JsonProperty("description") String description) {
+	private AttractionDTO(@JsonProperty("id") Integer id, @JsonProperty("name") String name,
+						  @JsonProperty("address") String address, @JsonProperty("lat") double lat,
+						  @JsonProperty("lng") double lng, @JsonProperty("type") String type,
+						  @JsonProperty("description") String description, @JsonProperty("favorite") FavoriteDTO favorite) {
 
 		this.id = id;
 		this.name = name;
@@ -46,6 +44,7 @@ public class AttractionDTO implements Serializable {
 		this.lng = lng;
 		this.type = type;
 		this.description = description;
+		this.favorite = favorite;
 	}
 
 	public Integer getId() {
@@ -66,16 +65,26 @@ public class AttractionDTO implements Serializable {
 
 	public String getDescription() { return description; }
 
-	public static AttractionDTO fromEntity(AttractionEntity AttractionEntity) {
-		return new AttractionDTO(null, AttractionEntity.getName(), AttractionEntity.getAddress(),
-								AttractionEntity.getLat(), AttractionEntity.getLng(),
-								AttractionEntity.getType(), AttractionEntity.getDescription());
-	}
+	public void setId(Integer id) { this.id = id; }
+
+	public void setName(String name) { this.name = name; }
+
+	public void setAddress(String address) { this.address = address; }
+
+	public void setLat(double lat) { this.lat = lat; }
+
+	public void setLng(double lng) { this.lng = lng; }
+
+	public void setType(String type) { this.type = type; }
+
+	public void setDescription(String description) { this.description = description; }
+
+	public void setFavorite(FavoriteDTO favorite) { this.favorite = favorite; }
 
 	public static AttractionDTO fromEntityByAdmin(AttractionEntity attractionEntity) {
 		return new AttractionDTO(attractionEntity.getId(), attractionEntity.getName(), attractionEntity.getAddress(),
 				attractionEntity.getLat(), attractionEntity.getLng(),
-				attractionEntity.getType(), attractionEntity.getDescription());
+				attractionEntity.getType().getName(), attractionEntity.getDescription(), null);
 	}
 
 }

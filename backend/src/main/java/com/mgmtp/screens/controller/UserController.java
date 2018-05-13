@@ -4,6 +4,7 @@ import com.mgmtp.screens.model.UserDTO;
 import com.mgmtp.screens.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
@@ -44,5 +45,12 @@ public class UserController {
             return ResponseEntity.ok(SUCCESS);
         }
         return ResponseEntity.ok(ERROR);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/username")
+    public ResponseEntity<String> getUserName() {
+        //Get user email authorized
+        String emailAuthorized = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
+        return ResponseEntity.ok(emailAuthorized);
     }
 }

@@ -1,5 +1,6 @@
 package com.mgmtp.screens.controller;
 
+import com.mgmtp.screens.entity.UserEntity;
 import com.mgmtp.screens.model.PlanDTO;
 import com.mgmtp.screens.service.PlanService;
 import com.mgmtp.screens.service.UserService;
@@ -64,7 +65,8 @@ public class AdminPlanController {
         if (!planService.isExist(id)) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ERROR);
         }
-        planService.updatePlan(id, request);
+        String emailAuthorized = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
+        planService.updatePlan(id, request, userService.getUserEntity(emailAuthorized));
         return ResponseEntity.ok(SUCCESS);
     }
 

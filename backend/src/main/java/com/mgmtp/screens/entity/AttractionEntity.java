@@ -27,8 +27,9 @@ public class AttractionEntity implements Serializable {
 	@Column(nullable = false)
 	private double lng;
 
-	@Column()
-	private String type;
+	@ManyToOne
+	@JoinColumn(name = "type_id")
+	private TypeEntity type;
 
 	@Column
 	private String description;
@@ -36,9 +37,12 @@ public class AttractionEntity implements Serializable {
 	@OneToMany(mappedBy = "attraction", cascade = CascadeType.ALL)
 	private List<EventEntity> events;
 
+	@OneToMany(mappedBy = "attraction", cascade = CascadeType.ALL)
+	private List<FavoriteEntity> favorite;
+
 	public AttractionEntity() { }
 
-	public AttractionEntity(String name, String address, double lat, double lng, String type, String description) {
+	public AttractionEntity(String name, String address, double lat, double lng, TypeEntity type, String description) {
 		this.name = name;
 		this.address = address;
 		this.lat = lat;
@@ -47,7 +51,7 @@ public class AttractionEntity implements Serializable {
 		this.description = description;
 	}
 
-	public AttractionEntity(Integer id, String name, String address, double lat, double lng, String type, String description) {
+	public AttractionEntity(Integer id, String name, String address, double lat, double lng, TypeEntity type, String description) {
 		this.id = id;
 		this.name = name;
 		this.address = address;
@@ -95,11 +99,11 @@ public class AttractionEntity implements Serializable {
 		this.lng = lng;
 	}
 
-	public String getType() {
+	public TypeEntity getType() {
 		return type;
 	}
 
-	public void setType(String type) {
+	public void setType(TypeEntity type) {
 		this.type = type;
 	}
 
@@ -114,4 +118,12 @@ public class AttractionEntity implements Serializable {
 	public List<EventEntity> getEvents() { return events; }
 
 	public void setEvents(List<EventEntity> events) { this.events = events; }
+
+	public List<FavoriteEntity> getFavorite() {
+		return favorite;
+	}
+
+	public void setFavorite(List<FavoriteEntity> favorite) {
+		this.favorite = favorite;
+	}
 }

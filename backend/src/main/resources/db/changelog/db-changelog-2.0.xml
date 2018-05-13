@@ -73,6 +73,47 @@
         </sql>
     </changeSet>
 
+    <changeSet id="create_favorite" author="anhquynhpham">
+        <createTable tableName="favorite">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="user_id" type="int"/>
+            <column name="attraction_id" type="int"/>
+            <column name="score" type="int"/>
+            <column name="is_user_choose" type="boolean"/>
+        </createTable>
+
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="favorite"
+                                 constraintName="user_fkey"
+                                 onDelete="CASCADE"
+                                 onUpdate="CASCADE"
+                                 referencedColumnNames="id"
+                                 referencedTableName="users"/>
+
+        <addForeignKeyConstraint baseColumnNames="attraction_id"
+                                 baseTableName="favorite"
+                                 constraintName="attraction_fkey"
+                                 onDelete="CASCADE"
+                                 onUpdate="CASCADE"
+                                 referencedColumnNames="id"
+                                 referencedTableName="attractions"/>
+
+        <sql dbms="postgresql"
+             splitStatements="true"
+             stripComments="true">
+            insert into favorite(user_id, attraction_id, score, is_user_choose) values (2, 2, 1, false);
+            insert into favorite(user_id, attraction_id, score, is_user_choose) values (2, 8, 1, true);
+            insert into favorite(user_id, attraction_id, score, is_user_choose) values (2, 9, 1, false);
+            insert into favorite(user_id, attraction_id, score, is_user_choose) values (2, 10, 1, true);
+            insert into favorite(user_id, attraction_id, score, is_user_choose) values (3, 3, 1, false);
+            insert into favorite(user_id, attraction_id, score, is_user_choose) values (3, 5, 1, true);
+            insert into favorite(user_id, attraction_id, score, is_user_choose) values (3, 6, 1, false);
+        </sql>
+    </changeSet>
+
+
     <changeSet id="tag-2.0" author="anhquynhpham">
         <tagDatabase tag="2.0"/>
     </changeSet>

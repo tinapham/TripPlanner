@@ -5,21 +5,21 @@ import Error from '../../components/error404/index.js';
 import HomePage from '../HomePage';
 import ExplorePage from '../ExplorePage';
 import {Redirect, Route, Switch} from 'react-router-dom';
-import {loggedIn} from "../../components/authentication/oauth";
 import axios from "axios/index";
 import MyPlanPage from "../MyPlanPage";
 import MyPlanListPage from '../MyPlanListPage';
+import Chatbot from '../ChatBot';
 
 class App extends React.Component {
 
     url_backend = process.env.REACT_APP_BACKEND_URL + "api/";
-    url = [this.url_backend + "attraction/", this.url_backend + "plan/", this.url_backend + "tour-guide/"];
+    url = [this.url_backend + "attraction/", this.url_backend + "plan/", this.url_backend + "tour-guide/",
+           this.url_backend + "user/username"];
 
     constructor() {
         super();
         this.state = {
-            accessToken: loggedIn(),
-            isAdmin: false
+            isAdmin: false,
         };
         this.savePlan = this.savePlan.bind(this);
         this.updatePlan = this.updatePlan.bind(this);
@@ -27,8 +27,8 @@ class App extends React.Component {
     }
 
     async componentDidMount() {
-        if (this.state.accessToken) {
-            axios.defaults.headers.common['Authorization'] = `Bearer ${this.state.accessToken}`;
+        if (this.props.accessToken) {
+            axios.defaults.headers.common['Authorization'] = `Bearer ${this.props.accessToken}`;
             let data = [];
             let promises = [];
             this.url.forEach(url => {
@@ -42,7 +42,8 @@ class App extends React.Component {
             this.setState({
                 dataAttractions: data[0].data,
                 dataPlans: data[1].data,
-                dataTourGuides: data[2].data
+                dataTourGuides: data[2].data,
+                username: data[3].data,
             });
         } else {
             axios.defaults.headers.common = undefined;
@@ -100,17 +101,14 @@ class App extends React.Component {
     }
 
     render() {
-        // console.log(this.state);
-
+        console.log(this.state);
         return (
             <div>
                 {
-                    this.state.accessToken
+                    this.props.accessToken
                         ? < Container isAdmin={this.state.isAdmin} email={this.state.email}>
                             <Switch>
                                 <Redirect exact from={this.props.match.url} to={`${this.props.match.url}/dashboard`}/>
-                                {/*<Route exact path={this.props.match.url}*/}
-                                       {/*render={(props) => <HomePage save={this.savePlan} {...props} />}/>*/}
                                 <Route path={`${this.props.match.url}/dashboard`}
                                        render={(props) => <HomePage save={this.savePlan} {...props} />}/>
                                 <Route path={`${this.props.match.url}/explore`}
@@ -137,6 +135,7 @@ class App extends React.Component {
                         </Container>
                         : <Redirect to='/login'/>
                 }
+                <Chatbot plans={this.state.dataPlans}/>
             </div>
         );
     }

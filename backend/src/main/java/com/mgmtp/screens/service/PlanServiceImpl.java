@@ -28,16 +28,22 @@ public class PlanServiceImpl implements PlanService {
 
     private TransactionDAO transactionDAO;
 
+    private TypeDAO typeDAO;
+
+    private FavoriteDAO favoriteDAO;
+
     @Autowired
     public PlanServiceImpl(PlanDAO planDAO, EventDAO eventDAO, UserService userService,
                            TransactionService transactionService, TourGuideDAO tourGuideDAO,
-                           TransactionDAO transactionDAO) {
+                           TransactionDAO transactionDAO, TypeDAO typeDAO, FavoriteDAO favoriteDAO) {
         this.eventDAO = eventDAO;
         this.planDAO = planDAO;
         this.userService = userService;
         this.transactionService = transactionService;
         this.tourGuideDAO = tourGuideDAO;
         this.transactionDAO = transactionDAO;
+        this.typeDAO = typeDAO;
+        this.favoriteDAO = favoriteDAO;
     }
 
     @Override
@@ -93,7 +99,7 @@ public class PlanServiceImpl implements PlanService {
                 null, user);
 
         if (planDTO.getEvents() != null) {
-            planEntity.setEvents(covertListEventDTOToEntity(planDTO.getEvents(), planEntity));
+            planEntity.setEvents(covertListEventDTOToEntity(planDTO.getEvents(), planEntity, user));
         }
         planDAO.save(planEntity);
 
@@ -112,7 +118,7 @@ public class PlanServiceImpl implements PlanService {
 
     @Override
     @Transactional
-    public void updatePlan(int id, PlanDTO planDTO) {
+    public void updatePlan(int id, PlanDTO planDTO, UserEntity user) {
 
         PlanEntity planEntity = planDAO.findOne(id);
 
@@ -133,7 +139,7 @@ public class PlanServiceImpl implements PlanService {
 
         deleteDiffEvent(planEntity.getEvents(), planDTO.getEvents());
         if (planDTO.getEvents() != null) {
-            planEntity.setEvents(covertListEventDTOToEntity(planDTO.getEvents(), planEntity));
+            planEntity.setEvents(covertListEventDTOToEntity(planDTO.getEvents(), planEntity, user));
         }
 
         planDAO.saveAndFlush(planEntity);
@@ -141,7 +147,7 @@ public class PlanServiceImpl implements PlanService {
 
     @Override
     @Transactional
-    public void updatePlan(int id, PlanDTO planDTO, String token) {
+    public void updatePlan(int id, PlanDTO planDTO, String token, UserEntity user) {
 
         PlanEntity planEntity = planDAO.findOne(id);
 
@@ -164,7 +170,7 @@ public class PlanServiceImpl implements PlanService {
         }
 
         if (planDTO.getEvents() != null) {
-            planEntity.setEvents(covertListEventDTOToEntity(planDTO.getEvents(), planEntity));
+            planEntity.setEvents(covertListEventDTOToEntity(planDTO.getEvents(), planEntity, user));
         }
         planDAO.saveAndFlush(planEntity);
     }
@@ -187,20 +193,30 @@ public class PlanServiceImpl implements PlanService {
     }
 
     private List<EventEntity> covertListEventDTOToEntity(List<EventDTO> listEventDTO,
-                                                         PlanEntity planEntity) {
+                                                         PlanEntity planEntity, UserEntity userEntity) {
         List<EventEntity> events = new ArrayList<>();
         for (EventDTO item : listEventDTO) {
             EventEntity eventEntity;
+            AttractionDTO attractionDTO = item.getAttraction();
+            TypeEntity type = typeDAO.getTypeEntityByName(attractionDTO.getType());
+            AttractionEntity attractionEntity = new AttractionEntity(attractionDTO.getId(), attractionDTO.getName(),
+                    attractionDTO.getAddress(), attractionDTO.getLat(),
+                    attractionDTO.getLng(), type,
+                    attractionDTO.getDescription());
             if (item.getId() != null) {
                 eventEntity = new EventEntity(item.getId(), item.getStartTime(), item.getEndTime(), planEntity);
             } else {
                 eventEntity = new EventEntity(item.getStartTime(), item.getEndTime(), planEntity);
+                FavoriteEntity favoriteEntity = favoriteDAO.getFavoriteEntityByUserAndAttraction(userEntity, attractionEntity);
+                if(favoriteEntity != null) {
+                    //increase score in favorite when user choose an attraction in event
+                    favoriteEntity.setScore(favoriteEntity.getScore()+1);
+                } else {
+                    favoriteEntity = new FavoriteEntity(1, false, userEntity, attractionEntity);
+                }
+                favoriteDAO.saveAndFlush(favoriteEntity);
             }
-            AttractionDTO attractionDTO = item.getAttraction();
-            eventEntity.setAttraction(new AttractionEntity(attractionDTO.getId(), attractionDTO.getName(),
-                    attractionDTO.getAddress(), attractionDTO.getLat(),
-                    attractionDTO.getLng(), attractionDTO.getType(),
-                    attractionDTO.getDescription()));
+            eventEntity.setAttraction(attractionEntity);
             events.add(eventEntity);
         }
         return events;
