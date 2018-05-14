@@ -14,7 +14,8 @@ class App extends React.Component {
 
     url_backend = process.env.REACT_APP_BACKEND_URL + "api/";
     url = [this.url_backend + "attraction/", this.url_backend + "plan/", this.url_backend + "tour-guide/",
-           this.url_backend + "user/username"];
+        this.url_backend + "user/username"];
+    url_fav = this.url_backend + "attraction/favorite/";
 
     constructor() {
         super();
@@ -24,6 +25,7 @@ class App extends React.Component {
         this.savePlan = this.savePlan.bind(this);
         this.updatePlan = this.updatePlan.bind(this);
         this.deletePlan = this.deletePlan.bind(this);
+        this.addFavorite = this.addFavorite.bind(this);
     }
 
     async componentDidMount() {
@@ -60,9 +62,9 @@ class App extends React.Component {
             }
         });
         if (response.data === "SUCCESS") {
-            if(window.location.href == 'http://localhost:3000/home/dashboard') {
+            if (window.location.href == 'http://localhost:3000/home/dashboard') {
                 //when create a new plan from dashboard => navigate to MyPlan
-                window.location.href = 'plan/'+data.name;
+                window.location.href = 'plan/' + data.name;
             } else {
                 //when create a new plan from My Plans => navigate back to My Plans
                 window.location.href = 'plans';
@@ -100,6 +102,22 @@ class App extends React.Component {
         }
     }
 
+    async addFavorite(id) {
+        let response = await axios({
+            method: 'get',
+            url: this.url_fav + id
+        });
+        if (response.data === true) {
+            let data = await axios({
+                method: 'get',
+                url: this.url[0]
+            });
+            this.setState({
+                dataAttractions: data.data,
+            });
+        }
+    }
+
     render() {
         console.log(this.state);
         return (
@@ -112,7 +130,8 @@ class App extends React.Component {
                                 <Route path={`${this.props.match.url}/dashboard`}
                                        render={(props) => <HomePage save={this.savePlan} {...props} />}/>
                                 <Route path={`${this.props.match.url}/explore`}
-                                       render={(props) => <ExplorePage {...props} data={this.state.dataAttractions}/>}/>
+                                       render={(props) => <ExplorePage addFavorite={this.addFavorite}
+                                                                       data={this.state.dataAttractions} {...props}/>}/>
                                 <Route path={`${this.props.match.url}/plan`}
                                        render={(props) => <MyPlanPage listTourGuide={this.state.dataTourGuides}
                                                                       save={this.savePlan}
@@ -126,10 +145,10 @@ class App extends React.Component {
                                                                           delete={this.deletePlan}/>}/>
                                 <Route path={`${this.props.match.url}/transaction/plan/:id`}
                                        render={(props) => <MyPlanPage data={this.state.dataTourGuides}
-                                                                          delete={this.deletePlan}/>}/>
+                                                                      delete={this.deletePlan}/>}/>
                                 <Route path={`${this.props.match.url}/transaction/:id`}
                                        render={(props) => <MyPlanPage data={this.state.dataTourGuides}
-                                                                       delete={this.deletePlan}/>}/>
+                                                                      delete={this.deletePlan}/>}/>
                                 <Route path="*" component={Error}/>
                             </Switch>
                         </Container>

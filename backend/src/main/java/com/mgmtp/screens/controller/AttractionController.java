@@ -1,5 +1,6 @@
 package com.mgmtp.screens.controller;
 
+import com.mgmtp.screens.entity.AttractionEntity;
 import com.mgmtp.screens.model.AttractionDTO;
 import com.mgmtp.screens.service.AttractionService;
 import com.mgmtp.screens.service.UserService;
@@ -49,6 +50,19 @@ public class AttractionController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
         return ResponseEntity.ok(attraction);
+    }
+
+    @RequestMapping(value = "/favorite/{id}")
+    @PreAuthorize("hasAuthority('write:favorite')")
+    public ResponseEntity<Boolean> addFavorite(@PathVariable Integer id) {
+
+//        try{
+            String emailAuthorized = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
+            attractionService.updateFavorite(id, userService.getUserEntity(emailAuthorized));
+//        } catch (Exception e) {
+//            return ResponseEntity.ok(false);
+//        }
+        return ResponseEntity.ok(true);
     }
 
 }

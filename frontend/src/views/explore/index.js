@@ -8,17 +8,22 @@ import {geolocated} from 'react-geolocated';
 
 class Explore extends Component {
 
-    constructor(props) {
-        super(props);
+    constructor() {
+        super();
         this.state = {
             currentAttraction: undefined,
-        }
+        };
+        this.addFavorite = this.addFavorite.bind(this);
     }
 
     setCurrentAttraction = (current) => {
         this.setState({
             currentAttraction: current
         });
+    };
+
+    addFavorite = (id) => {
+        this.props.addFavorite(id);
     };
 
     render() {
@@ -34,7 +39,8 @@ class Explore extends Component {
                                 <div className="col-md-4">
                                     {
                                         ! this.state.currentAttraction ?
-                                            <AttractionList data={this.props.data} setCurrent={this.setCurrentAttraction}/>
+                                            <AttractionList data={this.props.data} setCurrent={this.setCurrentAttraction}
+                                                            addFavorite={this.addFavorite}/>
                                             : <CurrentAttractionCard attraction={this.state.currentAttraction}/>
                                     }
 

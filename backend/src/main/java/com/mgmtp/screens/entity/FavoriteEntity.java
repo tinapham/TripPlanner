@@ -28,7 +28,16 @@ public class FavoriteEntity implements Serializable {
 	@JoinColumn(name = "attraction_id", nullable = false)
 	private AttractionEntity attraction;
 
+	public FavoriteEntity() {}
+
 	public FavoriteEntity(int score, boolean isUserChoose, UserEntity user, AttractionEntity attraction) {
+		this.score = score;
+		this.isUserChoose = isUserChoose;
+		this.user = user;
+		this.attraction = attraction;
+	}
+
+	public FavoriteEntity(Integer id, int score, boolean isUserChoose, UserEntity user, AttractionEntity attraction) {
 		this.score = score;
 		this.isUserChoose = isUserChoose;
 		this.user = user;

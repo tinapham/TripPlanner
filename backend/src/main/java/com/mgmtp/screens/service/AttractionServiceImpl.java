@@ -1,6 +1,7 @@
 package com.mgmtp.screens.service;
 
 import com.mgmtp.screens.entity.AttractionEntity;
+import com.mgmtp.screens.entity.FavoriteEntity;
 import com.mgmtp.screens.entity.TypeEntity;
 import com.mgmtp.screens.entity.UserEntity;
 import com.mgmtp.screens.model.AttractionDTO;
@@ -20,11 +21,15 @@ public class AttractionServiceImpl implements AttractionService {
 
 	private TypeDAO typeDAO;
 
+	private FavoriteDAO favoriteDAO;
+
 	@Autowired
-	public AttractionServiceImpl(AttractionDAO attractionDAO, AttractionRepo attractionRepo, TypeDAO typeDAO) {
+	public AttractionServiceImpl(AttractionDAO attractionDAO, AttractionRepo attractionRepo, TypeDAO typeDAO,
+								 FavoriteDAO favoriteDAO) {
 		this.typeDAO = typeDAO;
 		this.attractionDAO = attractionDAO;
 		this.attractionRepo = attractionRepo;
+		this.favoriteDAO = favoriteDAO;
 	}
 
 	@Override
@@ -91,6 +96,18 @@ public class AttractionServiceImpl implements AttractionService {
 			attractionEntity.setDescription(attractionDTO.getDescription());
 			attractionDAO.save(attractionEntity);
 		}
+	}
+
+	@Override
+	public void updateFavorite(int id, UserEntity user) {
+		AttractionEntity attraction = attractionDAO.findOne(id);
+		FavoriteEntity favorite = favoriteDAO.getFavoriteEntityByUserAndAttraction(user, attraction);
+		if (favorite == null) {
+			favorite = new FavoriteEntity(0, true, user, attraction);
+		} else {
+			favorite.setUserChoose(!favorite.isUserChoose());
+		}
+		favoriteDAO.saveAndFlush(favorite);
 	}
 
 }

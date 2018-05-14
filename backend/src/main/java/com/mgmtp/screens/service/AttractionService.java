@@ -21,4 +21,6 @@ public interface AttractionService {
 
 	void updateAttraction(int id, AttractionDTO AttractionDTO);
 
+	void updateFavorite(int id, UserEntity user);
+
 }
