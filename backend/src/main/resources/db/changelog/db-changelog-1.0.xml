@@ -65,6 +65,48 @@
             </column> <!--123456-->
         </insert>
 
+        <insert tableName="users">
+            <column name="email">tina</column>
+            <column name="password">8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92
+            </column> <!--123456-->
+        </insert>
+
+        <insert tableName="users">
+            <column name="email">kokomi</column>
+            <column name="password">8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92
+            </column> <!--123456-->
+        </insert>
+
+        <insert tableName="users">
+            <column name="email">john</column>
+            <column name="password">8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92
+            </column> <!--123456-->
+        </insert>
+
+        <insert tableName="users">
+            <column name="email">dennis</column>
+            <column name="password">8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92
+            </column> <!--123456-->
+        </insert>
+
+        <insert tableName="users">
+            <column name="email">hanna</column>
+            <column name="password">8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92
+            </column> <!--123456-->
+        </insert>
+
+        <insert tableName="users">
+            <column name="email">vicky</column>
+            <column name="password">8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92
+            </column> <!--123456-->
+        </insert>
+
+        <insert tableName="users">
+            <column name="email">loki</column>
+            <column name="password">8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92
+            </column> <!--123456-->
+        </insert>
+
         <update tableName="users">
             <column name="is_admin" value="true"/>
             <where>email='admin'</where>
@@ -76,10 +118,10 @@
             <column name="id" type="int" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="name" type="varchar(100)">
+            <column name="name" type="varchar(200)">
                 <constraints nullable="false"/>
             </column>
-            <column name="address" type="varchar(100)">
+            <column name="address" type="varchar(200)">
                 <constraints nullable="false"/>
             </column>
             <column name="lat" type="float">
@@ -89,7 +131,7 @@
                 <constraints nullable="false"/>
             </column>
 
-            <column name="type_id" type="integer"/>
+            <column name="type_id" type="int"/>
 
             <column name="description" type="text"/>
         </createTable>
@@ -105,77 +147,75 @@
         <sql dbms="postgresql"
              splitStatements="true"
              stripComments="true">
+            <!--1-->
             insert into attractions(name, address, lat, lng, type_id, description) values ('29/3 park',
-            '33 Điện Biên Phủ, Thạch Gián, Da Nang', 16.065548, 108.204486, '1',
+            '33 Điện Biên Phủ, Thạch Gián, Da Nang', 16.065548, 108.204486, 1,
             'Spacious city memorial park featuring hiking trails, paths, landscaped valleys and a lake.');
-
+            <!--2-->
             insert into attractions(name, address, lat, lng, type_id, description) values ('Ban Co Peak',
-            'Thọ Quang, Sơn Trà, Đà Nẵng', 16.118949, 108.271949, '2', '');
-
+            'Thọ Quang, Sơn Trà, Đà Nẵng', 16.118949, 108.271949, 2,
+            'As the highest mountain on Son Tra Peninsula, Ban Co peak is one of tourist attractions of Da Nang city.
+            *There is a status of a god in front of the chess board. According to legend, there were 2 fairies playing chess on Son Tra Mountain.
+            *The best time to visit Ban Co peak is on the early morning when the whole city and Son Tra peninsula nature are still sleeping in glimmering sun. ');
+            <!--3-->
             insert into attractions(name, address, lat, lng, type_id, description) values ('Asia Park',
-            '1 Phan Đăng Lưu, Hoà Cường Bắc, Hải Châu, Đà Nẵng', 16.039258, 108.228534, '1',
+            '1 Phan Đăng Lưu, Hoà Cường Bắc, Hải Châu, Đà Nẵng', 16.039258, 108.228534, 1,
             '- Open time: Monday to Sunday: 15:00 – 22:00
             *Sun Group – one of Asia’s Premier Real Estate developers – has chosen the resort town of Da Nang, on Vietnam’s central coast to develop an original amusement and culture park named Sun World Danang Wonder (Asia Park).
-            *The Amusement Park of Sun World Danang Wonder (Asia Park) brings together a complete package of rides, attractions, shows, restaurants and retail to allow for a wonderful evening out. Popular attractions such as four roller coasters, several attractions for children as well as high speed thrill rides are available and a Monorail encircles the park area.
-            *The Cultural park allows guests to enjoy the historical architecture, performing arts and wonderful cuisines of ten Asian countries including Japan, Indonesia, Singapore, South Korea, India, Nepal, Thailand, Cambodia, China and Vietnam. Each country is represented with fascinating landscaped gardens, as well as interpretations of historic or natural landmarks.
+            *The Amusement Park of Sun World Danang Wonder (Asia Park) brings together a complete package of rides, attractions, shows, restaurants and retail to allow for a wonderful evening out.
             ');
-
+            <!--4-->
             insert into attractions(name, address, lat, lng, type_id, description) values ('Dragon Bridge',
-            'Nguyễn Văn Linh, An Hải Trung, Đà Nẵng', 16.061210, 108.226976, '3',
+            'Nguyễn Văn Linh, An Hải Trung, Đà Nẵng', 16.061210, 108.226976, 3,
             'The Dragon Bridge is a bridge with a dragon over the Han River at Da Nang, Vietnam. Dragon Bridge is 666m long, 37.5m wide and has six lanes for traffic.It opened to traffic on March 29, 2013, at a cost of nearly 1.5 trillion VND.
-            *Main span was completed on October 26, 2011. The bridge was opened to traffic on March 29, 2013, the 38th anniversary of the liberation of Da Nang City. This modern bridge crosses the Han River at the Le Dinh Duong/Bach Dang traffic circle, providing the shortest road link from the Da Nang International Airport to other main roads in Da Nang City, and a more direct route to My Khe Beach and Non Nuoc Beach on the eastern edge of the City. The bridge was designed and built in the shape of a dragon and to breathe fire and water.
-            *Fire and Water Breathing The dragon on the bridge can breathe fire in 2 minutes with 3 minutes of water breathing after, making it an incredible highlight in Danang City. The water is sprayed out in a powerful blast reflecting the aspiration of Danang City. Fire and Water Performance: At 9.pm every weekends and holidays.
-            *With the lights changing, the bridge turns to many color. And with the lights reflections of the river water, the view is spectacular. During the show, no vehicle can go across the bridge, so if you want to take motobike there, you must go ealier. You can book the cruise boat ticket, enjoy beauty of Han river, then they will take you to the dock near the dragon’s head. Check carrefully that they do take you there.');
-
+            *Main span was completed on October 26, 2011. The bridge was opened to traffic on March 29, 2013, the 38th anniversary of the liberation of Da Nang City.
+            *With the lights changing, the bridge turns to many color. And with the lights reflections of the river water, the view is spectacular.');
+            <!--5-->
             insert into attractions(name, address, lat, lng, type_id, description) values ('Non Nuoc Pagoda',
-            '98 Huyền Trân Công Chúa, Hòa Hải, Ngũ Hành Sơn, Đà Nẵng', 16.004199, 108.264244, '4', '');
-
+            '98 Huyền Trân Công Chúa, Hòa Hải, Ngũ Hành Sơn, Đà Nẵng', 16.004199, 108.264244, 4,
+            '-Location: Non Nuoc Pagoda is located in Hoa Hai Ward, Ngu Hanh Son District, about 8km from the center of Da Nang City.
+            *-Characteristic: The pagoda was built during the 18th century. It was later conferred the name Ngu Che Ung Chon Tu during Minh Mang reign.
+            *Non Nuoc Pagoda is 100m from Tam Thai Pagoda overlooking the East Sea. Tang Chon Cave is also in the same area.');
+            <!--6-->
             insert into attractions(name, address, lat, lng, type_id, description) values ('The Marble Mountains',
-            '52 Huyền Trân Công Chúa, Hoà Hải, Ngũ Hành Sơn, Đà Nẵng', 16.003922, 108.262854, '2',
+            '52 Huyền Trân Công Chúa, Hoà Hải, Ngũ Hành Sơn, Đà Nẵng', 16.003922, 108.262854, 2,
             'Network of 5 marble mountains with multiple caves, elaborate temples and viewing outlooks.
-            *Kim Son (mountain of metal), Moc Son (Mountain of Wood), Thuy Son (Mountain of Water), Hoa Son (Mountain of Fire), and Tho Son (Mountain of Earth). Marble Mountains have attractive sights such as Da Chong tunnel, Ba Tho Cave, Hades Cave, Huyen Khong Cave, Linh Ung Pagoda, Vong Giang Tower, etc., which is suitable for spiritual tourism. At the feet of the mountains, there is a village of marble sculptural arts over 300 years of age. It is the place for tourists to see with their own eyes the stone sculptural arts of talent craftsmen, and tourists can choose their most favourite products as souvenirs.
+            *Kim Son (mountain of metal), Moc Son (Mountain of Wood), Thuy Son (Mountain of Water), Hoa Son (Mountain of Fire), and Tho Son (Mountain of Earth).
             *- Open time: 07:00 – 17:30 on weekdays.
-            *- Best time 07:00 – 10:00; 14:30 – 17:30
-            *- Price range: 1.00 USD
-            *- Tips: At the foot of the mountain is a village of art sculpture. You can buy stoneware products, jewelry, etc. as souvenirs and observe the artisans creating products.');
-
-            insert into attractions(name, address, lat, lng, type_id, description) values ('Hoa Trung Lake',
-            'Hòa Vang, Da Nang', 16.079906, 108.055420, '5', '');
-
+            *- Price range: 1.00 USD');
+            <!--7-->
+            insert into attractions(name, address, lat, lng, type_id, description) values ('Hoa Phu Thanh Tourist Area',
+            'Hòa Phú, Hòa Vang', 15.954210, 107.982258, 2,
+            'Far about 45 km from Da Nang city, Hoa Phu Thanh tourist area is situated in Hoa Vang district. The nature favors and bestows the wonderful natural scenery with the famous tourist attractions such as Suoi Mo tourist area, Ngam Doi or Phuoc Nhon hot spring....
+            ');
+            <!--8-->
             insert into attractions(name, address, lat, lng, type_id, description) values ('Son Tra Banyan Tree',
-            'Thọ Quang, Sơn Trà, Đà Nẵng', 16.122540, 108.331703, '6',
-            '800 year old banyan tree');
-
+            'Thọ Quang, Sơn Trà, Đà Nẵng', 16.122540, 108.331703, 6,
+            'Son Tra banyan tree (or Nui Cao Banyan tree, be classified in mulberry, and has science name “ Ficus bengalensis”) is about 22m in height and 10m in tree-trunk circumference and 85m in giant tree circumference. This tree has 26 aerial roots which are 25m in height, are in 63 small zones of Son Tra Natural Reserve.');
+            <!--9-->
             insert into attractions(name, address, lat, lng, type_id, description) values ('Linh Ung Pagoda',
-            'Hoàng Sa, Thọ Quang, Sơn Trà, Đà Nẵng', 16.100288, 108.277856, '4',
+            'Hoàng Sa, Thọ Quang, Sơn Trà, Đà Nẵng', 16.100288, 108.277856, 4,
             'Linh Ung pagoda is the largest pagoda of scale and artistic architecture. It is so famous for the huge statue of Lady Buddha – 67m high.
-            *Linh Ung – Bai But pagoda features perfect harmony between the modern and traditional architectures of Vietnamese pagodas, especially in the three-entrance gate, the main chamber and the ancestors’ house.
-            *On the way to see Linh Ung pagoda, you will pass a giant 3 doors gate, then you will surprise how spectacular it is. Just behind the entrance gate, there is a lovely courtyard with different kind of bonsai trees and 18 statues of aghast showing their expression. It is such a good place for your photos.
-            *- There are many steps to the gate, so if you don’t want to walk a lot, it is better that you ask the driver to stop at the hilltop parking.
-            *- You should see it at night, when it is cooler and the incredible view of all the lights of the city.
-            *- You need bring good camera and tripod to capture the beautiful sights. Taking panoramic photos here is great idea.');
-
+            *Linh Ung – Bai But pagoda features perfect harmony between the modern and traditional architectures of Vietnamese pagodas, especially in the three-entrance gate, the main chamber and the ancestors house. ');
+            <!--10-->
             insert into attractions(name, address, lat, lng, type_id, description) values ('Sun World Ba Na Hills',
-            'Hòa Vang, Đà Nẵng', 15.997735, 107.988077, '2',
-            '25 km to the southwest of Da Nang at an altitude of 1,487m, Sun World Ba Na Hills are considered as “One temperate place in the tropical forest” because the climate is cool all the year round and you can enjoy four seasons within a single day.
-            *In addition, Ba Na cable cars hold two Guinness World Records: the world’s longest single cable car system (5,042.62 m long) and the world highest gap between its departure and arrival station (1,291.81 m high). A series of four star hotel with 137 rooms and standard restaurants which can serve every demand of tourists.
-            *- Tel: (+84)236.3791999 or (+84)236.3791791.
-            *- Website: www.banahills.com.vn
-            *- Ticket prices:
-            *Adult: 700.000vnđ
-            *Children: 600.000vnđ (1m-1,3m)
-            *
-            *Price for Danang resident with condition (*) :
-            *Adult: 400.000vnđ
-            *Children: 300.000vnđ (1m-1,3m) ');
-
+            'Hòa Vang, Đà Nẵng', 15.997735, 107.988077, 2,
+            '25 km to the southwest of Da Nang at an altitude of 1,487m, Sun World Ba Na Hills are considered as "One temperate place in the tropical forest" because the climate is cool all the year round and you can enjoy four seasons within a single day.
+            *In addition, Ba Na cable cars hold two Guinness World Records: the world’s longest single cable car system (5,042.62 m long) and the world highest gap between its departure and arrival station (1,291.81 m high).');
+            <!--11-->
             insert into attractions(name, address, lat, lng, type_id, description) values ('Than Tai Hot Springs Park',
-            'QL14G, Hoà Phú, Hòa Vang, Đà Nẵng', 15.967851, 108.019805, '2',
+            'QL14G, Hoà Phú, Hòa Vang, Đà Nẵng', 15.967851, 108.019805, 2,
             'Located in Ba Na Nui Chua nature reserve, Phu Tuc village, Hoa Phu commune, Hoa Vang district, Da Nang city. Nui Than Tai Hot Spring Park can be said is a masterpiece that the nature has endowed the capital of Central Vietnam
-            *- Open time: 7h00 – 22h00
-            *- Best time: 15h00 – 19h00
-            *- Visit duration: 4 hours
             *- What to explore: Long Huyet Lake, Mineral Water Wall sightseeing area, Long Tien Cave, Son Than Temple, God of Wealth Than Tai Statue, Hot Springs bath, etc.');
+            <!--12-->
+            insert into attractions(name, address, lat, lng, type_id, description) values ('Nen Restaurant',
+            'Lo 20, My Da Tay 2, Ngu Hanh Son', 16.034470, 108.239392, 7, '');
+            <!--13-->
+            insert into attractions(name, address, lat, lng, type_id, description) values ('Tamarind Tree Restaurant',
+            'My Khe 4 street | Phuoc My Ward, Son Tra District', 16.058055, 108.245652, 7, '');
+            <!--14-->
+            insert into attractions(name, address, lat, lng, type_id, description) values ('99+ Sky Lounge',
+            'Tran Hung Dao Street | 5 Floor, Happy Yacht, Son Tra District', 16.064271, 108.229579, 7, '');
         </sql>
     </changeSet>
 
@@ -207,10 +247,51 @@
         <sql dbms="postgresql"
              splitStatements="true"
              stripComments="true">
-            insert into plans(name, start_day, end_day, user_id, payment_token) values ('Summer trip', '2018-04-01',
+            <!--1-->
+            insert into plans(name, start_day, end_day, user_id, payment_token) values ('Son Tra explore', '2018-04-01',
                             '2018-04-02', 2, '568fa31fa6e97a89');
-            insert into plans(name, start_day, end_day, user_id, payment_token) values ('30-4 Holiday', '2018-04-30',
+            <!--2-->
+            insert into plans(name, start_day, end_day, user_id, payment_token) values ('30-4 holiday', '2018-04-30',
                             '2018-04-30', 3, '55dea043474e18b3');
+            <!--3-->
+            insert into plans(name, start_day, end_day, user_id, payment_token) values ('My holiday', '2018-05-30',
+                            '2018-05-30', 5, '4b80947f037aa42c');
+            <!--4-->
+            insert into plans(name, start_day, end_day, user_id, payment_token) values ('Summer trip', '2018-06-01',
+                            '2018-06-02', 4, '227fd25902dc8d26');
+            <!--5-->
+            insert into plans(name, start_day, end_day, user_id, payment_token) values ('Camping go go!', '2018-06-06',
+                            '2018-06-06', 7, '77da86b53ef96640');
+            <!--6-->
+            insert into plans(name, start_day, end_day, user_id, payment_token) values ('My weekend', '2018-03-18',
+                            '2018-03-19', 8, '719cbf8179250fd2');
+            <!--7-->
+            insert into plans(name, start_day, end_day, user_id, payment_token) values ('Hello summer', '2018-07-01',
+                            '2018-07-01', 3, '4e246a8c17376c0c');
+            <!--8-->
+            insert into plans(name, start_day, end_day, user_id, payment_token) values ('Tet holiday', '2018-02-16',
+                            '2018-02-17', 9, '6ee2b58a4154880e');
+            <!--9-->
+            insert into plans(name, start_day, end_day, user_id, payment_token) values ('Day off', '2018-04-30',
+                            '2018-05-01', 10, '4566643e482ea010');
+            <!--10-->
+            insert into plans(name, start_day, end_day, user_id, payment_token) values ('My vacation', '2018-05-07',
+                            '2018-05-09', 3, '3725d1944d98207b');
+            <!--11-->
+            insert into plans(name, start_day, end_day, user_id, payment_token) values ('Family day', '2018-08-19',
+                            '2018-08-19', 6, '64c7549c73e33d1d');
+            <!--12-->
+            insert into plans(name, start_day, end_day, user_id, payment_token) values ('My birthday', '2018-07-23',
+                            '2018-07-23', 5, '70ee428b03ed5744');
+            <!--13-->
+            insert into plans(name, start_day, end_day, user_id, payment_token) values ('Graduation celebrate', '2018-06-09',
+                            '2018-06-12', 3, '4571ab48e86f26b2');
+            <!--14-->
+            insert into plans(name, start_day, end_day, user_id, payment_token) values ('Company trip', '2018-08-06',
+                            '2018-08-07', 4, '67bc63a9c9c133aa');
+            <!--15-->
+            insert into plans(name, start_day, end_day, user_id, payment_token) values ('one days in DN', '2018-06-30',
+                            '2018-06-30', 6, '495249f24beca0b2');
         </sql>
     </changeSet>
 
@@ -260,6 +341,68 @@
             '2018-04-02 12:00', 5, 2);
             insert into events(start_time, end_time, attraction_id, plan_id) values ('2018-04-30 16:00',
             '2018-04-02 21:30', 3, 2);
+            insert into events(start_time, end_time, attraction_id, plan_id) values ('2018-05-30 09:00',
+            '2018-05-30 14:30', 11, 3);
+            insert into events(start_time, end_time, attraction_id, plan_id) values ('2018-05-30 15:00',
+            '2018-05-30 19:00', 12, 3);
+            insert into events(start_time, end_time, attraction_id, plan_id) values ('2018-05-30 19:15',
+            '2018-05-30 21:00', 4, 3);
+            insert into events(start_time, end_time, attraction_id, plan_id) values ('2018-06-01 09:00',
+            '2018-05-30 17:00', 10, 4);
+            insert into events(start_time, end_time, attraction_id, plan_id) values ('2018-06-02 08:00',
+            '2018-05-30 12:00', 6, 4);
+            insert into events(start_time, end_time, attraction_id, plan_id) values ('2018-06-06 07:00',
+            '2018-05-06 19:00', 7, 5);
+            insert into events(start_time, end_time, attraction_id, plan_id) values ('2018-03-18 18:00',
+            '2018-03-18 20:00', 13, 6);
+            insert into events(start_time, end_time, attraction_id, plan_id) values ('2018-03-19 09:00',
+            '2018-03-19 16:30', 3, 6);
+            insert into events(start_time, end_time, attraction_id, plan_id) values ('2018-07-01 09:00',
+            '2018-07-01 14:30', 1, 7);
+            insert into events(start_time, end_time, attraction_id, plan_id) values ('2018-02-16 17:00',
+            '2018-02-16 21:30', 4, 8);
+            insert into events(start_time, end_time, attraction_id, plan_id) values ('2018-02-17 09:00',
+            '2018-02-17 17:30', 10, 8);
+            insert into events(start_time, end_time, attraction_id, plan_id) values ('2018-04-30 08:00',
+            '2018-04-30 18:45', 11, 9);
+            insert into events(start_time, end_time, attraction_id, plan_id) values ('2018-05-01 12:00',
+            '2018-05-01 13:30', 13, 9);
+            insert into events(start_time, end_time, attraction_id, plan_id) values ('2018-05-01 14:00',
+            '2018-05-01 19:30', 4, 9);
+            insert into events(start_time, end_time, attraction_id, plan_id) values ('2018-05-07 07:00',
+            '2018-05-07 09:30', 6, 10);
+            insert into events(start_time, end_time, attraction_id, plan_id) values ('2018-05-07 10:00',
+            '2018-05-07 12:30', 5, 10);
+            insert into events(start_time, end_time, attraction_id, plan_id) values ('2018-05-07 13:00',
+            '2018-05-07 14:30', 14, 10);
+            insert into events(start_time, end_time, attraction_id, plan_id) values ('2018-05-07 15:00',
+            '2018-05-07 18:30', 1, 10);
+            insert into events(start_time, end_time, attraction_id, plan_id) values ('2018-05-08 08:00',
+            '2018-05-08 14:30', 2, 10);
+            insert into events(start_time, end_time, attraction_id, plan_id) values ('2018-05-08 17:00',
+            '2018-05-08 20:30', 4, 10);
+            insert into events(start_time, end_time, attraction_id, plan_id) values ('2018-05-09 08:00',
+            '2018-05-09 16:30', 11, 10);
+            insert into events(start_time, end_time, attraction_id, plan_id) values ('2018-05-07 13:00',
+            '2018-05-07 14:30', 12, 10);
+            insert into events(start_time, end_time, attraction_id, plan_id) values ('2018-08-19 14:00',
+            '2018-08-19 16:30', 5, 11);
+            insert into events(start_time, end_time, attraction_id, plan_id) values ('2018-07-23 17:00',
+            '2018-07-23 22:00', 4, 12);
+            insert into events(start_time, end_time, attraction_id, plan_id) values ('2018-06-09 09:00',
+            '2018-06-09 14:30', 2, 13);
+            insert into events(start_time, end_time, attraction_id, plan_id) values ('2018-06-10 07:00',
+            '2018-06-10 17:30', 10, 13);
+            insert into events(start_time, end_time, attraction_id, plan_id) values ('2018-06-11 10:00',
+            '2018-06-11 16:30', 11, 13);
+            insert into events(start_time, end_time, attraction_id, plan_id) values ('2018-06-12 15:00',
+            '2018-06-12 17:30', 1, 13);
+            insert into events(start_time, end_time, attraction_id, plan_id) values ('2018-08-06 10:00',
+            '2018-08-06 18:30', 7, 14);
+            insert into events(start_time, end_time, attraction_id, plan_id) values ('2018-06-30 11:00',
+            '2018-06-30 13:30', 13, 15);
+            insert into events(start_time, end_time, attraction_id, plan_id) values ('2018-06-30 14:00',
+            '2018-06-30 16:30', 4, 15);
         </sql>
 
     </changeSet>

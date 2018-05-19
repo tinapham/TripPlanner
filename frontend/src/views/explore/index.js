@@ -41,7 +41,8 @@ class Explore extends Component {
                                         ! this.state.currentAttraction ?
                                             <AttractionList data={this.props.data} setCurrent={this.setCurrentAttraction}
                                                             addFavorite={this.addFavorite}/>
-                                            : <CurrentAttractionCard attraction={this.state.currentAttraction}/>
+                                            : <CurrentAttractionCard attraction={this.state.currentAttraction}
+                                                                     addFavorite={this.addFavorite}/>
                                     }
 
                                 </div>

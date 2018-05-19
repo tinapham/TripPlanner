@@ -27,11 +27,19 @@
             insert into tour_guides(name, experience, price, description) values ('Duyen Nguyen', '10 years',
                                     102, 'I have worked as an English speaking guide in Da Nang, Hoi An, as well as different regions in Vietnam for 10 years. I love my green country so much and I am proud of its amazing nature, deep orient culture blended with local traditional customs and long rich history. Therefore, my English skills are excellent enabling valued customers to communicate at a very high level of the issues of history, cultures, architectures, war,...');
 
-            insert into tour_guides(name, experience, price, description) values ('Ha Vu', '1 years',
+            insert into tour_guides(name, experience, price, description) values ('Ha Vu', '1 year',
                                     45, 'Hello everyone, I graduated from Foreign trade university 2 years ago. Now I am a freelancer working as part time tour guide and translator. I myself have travelled to a lot of places in Vietnam. I can speak English and Chinese very well. I will be very happy to guide you to visit beautiful places in Da Nang.');
 
             insert into tour_guides(name, experience, price, description) values ('Huu Duong', '2 years',
-                                    57, 'Dear my valued clients, I am a local tour guide in Vietnam. I can guide you through Hoi An ancient town, Da Nang city, My Son holly land in the middle of Vietnam. I can arrange an A/C car to pick cruise ship passengers up at the cruise ship entrance (Chan May, Tien Sa), the airport, train station, hotel lobby, bus stop or road. I can arrange a golf package during your stay in Da Nang City (Montgomerie Links, Da Nang Golf Club, Laguna Golf Course, Ba Na Hills club). I am certified by Vietnam National Administration of Tourism. I am available for your request and sure to reconfirm your booking request. I would like to be a bridge of cultural exchange, come with me and share the view.');
+                                    57, 'Dear my valued clients, I am a local tour guide in Vietnam. I can guide you through Hoi An ancient town, Da Nang city, My Son holly land in the middle of Vietnam. I can arrange an A/C car to pick cruise ship passengers up at the cruise ship entrance (Chan May, Tien Sa), the airport, train station, hotel lobby, bus stop or road. I can arrange a golf package during your stay in Da Nang City.');
+
+            insert into tour_guides(name, experience, price, description) values ('Tran Hai Nam ', '7 years',
+                                    70, 'Hi,everyone. My Name is Nam. Now i am working as Tourguide for 8 years. I have good health so in the past until now, i go with many group from young to old for 4 days to 12 days trave around Hanoi and the midle of Vietnam. I can trekking,climbing, cycling, biking, walking with my travellers. I alway made my best to make my client feel happy when they go with me. More and more and more, Just book me and you will know.');
+
+            insert into tour_guides(name, experience, price, description) values ('Ha Nguyen', '5 years',
+                                    63, '- Private guides and private car transfer service to every areas
+            - Trip to visit all handicraft village,the moutains,the ethnic minority areas....
+            - Private motobike trip to Da Nang, Hue, Marble moutain, My Son sanctuary, National Park, etc.')
         </sql>
     </changeSet>
 
@@ -68,8 +76,21 @@
         <sql dbms="postgresql"
              splitStatements="true"
              stripComments="true">
-            insert into transactions(guide_id, plan_id, days, cost, paid) values (2, 1, 2, 120, false);
-            insert into transactions(guide_id, plan_id, days, cost, paid) values (4, 2, 1, 45, false);
+            insert into transactions(guide_id, plan_id, days, cost, paid) values (2, 1, 2, 120, true);
+            insert into transactions(guide_id, plan_id, days, cost, paid) values (4, 2, 1, 45, true);
+            insert into transactions(guide_id, plan_id, days, cost, paid) values (1, 3, 1, 90, false);
+            insert into transactions(guide_id, plan_id, days, cost, paid) values (6, 4, 2, 140, true);
+            insert into transactions(guide_id, plan_id, days, cost, paid) values (7, 5, 1, 63, false);
+            insert into transactions(guide_id, plan_id, days, cost, paid) values (3, 6, 2, 204, true);
+            insert into transactions(guide_id, plan_id, days, cost, paid) values (5, 7, 1, 57, false);
+            insert into transactions(guide_id, plan_id, days, cost, paid) values (4, 8, 2, 90, true);
+            insert into transactions(guide_id, plan_id, days, cost, paid) values (2, 9, 2, 60, true);
+            insert into transactions(guide_id, plan_id, days, cost, paid) values (7, 10, 3, 189, true);
+            insert into transactions(guide_id, plan_id, days, cost, paid) values (1, 11, 1, 90, false);
+            insert into transactions(guide_id, plan_id, days, cost, paid) values (6, 12, 1, 70, false);
+            insert into transactions(guide_id, plan_id, days, cost, paid) values (2, 13, 4, 240, true);
+            insert into transactions(guide_id, plan_id, days, cost, paid) values (3, 14, 2, 204, false);
+            insert into transactions(guide_id, plan_id, days, cost, paid) values (4, 15, 1, 45, false);
         </sql>
     </changeSet>
 
@@ -107,9 +128,33 @@
             insert into favorite(user_id, attraction_id, score, is_user_choose) values (2, 8, 1, true);
             insert into favorite(user_id, attraction_id, score, is_user_choose) values (2, 9, 1, false);
             insert into favorite(user_id, attraction_id, score, is_user_choose) values (2, 10, 1, true);
+            insert into favorite(user_id, attraction_id, score, is_user_choose) values (3, 1, 3, false);
+            insert into favorite(user_id, attraction_id, score, is_user_choose) values (3, 2, 2, false);
             insert into favorite(user_id, attraction_id, score, is_user_choose) values (3, 3, 1, false);
-            insert into favorite(user_id, attraction_id, score, is_user_choose) values (3, 5, 1, true);
-            insert into favorite(user_id, attraction_id, score, is_user_choose) values (3, 6, 1, false);
+            insert into favorite(user_id, attraction_id, score, is_user_choose) values (3, 4, 1, false);
+            insert into favorite(user_id, attraction_id, score, is_user_choose) values (3, 5, 2, true);
+            insert into favorite(user_id, attraction_id, score, is_user_choose) values (3, 6, 2, false);
+            insert into favorite(user_id, attraction_id, score, is_user_choose) values (3, 10, 1, false);
+            insert into favorite(user_id, attraction_id, score, is_user_choose) values (3, 11, 2, false);
+            insert into favorite(user_id, attraction_id, score, is_user_choose) values (3, 12, 1, false);
+            insert into favorite(user_id, attraction_id, score, is_user_choose) values (3, 14, 1, true);
+            insert into favorite(user_id, attraction_id, score, is_user_choose) values (4, 6, 1, false);
+            insert into favorite(user_id, attraction_id, score, is_user_choose) values (4, 7, 1, false);
+            insert into favorite(user_id, attraction_id, score, is_user_choose) values (4, 10, 1, false);
+            insert into favorite(user_id, attraction_id, score, is_user_choose) values (5, 4, 2, false);
+            insert into favorite(user_id, attraction_id, score, is_user_choose) values (5, 11, 1, false);
+            insert into favorite(user_id, attraction_id, score, is_user_choose) values (5, 12, 1, true);
+            insert into favorite(user_id, attraction_id, score, is_user_choose) values (6, 5, 1, false);
+            insert into favorite(user_id, attraction_id, score, is_user_choose) values (6, 4, 1, false);
+            insert into favorite(user_id, attraction_id, score, is_user_choose) values (6, 13, 1, false);
+            insert into favorite(user_id, attraction_id, score, is_user_choose) values (7, 7, 1, false);
+            insert into favorite(user_id, attraction_id, score, is_user_choose) values (8, 3, 1, false);
+            insert into favorite(user_id, attraction_id, score, is_user_choose) values (8, 13, 1, false);
+            insert into favorite(user_id, attraction_id, score, is_user_choose) values (9, 4, 1, false);
+            insert into favorite(user_id, attraction_id, score, is_user_choose) values (9, 10, 1, false);
+            insert into favorite(user_id, attraction_id, score, is_user_choose) values (10, 4, 1, false);
+            insert into favorite(user_id, attraction_id, score, is_user_choose) values (10, 11, 1, true);
+            insert into favorite(user_id, attraction_id, score, is_user_choose) values (10, 13, 1, false);
         </sql>
     </changeSet>
 

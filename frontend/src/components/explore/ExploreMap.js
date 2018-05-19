@@ -53,7 +53,7 @@ class ExploreMap extends React.Component {
         const onMarkerClick = this.onMarkerClick;
         return (
             <Map google={this.props.google}
-                 zoom={12}
+                 zoom={11}
                  initialCenter={this.state.center}
                  onClick={this.onMapClicked}
                  style={{

@@ -15,6 +15,8 @@ const COLORS = [
     '#FFBB28',
     '#FF8042',
     '#b816ff',
+    '#E1FF33',
+    '#d41f00'
 ];
 class Chart extends Component {
 

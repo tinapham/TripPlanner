@@ -20,7 +20,6 @@ class Chatbot extends React.Component {
     }
 
     render() {
-        console.log(this.state.plan.name);
         const theme = {
             background: '#f5f8fb',
             fontFamily: 'Helvetica Neue',

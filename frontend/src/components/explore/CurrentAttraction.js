@@ -10,33 +10,33 @@ class CurrentAttractionCard extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            param: this.props.attraction.description.split('*')
-        }
+            param: this.props.attraction.description.split('*'),
+            isChoose: this.props.attraction.favorite.choose
+        };
+        this.addFavorite = this.addFavorite.bind(this);
     }
 
     componentDidUpdate(prevProps) {
         if (this.props.attraction !== prevProps.attraction) {
             this.setState({
-                param: this.props.attraction.description.split('*')
+                param: this.props.attraction.description.split('*'),
+                isChoose: this.props.attraction.favorite.choose
             });
         }
     }
 
+    async addFavorite() {
+        await this.setState ({
+            isChoose: !this.state.isChoose
+        });
+        this.props.addFavorite(this.props.attraction.id);
+    };
+
     render() {
-        console.log(this.state);
         return (
 
             <Card style={styles.gridList}>
                 <CardMedia
-                    children=
-                        {
-                            <IconButton>
-                                {
-                                    this.props.attraction.favorite.choose ?
-                                        <Star color="white"/> : <StarBorder color="white"/>
-                                }
-                            </IconButton>
-                        }
                     overlay={<CardTitle title={this.props.attraction.name}
                                         subtitle={this.props.attraction.address}/>}
                 >
@@ -44,9 +44,9 @@ class CurrentAttractionCard extends React.Component {
                          alt=""/>
                 </CardMedia>
                 <CardText>
-                    <IconButton>
+                    <IconButton onClick={this.addFavorite}>
                         {
-                            this.props.attraction.favorite.choose ?
+                            this.state.isChoose ?
                                 <Star color="black"/> : <StarBorder color="black"/>
                         }
                     </IconButton>

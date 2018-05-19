@@ -100,10 +100,9 @@ public class PlanEntity implements Serializable {
 
 	public String getPaymentToken() { return paymentToken; }
 
-	private String generateToken() {
+	private static String generateToken() {
 		long longToken = Math.abs(random.nextLong());
-		String random = Long.toString(longToken, 16);
-		return (random);
+		return Long.toString(longToken, 16);
 	}
 
 }
