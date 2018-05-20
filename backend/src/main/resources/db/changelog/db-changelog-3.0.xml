@@ -19,68 +19,68 @@
              splitStatements="true"
              stripComments="true">
             <!--2-->
-            insert into feedback(user_id, attraction_id, content, created_at, rating) values (2, 2, 'came here several times and it was always a very good feeling to travel all the way through the Son Tra mountain to reach it. best views over the sea or Da Nang city are not just here on the peak but you can catch also along the way. be sure to use a good vehicle to climb the roads, and the trip would be better in the summer.',
-                                2017-12-06, 5);
-            insert into feedback(user_id, attraction_id, content, created_at, rating) values (7, 2, 'The ride up is bumpy and slow. You have to climb fairly drastic slopes so take a strong durable motorbike. If you're lucky and arrive on a clear day, the view is fantastic! We came on a day that was part foggy part sunny and that was lovely, watching everything disappearing and reappearing through the drifting fog. The peak itself can get pretty crowded but a bit down the road there's a nice quiet hidden spot that offers a better view and tranquility. If you're lucky you'll catch glimpse of a few brown monkey wandering down the road.',
-                                2017-11-21, 4);
+            insert into feedback(user_id, attraction_id, content, created_at, rating) values (2, 2, 'I came here several times and it was always a very good feeling to travel all the way through the Son Tra mountain to reach it.',
+                                '2017-12-06', 5);
+            insert into feedback(user_id, attraction_id, content, created_at, rating) values (7, 2, 'The ride up is bumpy and slow. You have to climb fairly drastic slopes so take a strong durable motorbike.The view is fantastic',
+                                '2017-11-21', 4);
             <!--3-->
-            insert into feedback(user_id, attraction_id, content, created_at, rating) values (1, 3, 'It had a big wheel I'd like to try but I need to buy an entrance ticket then buy another ticket to go up there. From the highest, I could see almost the city, the view to the beach was locked by many buildings.',
-                                2018-01-05, 3);
-            insert into feedback(user_id, attraction_id, content, created_at, rating) values (9, 3, 'Take the sun wheel and the monorail for a great view of Da Nang city at night. Rides were fun and international standard, with great spots to have fun games and activities.',
-                                2017-05-14, 5);
+            insert into feedback(user_id, attraction_id, content, created_at, rating) values (1, 3, 'It had a big wheel I would like to try but I need to buy an entrance ticket then buy another ticket to go up there.',
+                                '2018-01-05', 3);
+            insert into feedback(user_id, attraction_id, content, created_at, rating) values (9, 3, 'Take the sun wheel and the monorail for a great view of Da Nang city at night. Rides were fun and international standard.',
+                                '2017-05-14', 5);
             insert into feedback(user_id, attraction_id, content, created_at, rating) values (4, 3, 'You can see beautiful lighting and, whole of Da Nang city on the top of the sun wheel. Romantic with a couple.',
-                                2017-12-06, 4);
+                                '2017-12-06', 4);
             <!--4-->
-            insert into feedback(user_id, attraction_id, content, created_at, rating) values (5, 4, 'The dragon comes to life on Saturdays and Sundays at 9PM as it breathes fire. Bridge traffic is suspended for a few minutes prior to and during the show. Don’t forget to bring your camera!',
-                                2018-03-11, 5);
+            insert into feedback(user_id, attraction_id, content, created_at, rating) values (5, 4, 'The dragon comes to life on Saturdays and Sundays at 9PM as it breathes fire. Bridge traffic is suspended for a few minutes.',
+                                '2018-03-11', 5);
             <!--5-->
-            insert into feedback(user_id, attraction_id, content, created_at, rating) values (4, 5, 'Have been there so many times. Feel so peaceful with fresh air. Refesh your life after work.',
-                                2017-10-06, 4);
+            insert into feedback(user_id, attraction_id, content, created_at, rating) values (4, 5, 'Have been there so many times. Feel so peaceful with fresh air. Refresh your life after work.',
+                                '2017-10-06', 4);
             <!--6-->
             insert into feedback(user_id, attraction_id, content, created_at, rating) values (10, 6, '150 steeps to climb but it was worthy nice view of the city and the old temples, must visit if you are in Da Nang',
-                                2017-06-29, 3);
-            insert into feedback(user_id, attraction_id, content, created_at, rating) values (8, 6, 'Part of a city tour and was pleasantly surprised to see different caves and history associated with each one. It is a long trek to the top but the amazing view will justify your effort. Entrance fee is 40,000VND per person. Go early in the morning. It is less crowded and much cooler. Wear comfortable shoes as some path is only rocks.',
-                                2016-07-19, 4);
+                                '2017-06-29', 3);
+            insert into feedback(user_id, attraction_id, content, created_at, rating) values (8, 6, 'Part of a city tour and was pleasantly surprised to see different caves and history associated with each one.',
+                                '2016-07-19', 4);
             <!--7-->
-            insert into feedback(user_id, attraction_id, content, created_at, rating) values (3, 7, 'Here is a chain of resorts located close to each other including: amusement park slide waterfall, tourist hot spring mountains mountain god. If you go one day at the hot spring and one day on the waterfall will save more time and travel costs.',
-                                2017-12-06, 5);
-            insert into feedback(user_id, attraction_id, content, created_at, rating) values (6, 7, 'Able to book thru local travel agency was cheaper and more flexible than hotel.great fun .Was my first experience.nice scenic drive. Either 10.30 or 2.30 start. Would do it again. Can buy pictures reasonably priced also sent to email',
-                                2017-04-08, 4);
-            insert into feedback(user_id, attraction_id, content, created_at, rating) values (9, 7, 'This is a full day for 400,000 vnd with more things to do than you can possible complete in one day. The warm mud bath is awesome followed by a fresh shower. Wave pool is wicked and dangerous. Five slides down the mountain but the walk up steps is wicked too. Steam bath and massage pool. Kids play pool fun as well. Lots of walking but they offer buggies for some of the features.',
-                                2017-03-30, 5);
+            insert into feedback(user_id, attraction_id, content, created_at, rating) values (3, 7, 'Here is a chain of resorts located close to each other including: amusement park slide waterfall.',
+                                '2017-12-06', 5);
+            insert into feedback(user_id, attraction_id, content, created_at, rating) values (6, 7, 'Able to book thru local travel agency was cheaper and more flexible than hotel.great fun. Was my first experience.',
+                                '2017-04-08', 4);
+            insert into feedback(user_id, attraction_id, content, created_at, rating) values (9, 7, 'This is a full day for 400,000 vnd with more things to do than you can possible complete in one day.',
+                                '2017-03-30', 5);
             <!--8-->
             insert into feedback(user_id, attraction_id, content, created_at, rating) values (1, 8, 'Very cool place to visit while on Son Tra Peninsula. Cone in late afternoon while peaceful. A great place to stop',
-                                2018-04-04, 4);
+                                '2018-04-04', 4);
             <!--9-->
-            insert into feedback(user_id, attraction_id, content, created_at, rating) values (5, 9, 'Apart from the Lady Buddha which can be seen on My Khe Beach, there are actually a few Buddhism sites at the same place, all within a few minutes' walk from the Lady Buddha: Tháp Xá Lợi - Tượng Phật nằm (The Sleeping Buddha, the Laughing Buddha and a tower) and Vườn Lộc Uyển (on the way to the Lady Buddha where a lot of white marble buddha statues are placed).',
-                                2018-04-30, 4);
-            insert into feedback(user_id, attraction_id, content, created_at, rating) values (7, 9, 'Highly recommended. Just 9 km away from Danang city center.You can visit the peaceful place with stunning view of Danang coastline.Lady Buddha statue is impressive.You can see many bonsai trees there.',
-                                2018-05-12, 5);
+            insert into feedback(user_id, attraction_id, content, created_at, rating) values (5, 9, 'Apart from the Lady Buddha which can be seen on My Khe Beach, there are actually a few Buddhism sites at the same place.',
+                                '2018-04-30', 4);
+            insert into feedback(user_id, attraction_id, content, created_at, rating) values (7, 9, 'Highly recommended. Just 9 km away from Danang city center.You can visit the peaceful place with stunning view of Danang.',
+                                '2018-05-12', 5);
             <!--10-->
-            insert into feedback(user_id, attraction_id, content, created_at, rating) values (3, 10, 'The views from the top are amazing, particularly the giant hands, the view from The cable cart and also the giant Buddha - it’s worth the visit. The rest of the part is a mixture of a European theme park which seemed a bit confused. Don’t eat near the love garden the food was horrible however once we travelled up to the top there were a lot more options (mainly German). There were also no maps available in English, most were Korean. We had fun and with young kids they loved the theme park. It’s currently low season so all the rides were free except for the wax museum. If you have a few hours to kill it’s worth the trip - if your running out of time, I’d say you could skip it.',
-                                2017-12-29, 4);
-            insert into feedback(user_id, attraction_id, content, created_at, rating) values (8, 10, 'Bana Hills was a good visit. A beautiful tourist attraction. I enjoyed the atmosphere and weather very much. Especially the Christmas decorations. Flowers and the wine cellar was nice too. However, we didn't managed to see much of the building architecture or outdoor attractions because it was too foggy. But overall, it was good.',
-                                2018-01-19, 5);
+            insert into feedback(user_id, attraction_id, content, created_at, rating) values (3, 10, 'The views from the top are amazing, particularly the giant hands, the view from. It is worth the visit.',
+                                '2017-12-29', 4);
+            insert into feedback(user_id, attraction_id, content, created_at, rating) values (8, 10, 'Bana Hills was a good visit. A beautiful tourist attraction. I enjoyed the atmosphere and weather very much.',
+                                '2018-01-19', 5);
             <!--11-->
-            insert into feedback(user_id, attraction_id, content, created_at, rating) values (4, 11, 'It was very far from the city, appox 40km and in a remote area which passed the beautiful rural of Da Nang. It was raining when we were there so there was not so many tourists. The building looked too old and dull and it made the place just like a ghost town. Staff was very friendly but price was very expensive. We were asked to buy the entrance ticket which cost VND300,000 and onsen ticket at VND150,000 per person even though we said that we wanted to use the onsen only! It was ridiculous that we didn't use any services in the package of VND300,000 but had to pay!',
-                                2018-01-19, 2);
+            insert into feedback(user_id, attraction_id, content, created_at, rating) values (4, 11, 'It was very far from the city, approx 40km and in a remote area which passed the beautiful rural. Staff was very friendly.',
+                                '2018-01-19', 2);
             insert into feedback(user_id, attraction_id, content, created_at, rating) values (8, 11, 'Beauty, clean , a little people a very good for holiday one day. Sauna and spa good for healthy. Food 200.000vnd .',
-                                2018-05-01, 5);
+                                '2018-05-01', 5);
             <!--12-->
-            insert into feedback(user_id, attraction_id, content, created_at, rating) values (1, 12, 'Nen Restaurant was an amazing dining experience ... from start to finish! The staff was very accommodating when making reservations for our group of 9. We had some guests with food issues (one with no shellfish, one with no red meat) and they did a great job substituting dishes for them. I'm from Los Angeles and the restaurant looked like one of the top new restaurants in LA. All of the staff were great -- excellent English was spoken all around. The service was perfect. And the food ... it was definitely Vietnamese, but unlike any Vietnamese we had in our trip throughout the country. The chef came out at the end of the dinner and received a warm round of applause from all the diners for a job very well done.',
-                                2018-04-22, 5);
+            insert into feedback(user_id, attraction_id, content, created_at, rating) values (1, 12, 'Nen Restaurant was an amazing dining experience ... from start to finish! The staff was very accommodating.',
+                                '2018-04-22', 5);
             <!--13-->
-            insert into feedback(user_id, attraction_id, content, created_at, rating) values (10, 13, 'Food is nice; we ordered chicken fried rice, can lau (noodle with pork and kai lan on gravy), and grilled fish. Price is affordable too. The staffs were very friendly and nice. Highly recommend!',
-                                2018-01-19, 5);
-            insert into feedback(user_id, attraction_id, content, created_at, rating) values (9, 13, 'Fantastic food and great prices, service with a smile even though the waiter was clearly on his own. Would definitely eat here again and recommend.',
-                                2018-02-10, 5);
-            insert into feedback(user_id, attraction_id, content, created_at, rating) values (3, 13, 'We had a fantastic meal and staff were very attentive, concerned with our overall experience and ensured that we thoroughly enjoyed our meal. The morning glory does NOT disappoint!! Hung = best server!',
-                                2018-05-03, 4);
+            insert into feedback(user_id, attraction_id, content, created_at, rating) values (10, 13, 'Food is nice; we ordered chicken fried rice, cao lau, and grilled fish. Highly recommend!',
+                                '2018-01-19', 5);
+            insert into feedback(user_id, attraction_id, content, created_at, rating) values (9, 13, 'Fantastic food and great prices, service with a smile even though the waiter was clearly. Would definitely eat here again.',
+                                '2018-02-10', 5);
+            insert into feedback(user_id, attraction_id, content, created_at, rating) values (3, 13, 'We had a fantastic meal and staff were very attentive, concerned with our overall experience, we enjoyed our meal.',
+                                '2018-05-03', 4);
             <!--14-->
-            insert into feedback(user_id, attraction_id, content, created_at, rating) values (5, 14, 'The lounge outside has very nice view, can see directly the Han River bridge and the dragon bridge. The feeling like sitting in the middle of the river. However the food is not really good here. Has a lot of restaurants inside with a lot of kind of food.',
-                                2017-09-14, 4);
-            insert into feedback(user_id, attraction_id, content, created_at, rating) values (6, 14, 'That's amazing night on Sarturday last weekend. we went there to get some craft beer, music was really good with talent band, the service was friendly and polite, everything was great. should go there to enjoy your life.',
-                                2018-04-12, 5);
+            insert into feedback(user_id, attraction_id, content, created_at, rating) values (5, 14, 'The lounge outside has very nice view, can see directly the Han River bridge. However the food is not really good here.',
+                                '2017-09-14', 4);
+            insert into feedback(user_id, attraction_id, content, created_at, rating) values (6, 14, 'That was amazing night on weekend. we went there to get some craft beer, music was really good, the service was friendly.',
+                                '2018-04-12', 5);
             <!--15-->
             <!--16-->
 

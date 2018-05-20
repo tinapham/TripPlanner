@@ -40,6 +40,9 @@ public class AttractionEntity implements Serializable {
 	@OneToMany(mappedBy = "attraction", cascade = CascadeType.ALL)
 	private List<FavoriteEntity> favorite;
 
+	@OneToMany(mappedBy = "attraction", cascade = CascadeType.ALL)
+	private List<FeedbackEntity> feedback;
+
 	public AttractionEntity() { }
 
 	public AttractionEntity(String name, String address, double lat, double lng, TypeEntity type, String description) {
@@ -59,6 +62,18 @@ public class AttractionEntity implements Serializable {
 		this.lng = lng;
 		this.type = type;
 		this.description = description;
+	}
+
+	public AttractionEntity(Integer id, String name, String address, double lat, double lng, TypeEntity type,
+							String description, List<FeedbackEntity> feedback) {
+		this.id = id;
+		this.name = name;
+		this.address = address;
+		this.lat = lat;
+		this.lng = lng;
+		this.type = type;
+		this.description = description;
+		this.feedback = feedback;
 	}
 
 	public Integer getId() { return id; }
@@ -126,4 +141,9 @@ public class AttractionEntity implements Serializable {
 	public void setFavorite(List<FavoriteEntity> favorite) {
 		this.favorite = favorite;
 	}
+
+	public List<FeedbackEntity> getFeedback() { return feedback; }
+
+	public void setFeedback(List<FeedbackEntity> feedback) { this.feedback = feedback; }
+
 }

@@ -3,7 +3,11 @@ package com.mgmtp.screens.model;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.mgmtp.screens.entity.AttractionEntity;
+import com.mgmtp.screens.entity.FeedbackEntity;
+
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AttractionDTO implements Serializable {
 
@@ -27,6 +31,9 @@ public class AttractionDTO implements Serializable {
 	@JsonProperty("favorite")
 	private FavoriteDTO favorite;
 
+	@JsonProperty("feedbacks")
+	private List<FeedbackDTO> feedbackDTOS;
+
 	public AttractionDTO() {
 		this.lat = 0;
 		this.lng = 0;
@@ -35,7 +42,8 @@ public class AttractionDTO implements Serializable {
 	private AttractionDTO(@JsonProperty("id") Integer id, @JsonProperty("name") String name,
 						  @JsonProperty("address") String address, @JsonProperty("lat") double lat,
 						  @JsonProperty("lng") double lng, @JsonProperty("type") String type,
-						  @JsonProperty("description") String description, @JsonProperty("favorite") FavoriteDTO favorite) {
+						  @JsonProperty("description") String description, @JsonProperty("favorite") FavoriteDTO favorite,
+						  @JsonProperty("feedbacks") List<FeedbackDTO> feedbackDTOS) {
 
 		this.id = id;
 		this.name = name;
@@ -45,6 +53,8 @@ public class AttractionDTO implements Serializable {
 		this.type = type;
 		this.description = description;
 		this.favorite = favorite;
+		this.feedbackDTOS = feedbackDTOS;
+
 	}
 
 	public Integer getId() {
@@ -81,10 +91,21 @@ public class AttractionDTO implements Serializable {
 
 	public void setFavorite(FavoriteDTO favorite) { this.favorite = favorite; }
 
+	public List<FeedbackDTO> getFeedbackDTOS() { return feedbackDTOS; }
+
+	public void setFeedbackDTOS(List<FeedbackDTO> feedbackDTOS) { this.feedbackDTOS = feedbackDTOS; }
+
 	public static AttractionDTO fromEntityByAdmin(AttractionEntity attractionEntity) {
+		List<FeedbackDTO> feedbackDTOS = new ArrayList<>();
+		List<FeedbackEntity> feedbackEntities = attractionEntity.getFeedback();
+		if(feedbackEntities != null ) {
+			for (FeedbackEntity item : feedbackEntities) {
+				feedbackDTOS.add(FeedbackDTO.fromEntityByAdmin(item));
+			}
+		}
 		return new AttractionDTO(attractionEntity.getId(), attractionEntity.getName(), attractionEntity.getAddress(),
 				attractionEntity.getLat(), attractionEntity.getLng(),
-				attractionEntity.getType().getName(), attractionEntity.getDescription(), null);
+				attractionEntity.getType().getName(), attractionEntity.getDescription(), null, feedbackDTOS);
 	}
 
 }

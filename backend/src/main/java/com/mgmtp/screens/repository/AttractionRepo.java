@@ -1,12 +1,10 @@
 package com.mgmtp.screens.repository;
 
-import com.mgmtp.screens.entity.AttractionEntity;
-import com.mgmtp.screens.entity.TransactionEntity;
-import com.mgmtp.screens.entity.TypeEntity;
-import com.mgmtp.screens.entity.UserEntity;
+import com.mgmtp.screens.entity.*;
 import com.mgmtp.screens.model.AttractionDTO;
 import com.mgmtp.screens.model.BarChartDTO;
 import com.mgmtp.screens.model.FavoriteDTO;
+import com.mgmtp.screens.model.FeedbackDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -21,7 +19,14 @@ public class AttractionRepo {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    @Autowired TypeDAO typeDAO;
+    @Autowired
+    TypeDAO typeDAO;
+
+    @Autowired
+    AttractionDAO attractionDAO;
+
+    @Autowired
+    FeedbackDAO feedbackDAO;
 
     public List<AttractionDTO> getAllByUser(UserEntity userEntity) {
         List<AttractionDTO> list = new ArrayList<>();
@@ -36,7 +41,8 @@ public class AttractionRepo {
             for (Map row : rows) {
 
                 AttractionDTO attraction = new AttractionDTO();
-                attraction.setId(Integer.parseInt(row.get("id").toString()));
+                Integer id = Integer.parseInt(row.get("id").toString());
+                attraction.setId(id);
                 attraction.setName(row.get("name").toString());
                 attraction.setAddress(row.get("address").toString());
                 attraction.setLat(Double.parseDouble(row.get("lat").toString()));
@@ -51,6 +57,17 @@ public class AttractionRepo {
                 //set type
                 TypeEntity typeEntity = typeDAO.findOne(Integer.parseInt(row.get("type_id").toString()));
                 attraction.setType(typeEntity.getName());
+
+                //set list feedback
+                AttractionEntity attractionEntity = attractionDAO.findOne(id);
+                List<FeedbackEntity> feedbackEntities = feedbackDAO.getAllByAttraction(attractionEntity);
+                List<FeedbackDTO> feedbackDTOS = new ArrayList<>();
+                if(feedbackEntities != null ) {
+                    for (FeedbackEntity item : feedbackEntities) {
+                        feedbackDTOS.add(FeedbackDTO.fromEntityByAdmin(item));
+                    }
+                }
+                attraction.setFeedbackDTOS(feedbackDTOS);
 
                 list.add(attraction);
             }

@@ -1,9 +1,6 @@
 package com.mgmtp.screens.service;
 
-import com.mgmtp.screens.entity.AttractionEntity;
-import com.mgmtp.screens.entity.FavoriteEntity;
-import com.mgmtp.screens.entity.TypeEntity;
-import com.mgmtp.screens.entity.UserEntity;
+import com.mgmtp.screens.entity.*;
 import com.mgmtp.screens.model.AttractionDTO;
 import com.mgmtp.screens.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,13 +20,16 @@ public class AttractionServiceImpl implements AttractionService {
 
 	private FavoriteDAO favoriteDAO;
 
+	private FeedbackDAO feedbackDAO;
+
 	@Autowired
 	public AttractionServiceImpl(AttractionDAO attractionDAO, AttractionRepo attractionRepo, TypeDAO typeDAO,
-								 FavoriteDAO favoriteDAO) {
+								 FavoriteDAO favoriteDAO, FeedbackDAO feedbackDAO) {
 		this.typeDAO = typeDAO;
 		this.attractionDAO = attractionDAO;
 		this.attractionRepo = attractionRepo;
 		this.favoriteDAO = favoriteDAO;
+		this.feedbackDAO = feedbackDAO;
 	}
 
 	@Override
@@ -59,6 +59,8 @@ public class AttractionServiceImpl implements AttractionService {
 		}
 		List<AttractionDTO> attractionDTOS = new ArrayList<>();
 		for (AttractionEntity item : list) {
+			List<FeedbackEntity> feedbackEntities = feedbackDAO.getAllByAttraction(item);
+			item.setFeedback(feedbackEntities);
 			attractionDTOS.add(AttractionDTO.fromEntityByAdmin(item));
 		}
 		return attractionDTOS;

@@ -30,6 +30,9 @@ public class UserEntity implements Serializable {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<FavoriteEntity> favorites;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<FeedbackEntity> feedback;
+
     public UserEntity() {}
 
     public UserEntity(String email, String password) {
@@ -72,4 +75,9 @@ public class UserEntity implements Serializable {
     public List<FavoriteEntity> getFavorites() { return favorites; }
 
     public void setFavorites(List<FavoriteEntity> favorites) { this.favorites = favorites; }
+
+    public List<FeedbackEntity> getFeedback() { return feedback; }
+
+    public void setFeedback(List<FeedbackEntity> feedback) { this.feedback = feedback; }
+
 }
