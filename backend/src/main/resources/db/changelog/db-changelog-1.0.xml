@@ -216,6 +216,24 @@
             <!--14-->
             insert into attractions(name, address, lat, lng, type_id, description) values ('99+ Sky Lounge',
             'Tran Hung Dao Street | 5 Floor, Happy Yacht, Son Tra District', 16.064271, 108.229579, 7, '');
+            <!--15-->
+            insert into attractions(name, address, lat, lng, type_id, description) values ('Cong caphe',
+            '98-96 Bach Dang, Da Nang', 16.069165, 108.224867, 10, '');
+            <!--16-->
+            insert into attractions(name, address, lat, lng, type_id, description) values ('Boulevard Gelato and Coffee',
+            '77 Tran Quoc Toan | Corner of Tran Quoc Toan and Nguyen Chi Thanh', 16.066232, 108.220997, 10, '');
+            <!--17-->
+            insert into attractions(name, address, lat, lng, type_id, description) values ('Bon Appetit',
+            '390 Vo Nguyen Giap, Da Nang', 16.042802, 108.248041, 10, '');
+            <!--18-->
+            insert into attractions(name, address, lat, lng, type_id, description) values ('The 1920s Lounge',
+            '53 Tran Quoc Toan, Da Nang', 16.066269, 108.221834, 12, '');
+            <!--19-->
+            insert into attractions(name, address, lat, lng, type_id, description) values ('Poolside Bar',
+            '35 Truong Sa | Sheraton Grand Danang Resort, Hoa Hai Ward, Ngu Hanh Son District', 16.009777, 108.263693, 12, '');
+            <!--20-->
+            insert into attractions(name, address, lat, lng, type_id, description) values ('N Pub',
+            '12 Phan Liem, Da Nang', 16.054713, 108.245094, 12, '');
         </sql>
     </changeSet>
 

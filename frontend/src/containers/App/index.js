@@ -16,7 +16,7 @@ class App extends React.Component {
     url = [this.url_backend + "attraction/", this.url_backend + "plan/", this.url_backend + "tour-guide/",
         this.url_backend + "user/username"];
     url_fav = this.url_backend + "attraction/favorite/";
-
+    url_fb = this.url_backend + "feedback/";
     constructor() {
         super();
         this.state = {
@@ -26,6 +26,7 @@ class App extends React.Component {
         this.updatePlan = this.updatePlan.bind(this);
         this.deletePlan = this.deletePlan.bind(this);
         this.addFavorite = this.addFavorite.bind(this);
+        this.addFeedback = this.addFeedback.bind(this);
     }
 
     async componentDidMount() {
@@ -118,6 +119,27 @@ class App extends React.Component {
         }
     }
 
+    async addFeedback(id, feedback) {
+        // console.log('ahihi')
+        let response = await axios({
+            method: 'post',
+            url: this.url_fb + id,
+            data: JSON.stringify(feedback),
+            headers: {
+                "Content-Type": "application/json; charset=utf8"
+            }
+        });
+        if (response.data === true) {
+            let data = await axios({
+                method: 'get',
+                url: this.url[0]
+            });
+            this.setState({
+                dataAttractions: data.data,
+            });
+        }
+    }
+
     render() {
         console.log(this.state);
         return (
@@ -131,7 +153,9 @@ class App extends React.Component {
                                        render={(props) => <HomePage save={this.savePlan} {...props} />}/>
                                 <Route path={`${this.props.match.url}/explore`}
                                        render={(props) => <ExplorePage addFavorite={this.addFavorite}
-                                                                       data={this.state.dataAttractions} {...props}/>}/>
+                                                                       data={this.state.dataAttractions}
+                                                                       addFeedback={this.addFeedback}
+                                                                       username={this.state.username}{...props}/>}/>
                                 <Route path={`${this.props.match.url}/plan`}
                                        render={(props) => <MyPlanPage listTourGuide={this.state.dataTourGuides}
                                                                       save={this.savePlan}

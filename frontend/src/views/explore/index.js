@@ -14,6 +14,7 @@ class Explore extends Component {
             currentAttraction: undefined,
         };
         this.addFavorite = this.addFavorite.bind(this);
+        this.addFeedback = this.addFeedback.bind(this);
     }
 
     setCurrentAttraction = (current) => {
@@ -24,6 +25,11 @@ class Explore extends Component {
 
     addFavorite = (id) => {
         this.props.addFavorite(id);
+    };
+
+    addFeedback = (data) => {
+        this.props.addFeedback(this.state.currentAttraction.id, data);
+        // console.log('ahihi');
     };
 
     render() {
@@ -42,7 +48,9 @@ class Explore extends Component {
                                             <AttractionList data={this.props.data} setCurrent={this.setCurrentAttraction}
                                                             addFavorite={this.addFavorite}/>
                                             : <CurrentAttractionCard attraction={this.state.currentAttraction}
-                                                                     addFavorite={this.addFavorite}/>
+                                                                     addFavorite={this.addFavorite}
+                                                                     addFeedback={this.addFeedback}
+                                                                     username={this.props.username}/>
                                     }
 
                                 </div>

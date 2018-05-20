@@ -12,7 +12,7 @@ const data = {
         {text: 'Home', icon: <ActionHome/>, link: '/home/dashboard'},
         {text: 'Explore', icon: <Assessment/>, link: '/home/explore'},
         {text: 'My plans', icon: <ActionFlightTakeoff/>, link: '/home/plans'},
-        {text: 'Profile', icon: <Group/>, link: '/home/profile'},
+        // {text: 'Profile', icon: <Group/>, link: '/home/profile'},
         {text: 'Sign out', icon: <Exit/>, link: '/login'}
     ],
     adminMenus: [

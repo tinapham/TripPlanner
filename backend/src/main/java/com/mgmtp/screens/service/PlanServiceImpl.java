@@ -207,15 +207,17 @@ public class PlanServiceImpl implements PlanService {
                 eventEntity = new EventEntity(item.getId(), item.getStartTime(), item.getEndTime(), planEntity);
             } else {
                 eventEntity = new EventEntity(item.getStartTime(), item.getEndTime(), planEntity);
-                FavoriteEntity favoriteEntity = favoriteDAO.getFavoriteEntityByUserAndAttraction(userEntity, attractionEntity);
-                if(favoriteEntity != null) {
-                    //increase score in favorite when user choose an attraction in event
-                    favoriteEntity.setScore(favoriteEntity.getScore()+1);
-                } else {
-                    favoriteEntity = new FavoriteEntity(1, false, userEntity, attractionEntity);
-                }
-                favoriteDAO.saveAndFlush(favoriteEntity);
             }
+
+            FavoriteEntity favoriteEntity = favoriteDAO.getFavoriteEntityByUserAndAttraction(userEntity, attractionEntity);
+            if(favoriteEntity != null) {
+                //increase score in favorite when user choose an attraction in event
+                favoriteEntity.setScore(favoriteEntity.getScore()+1);
+            } else {
+                favoriteEntity = new FavoriteEntity(1, false, userEntity, attractionEntity);
+            }
+            favoriteDAO.saveAndFlush(favoriteEntity);
+
             eventEntity.setAttraction(attractionEntity);
             events.add(eventEntity);
         }
