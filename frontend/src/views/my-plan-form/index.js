@@ -387,7 +387,6 @@ class MyPlanForm extends Component {
                                                     fullWidth={true}
                                                     type="text"
                                                     value={tourGuide ? '$' + tourGuide.price : undefined}
-                                                    disabled={true}
                                                 />
                                             </div>
                                             <div className="col-md-4 col-sm-12 col-xs-12">
@@ -396,7 +395,6 @@ class MyPlanForm extends Component {
                                                     fullWidth={true}
                                                     type="text"
                                                     value={tourGuide ? tourGuide.experience : undefined}
-                                                    disabled={true}
                                                 />
                                             </div>
                                             <div className="col-md-12 col-sm-12 col-xs-12">
@@ -405,7 +403,6 @@ class MyPlanForm extends Component {
                                                     fullWidth={true}
                                                     type="text"
                                                     value={tourGuide ? tourGuide.description : undefined}
-                                                    disabled={true}
                                                     multiLine={true}
                                                     rows={1}
                                                 />

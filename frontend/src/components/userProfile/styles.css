@@ -79,3 +79,15 @@
     padding: 0 20px;
     margin-bottom: 17px;
 }
+
+.paper {
+    padding: 30px
+}
+
+.saveButton {
+    margin-left: 5px
+}
+
+.buttons {
+    margin-top: 30px;
+}

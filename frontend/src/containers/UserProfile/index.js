@@ -1,9 +1,9 @@
 import React from 'react';
-import UserProfile from '../userProfile/index';
+import UserProfile from '../../components/userProfile/index';
 
 const UserInfoPage = (props) => {
     return (
-        <UserProfile email={props.email}/>
+        <UserProfile username={props.username}/>
     );
 };
 

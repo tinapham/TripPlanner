@@ -8,6 +8,7 @@ import {Redirect, Route, Switch} from 'react-router-dom';
 import axios from "axios/index";
 import MyPlanPage from "../MyPlanPage";
 import MyPlanListPage from '../MyPlanListPage';
+import UserInfoPage from '../UserProfile';
 import Chatbot from '../ChatBot';
 
 class App extends React.Component {
@@ -141,7 +142,7 @@ class App extends React.Component {
     }
 
     render() {
-        console.log(this.state);
+        console.log(this.state.dataPlans);
         return (
             <div>
                 {
@@ -166,19 +167,21 @@ class App extends React.Component {
                                                                       update={this.updatePlan}{...props} />}/>
                                 <Route path={`${this.props.match.url}/plans`}
                                        render={(props) => <MyPlanListPage data={this.state.dataPlans}
-                                                                          delete={this.deletePlan}/>}/>
+                                                                          delete={this.deletePlan}{...props} />}/>
                                 <Route path={`${this.props.match.url}/transaction/plan/:id`}
                                        render={(props) => <MyPlanPage data={this.state.dataTourGuides}
-                                                                      delete={this.deletePlan}/>}/>
+                                                                      delete={this.deletePlan}{...props} />}/>
                                 <Route path={`${this.props.match.url}/transaction/:id`}
                                        render={(props) => <MyPlanPage data={this.state.dataTourGuides}
-                                                                      delete={this.deletePlan}/>}/>
+                                                                      delete={this.deletePlan}{...props} />}/>
+                                <Route path={`${this.props.match.url}/profile`}
+                                       render={(props) => <UserInfoPage username={this.state.username} {...props} />}/>
                                 <Route path="*" component={Error}/>
                             </Switch>
                         </Container>
                         : <Redirect to='/login'/>
                 }
-                <Chatbot plans={this.state.dataPlans}/>
+                {/*<Chatbot plans={this.state.dataPlans}/>*/}
             </div>
         );
     }
